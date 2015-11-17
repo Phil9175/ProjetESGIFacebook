@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set("Europe/Paris");
 include("core/class/constantes.core.php");
 
-require_once __DIR__ .'controller/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php';
+require_once 'controller/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php';
 
 spl_autoload_register( function($class_name) {
     if (file_exists("controller/class/" . $class_name . ".controller.class.php"))
@@ -31,7 +31,6 @@ $action = (!isset($url[1]))?"defaultPage":$url[1];
 unset($url[1]);
 $args = array_merge($url, $_POST);
 
-$test = new test;
 if (class_exists($object)){
 	$obj = new $object;
 	if (is_callable([$obj, $action]) && fonctions::is_controller($object)){

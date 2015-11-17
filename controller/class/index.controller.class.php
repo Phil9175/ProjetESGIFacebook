@@ -10,8 +10,8 @@ class index {
 	
 	public function not_logged($args){
 		$fb = new Facebook\Facebook([
-		  'app_id' => '155552308131961',
-		  'app_secret' => '65ccc3a4ae807ed66596e2dd391bb2a3',
+		  'app_id' => APP_ID,
+		  'app_secret' => APP_SECRET,
 		  'default_graph_version' => 'v2.5',
 		  ]);
   
@@ -34,8 +34,8 @@ class index {
 	
 	public function fb_callback($args){
 		$fb = new Facebook\Facebook([
-	  'app_id' => '155552308131961',
-	  'app_secret' => '65ccc3a4ae807ed66596e2dd391bb2a3',
+		  'app_id' => APP_ID,
+		  'app_secret' => APP_SECRET,
 	  'default_graph_version' => 'v2.5',
 	  ]);
 	  
