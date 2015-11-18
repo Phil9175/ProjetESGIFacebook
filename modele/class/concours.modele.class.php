@@ -8,6 +8,7 @@ class concours extends bdd{
 	protected $date_fin;
 	protected $classement;
 	protected $prix;
+	protected $status;
 	
 	public function __construct(){
 		parent::__construct();
@@ -52,33 +53,42 @@ class concours extends bdd{
 	public function set_prix($prix){
 		$this->prix = $prix;
 	}
+
+	public function set_status($status){
+		$this->status = $status;
+	}
 	
-	public function get_id($id){
+	public function get_id(){
 		return $this->id;
 	}
 	
-	public function get_titre($titre){
+	public function get_titre(){
 		return $this->titre;
 	}
 	
-	public function get_description($description){
+	public function get_description(){
 		return $this->description;
 	}
 	
-	public function get_date_debut($date_debut){
+	public function get_date_debut(){
 		return $this->date_debut;
 	}
 	
-	public function get_date_fin($date_fin){
+	public function get_date_fin(){
 		return $this->date_fin;
 	}
 	
-	public function get_classement($classement){
+	public function get_classement(){
 		return $this->classement;
 	}
 	
-	public function get_prix($prix){
+	public function get_prix(){
 		return $this->prix;
 	}
+
+	public function get_status(){
+		return $this->status;
+	}
+
 }
 ?>
