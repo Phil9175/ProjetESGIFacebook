@@ -5,7 +5,6 @@ class index {
 	}
 	
 	public function defaultPage($args) {
-		
 	}
 	
 	public function not_logged($args){

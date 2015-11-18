@@ -8,6 +8,7 @@ class concours extends bdd{
 	protected $date_fin;
 	protected $classement;
 	protected $prix;
+	protected $status;
 	
 	public function __construct(){
 		parent::__construct();
@@ -52,6 +53,10 @@ class concours extends bdd{
 	public function set_prix($prix){
 		$this->prix = $prix;
 	}
+
+	public function set_status($status){
+		$this->status = $status;
+	}
 	
 	public function get_id(){
 		return $this->id;
@@ -80,5 +85,10 @@ class concours extends bdd{
 	public function get_prix(){
 		return $this->prix;
 	}
+
+	public function get_status(){
+		return $this->status;
+	}
+
 }
 ?>
