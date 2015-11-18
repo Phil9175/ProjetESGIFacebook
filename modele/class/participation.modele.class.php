@@ -3,8 +3,7 @@ class participation extends bdd{
 	
 	protected $idConcours;
 	protected $idParticipant;
-	protected $prenom;
-	protected $email;
+	protected $idPhoto;
 	
 	public function __construct(){
 		parent::__construct();
