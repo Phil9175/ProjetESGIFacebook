@@ -22,15 +22,11 @@ class index {
 			  $loginUrl = $helper->getLoginUrl('http://projetesgifacebook.com/login-callback.php', $scope);
 			  $view = new view("index", "index");
 			  $view->assign("link", $loginUrl);
-
 		  }else{
 			  header('Location: index/logged/');
 			  exit();
 		  }
-  
-  
-  
-	}
+  	}
 	
 	public function fb_callback($args){
 		$fb = new Facebook\Facebook([
