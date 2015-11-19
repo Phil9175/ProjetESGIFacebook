@@ -36,7 +36,7 @@ CREATE TABLE "concoursPhotos"."participant"
   "gender" VARCHAR,
   "email" VARCHAR NOT NULL,
   "birth_date" DATE ,
-  "localisation" VARCHAR,
+  "city" VARCHAR,
   "role" VARCHAR,
   PRIMARY KEY ("id_participant")
 );
