@@ -30,10 +30,10 @@ CREATE TABLE "concoursPhotos"."participation"
 
 CREATE TABLE "concoursPhotos"."participant"
 (
-  "id_participant" int NOT NULL,
+  "id" int NOT NULL,
   "name" VARCHAR NOT NULL,
   "firstName" VARCHAR NOT NULL,
-  "sex" VARCHAR,
+  "gender" VARCHAR,
   "email" VARCHAR NOT NULL,
   "birth_date" DATE ,
   "localisation" VARCHAR,

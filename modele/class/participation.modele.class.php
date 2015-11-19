@@ -19,28 +19,76 @@ class participation extends bdd{
 		parent::save("participant");
 	}
 
-	public function set_idConcours($idConcours){
-		$this->idConcours = $idConcours;
-	}
-	
-	public function set_idParticipant($idParticipant){
-		$this->idParticipant = $idParticipant;
-	}
-	
-	public function set_idPhoto($idPhoto){
-		$this->idPhoto = $idPhoto;
-	}
-	
-	public function get_idConcours(){
-		return $this->idConcours;
-	}
-	
-	public function get_idParticipant(){
-		return $this->idParticipant;
-	}
-	
-	public function get_idPhoto(){
-		return $this->idPhoto;
-	}
+    /**
+     * Gets the value of idConcours.
+     *
+     * @return mixed
+     */
+    public function getIdConcours()
+    {
+        return $this->idConcours;
+    }
+
+    /**
+     * Sets the value of idConcours.
+     *
+     * @param mixed $idConcours the id concours
+     *
+     * @return self
+     */
+    public function setIdConcours($idConcours)
+    {
+        $this->idConcours = $idConcours;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of idParticipant.
+     *
+     * @return mixed
+     */
+    public function getIdParticipant()
+    {
+        return $this->idParticipant;
+    }
+
+    /**
+     * Sets the value of idParticipant.
+     *
+     * @param mixed $idParticipant the id participant
+     *
+     * @return self
+     */
+    public function setIdParticipant($idParticipant)
+    {
+        $this->idParticipant = $idParticipant;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of idPhoto.
+     *
+     * @return mixed
+     */
+    public function getIdPhoto()
+    {
+        return $this->idPhoto;
+    }
+
+    /**
+     * Sets the value of idPhoto.
+     *
+     * @param mixed $idPhoto the id photo
+     *
+     * @return self
+     */
+    public function setIdPhoto($idPhoto)
+    {
+        $this->idPhoto = $idPhoto;
+
+        return $this;
+    }
 }
 ?>
