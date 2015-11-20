@@ -9,6 +9,7 @@ class concours extends bdd{
 	protected $ranking;
 	protected $award;
 	protected $status;
+	protected $ranking;
 	
 	public function __construct(){
 		parent::__construct();
@@ -21,7 +22,7 @@ class concours extends bdd{
 	}
 	
 	public function save(){
-		$this->classement = serialize($this->classement);
+		$this->ranking = serialize($this->ranking);
 		parent::save("concours");
 	}
 
@@ -213,6 +214,30 @@ class concours extends bdd{
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+     /**
+     * Gets the value of ranking.
+     *
+     * @return mixed
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
+
+    /**
+     * Sets the value of ranking.
+     *
+     * @param mixed $ranking the ranking
+     *
+     * @return self
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
 
         return $this;
     }
