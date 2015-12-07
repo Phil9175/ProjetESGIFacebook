@@ -9,18 +9,9 @@ class admin
     {
     }
     
-    public function defaultPage($args)
+    public function listAction($args)
     {
-        if (security::is_connected() === TRUE) {
-            $view = new view("admin", "auth", "admin.layout");
-            $view->assign("meta_title", "Administration");
-            $view->assign("meta_description", "Administration journal du referencement");
-            
-        } else {
-            $view = new view("admin", "auth", "admin.notconnected.layout");
-            $view->assign("meta_title", "Connexion Administration");
-            $view->assign("meta_description", "Connexion administration journal du referencement");
-        }
+		$view = new view("admin","concours/list");
     }
     
     public function auth($args)
