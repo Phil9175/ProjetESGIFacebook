@@ -1,5 +1,4 @@
-
-		<div id="wrap">
+<div id="wrap">
 			<h2> Appli Facebook </h2>
 			<div id="participer">
 				 <a class="btn btn-default" href="/index/participerAction">Je souhaite participer au concours </a>
