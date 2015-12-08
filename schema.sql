@@ -17,88 +17,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `competition`
+-- Structure de la table `concours`
 --
 
-CREATE TABLE `competition` (
-  `id_competition` int(11) NOT NULL,
+CREATE TABLE `concours` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `award` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
+  `award` int(11) NULL,
+  `start_date` DATETIME NOT NULL,
+  `end_date` DATETIME NOT NULL,
   `status` varchar(25) NOT NULL,
-  `ranking` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+  `ranking` text NULL,
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Structure de la table `participant`
 --
 
 CREATE TABLE `participant` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) NOT NULL,
   `firstname` varchar(75) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `birthdate` date NOT NULL,
+  `birthdate` DATETIME NOT NULL,
   `city` varchar(50) NOT NULL,
-  `role` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+  `role` varchar(20) NOT NULL,
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Structure de la table `participation`
 --
 
 CREATE TABLE `participation` (
-  `id` int(11) NOT NULL,
-  `id_competition` int(11) NOT NULL,
-  `id_participation` int(11) NOT NULL,
-  `id_photo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_concours` int(11) NOT NULL,
+  `id_participant` int(11) NOT NULL,
+  `id_photo` int(11) NOT NULL,
+  PRIMARY KEY(`id_concours`,`id_participant`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Index pour les tables exportées
---
 
---
--- Index pour la table `competition`
---
-ALTER TABLE `competition`
-  ADD PRIMARY KEY (`id_competition`);
-
---
--- Index pour la table `participant`
---
-ALTER TABLE `participant`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `participation`
---
-ALTER TABLE `participation`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `competition`
---
-ALTER TABLE `competition`
-  MODIFY `id_competition` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `participant`
---
-ALTER TABLE `participant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `participation`
---
-ALTER TABLE `participation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE participation add foreign key (id_concours) References concours(id);
+ALTER TABLE participation add foreign key (id_participant) References participant(id);
