@@ -29,6 +29,7 @@ CREATE TABLE `concours` (
   `end_date` DATETIME NOT NULL,
   `status` varchar(25) NOT NULL,
   `ranking` text NULL,
+  'logo' varchar(255) NOT NULL
   PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

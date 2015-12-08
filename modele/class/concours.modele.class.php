@@ -9,7 +9,7 @@ class concours extends bdd{
 	protected $ranking;
 	protected $award;
 	protected $status;
-	protected $ranking;
+    protected $logo;
 	
 	public function __construct(){
 		parent::__construct();
@@ -218,26 +218,26 @@ class concours extends bdd{
         return $this;
     }
 
-     /**
-     * Gets the value of ranking.
+    /**
+     * Gets the value of logo.
      *
      * @return mixed
      */
-    public function getRanking()
+    public function getLogo()
     {
-        return $this->ranking;
+        return $this->logo;
     }
 
     /**
-     * Sets the value of ranking.
+     * Sets the value of logo.
      *
-     * @param mixed $ranking the ranking
+     * @param mixed $logo the logo
      *
      * @return self
      */
-    public function setRanking($ranking)
+    public function setLogo($logo)
     {
-        $this->ranking = $ranking;
+        $this->logo = $logo;
 
         return $this;
     }
