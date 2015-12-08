@@ -73,10 +73,10 @@ class index {
 		  'default_graph_version' => 'v2.5',
 		  ]);
   	
-  	if(!isset($_SESSION['facebook_access_token'])){
-		header('Location: index/not_logged');
-		exit();
-	}else{
+	  	if(!isset($_SESSION['facebook_access_token'])){
+			header('Location: index/not_logged');
+			exit();
+		}else{
 
 		$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
   
