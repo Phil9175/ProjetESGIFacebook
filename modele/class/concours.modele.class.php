@@ -10,6 +10,8 @@ class concours extends bdd{
 	protected $award;
 	protected $status;
     protected $logo;
+    protected $font;
+    protected $fontFamily;
 	
 	public function __construct(){
 		parent::__construct();
@@ -238,6 +240,56 @@ class concours extends bdd{
     public function setLogo($logo)
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of font.
+     *
+     * @return mixed
+     */
+    public function getFont()
+    {
+        return $this->font;
+    }
+
+    /**
+     * Sets the value of font.
+     *
+     * @param mixed $font the font
+     *
+     * @return self
+     */
+    public function setFont($font)
+    {
+        $this->font = $font;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Gets the value of fontFamily.
+     *
+     * @return mixed
+     */
+    public function getFontFamily()
+    {
+        return $this->fontFamily;
+    }
+
+    /**
+     * Sets the value of fontFamily.
+     *
+     * @param mixed $fontFamily the font family
+     *
+     * @return self
+     */
+    protected function setFontFamily($fontFamily)
+    {
+        $this->fontFamily = $fontFamily;
 
         return $this;
     }

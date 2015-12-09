@@ -24,12 +24,14 @@ CREATE TABLE `concours` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `award` int(11) NULL,
+  `award` varchar(255) NULL,
   `start_date` DATETIME NOT NULL,
   `end_date` DATETIME NOT NULL,
-  `status` varchar(25) NOT NULL,
+  `status` boolean NOT NULL,
   `ranking` text NULL,
-  'logo' varchar(255) NOT NULL
+  `logo` varchar(255) NULL,
+  `font` varchar(255) NULL,
+  `font_family` varchar(255) NULL,
   PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -37,13 +39,13 @@ CREATE TABLE `concours` (
 --
 
 CREATE TABLE `participant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(75) NOT NULL,
   `firstname` varchar(75) NOT NULL,
-  `gender` varchar(10) NOT NULL,
+  `gender` boolean NOT NULL,
   `email` varchar(255) NOT NULL,
-  `birthdate` DATETIME NOT NULL,
-  `city` varchar(50) NOT NULL,
+  `birthdate` DATETIME NULL,
+  `city` varchar(50) NULL,
   `role` varchar(20) NOT NULL,
   PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
