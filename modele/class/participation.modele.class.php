@@ -4,6 +4,8 @@ class participation extends bdd{
 	protected $idConcours;
 	protected $idParticipant;
 	protected $idPhoto;
+    protected $createdAt;
+    protected $updatedAt;
 	
 	public function __construct(){
 		parent::__construct();
@@ -15,8 +17,8 @@ class participation extends bdd{
 		}
 	}
 	
-	public function save(){
-		parent::save("participant");
+	public function save($table = "participation"){
+		parent::save($table);
 	}
 
     /**
@@ -87,6 +89,54 @@ class participation extends bdd{
     public function setIdPhoto($idPhoto)
     {
         $this->idPhoto = $idPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of createdAt.
+     *
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Sets the value of createdAt.
+     *
+     * @param mixed $createdAt the created at
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of updatedAt.
+     *
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Sets the value of updatedAt.
+     *
+     * @param mixed $updatedAt the updated at
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

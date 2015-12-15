@@ -15,7 +15,6 @@ class index {
 			$scope =["email","user_likes","user_photos","publish_actions"];
 
 			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
-			var_dump($this->loginUrl);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 		}
@@ -32,11 +31,6 @@ class index {
 	public function participerAction($args) {
 
 		$view = new view("front","participation");
-	}
-
-	public function voterAction($args) {
-
-		$view = new view("front","voter");
 	}
 
 	public function not_logged($args){

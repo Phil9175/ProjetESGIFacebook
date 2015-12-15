@@ -5,7 +5,7 @@
 	</div>
 
 	<div id="voter">
-		<a class="btn btn-default" href="/index/voterAction">Je souhaite voter</a>
+		<a class="btn btn-default" href="/voter/defaultPage">Je souhaite voter</a>
 	</div>
 
 	<div id="gerer_concours">

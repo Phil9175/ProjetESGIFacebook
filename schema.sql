@@ -23,8 +23,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `concours` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `award` varchar(255) NULL,
+  `description` text NOT NULL,
+  `award` text NULL,
   `start_date` DATETIME NOT NULL,
   `end_date` DATETIME NOT NULL,
   `status` boolean NOT NULL,
@@ -32,22 +32,23 @@ CREATE TABLE `concours` (
   `logo` varchar(255) NULL,
   `font` varchar(255) NULL,
   `font_family` varchar(255) NULL,
-  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 --
 -- Structure de la table `participant`
 --
 
 CREATE TABLE `participant` (
-  `id` int(11) NOT NULL,
+  `id` bigint NOT NULL,
   `name` varchar(75) NOT NULL,
-  `firstname` varchar(75) NOT NULL,
+  `first_name` varchar(75) NOT NULL,
+  `last_name` varchar(75) NOT NULL,
   `gender` boolean NOT NULL,
   `email` varchar(255) NOT NULL,
   `birthdate` DATETIME NULL,
   `city` varchar(50) NULL,
   `role` varchar(20) NOT NULL,
-  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 --
 -- Structure de la table `participation`
@@ -55,9 +56,12 @@ CREATE TABLE `participant` (
 
 CREATE TABLE `participation` (
   `id_concours` int(11) NOT NULL,
-  `id_participant` int(11) NOT NULL,
-  `id_photo` int(11) NOT NULL,
-  PRIMARY KEY(`id_concours`,`id_participant`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_participant` bigint NOT NULL,
+  `id_photo` bigint NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME NOT NULL,
+
+  PRIMARY KEY(`id_concours`,`id_participant`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 
 ALTER TABLE participation add foreign key (id_concours) References concours(id);

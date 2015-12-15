@@ -23,9 +23,9 @@ class concours extends bdd{
 		}
 	}
 	
-	public function save(){
+	public function save($table = "concours"){
 		$this->ranking = serialize($this->ranking);
-		parent::save("concours");
+		parent::save($table);
 	}
 
     /**

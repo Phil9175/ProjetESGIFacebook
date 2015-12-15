@@ -3,7 +3,8 @@ class participant extends bdd{
 	
 	protected $id;
 	protected $name;
-	protected $firstname;
+	protected $firstName;
+    protected $lastName;
 	protected $email;
 	protected $gender;
 	protected $birthDate;
@@ -20,8 +21,8 @@ class participant extends bdd{
 		}
 	}
 	
-	public function save(){
-		parent::save("participant");
+	public function save($table = "participant"){
+		parent::save($table);
 	}
 
     /**
@@ -73,25 +74,25 @@ class participant extends bdd{
     }
 
     /**
-     * Gets the value of firstname.
+     * Gets the value of firstName.
      *
      * @return mixed
      */
-    public function getFirstname()
+    public function getFirstName()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
     /**
-     * Sets the value of firstname.
+     * Sets the value of firstName.
      *
-     * @param mixed $firstname the firstname
+     * @param mixed $firstName the firstName
      *
      * @return self
      */
-    public function setFirstname($firstname)
+    public function setFirstName($firstName)
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -212,6 +213,30 @@ class participant extends bdd{
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of lastName.
+     *
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Sets the value of lastName.
+     *
+     * @param mixed $lastName the lastName
+     *
+     * @return self
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
