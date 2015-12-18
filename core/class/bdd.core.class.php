@@ -61,6 +61,20 @@ class bdd {
 			}
 		}
 	}
+
+	public function getOneByAnd($value,$value2, $column = "id", $column2 = "id", $table){
+		$sql = "SELECT * FROM ".$table." WHERE ".$column."=:".$column." AND ".$column2."=:".$column2." limit 1";
+		$query = $this->connexion->prepare($sql);
+		$query->execute([$column=>$value,$column2=>$value2]);
+		$query->setFetchMode(PDO::FETCH_ASSOC);
+		$data = $query->fetch(PDO::FETCH_ASSOC);
+
+		if (!empty($data)){
+			foreach($data as $propName => $propValue){
+				$this->result[$propName] = $propValue;
+			}
+		}
+	}
 	
 	public function getResults($value, $column = "id", $table, $order){
 		$requete = (empty($column))?"":" WHERE ".$column."=:".$column;

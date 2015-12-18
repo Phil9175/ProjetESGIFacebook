@@ -17,6 +17,7 @@ class voter {
 			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+			
 		}
 	}
 
@@ -31,19 +32,27 @@ class voter {
 
 		try {
 			$participation = new participation;
-			$participations = $participation->getResults("", "", "participation", "WHERE id_concours = ".$leConcours->getId()." ORDER BY updated_at");
+			// On sélectionne les participations du concours ci dessus
+			$participations = $participation->requete("Select * from participation inner join participant on participation.id_participant = participant.id where id_concours = "
+				.$leConcours->getId()." ORDER BY updated_at");
 			
 		} catch (Exception $e) {
-			// echo "LOL";
+			$_SESSION['flash_message'] = "Le Concours n'est pas encore ouvert";
 			header('Location: /index/defaultPage/');
 		}
+		
+		$maParticipation = new participation;
+		// retrouve la participation du user connecter
+		$maParticipation->getOneByAnd($_SESSION['idParticipant'],$leConcours->getId(), 'id_participant', 'id_concours', 'participation');
+		
+		$maParticipation->setFromBdd($maParticipation->result);
 
 		$view = new view("front","voter");
 		$view->assign('loginUrl',$this->loginUrl);
 		$view->assign('leConcours',$leConcours);
 		$view->assign('participations',$participations);
+		$view->assign('maParticipation',$maParticipation);
 		$view->assign('fb',$this->fb);
-
 	}
 
 	public function voterAction($args) {

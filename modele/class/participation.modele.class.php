@@ -10,13 +10,22 @@ class participation extends bdd{
 	public function __construct(){
 		parent::__construct();
 	}
-	
-	public function setFromBdd($var = []){
+
+/*	public function setFromBdd($var = []){
+        var_dump($var);
+
 		foreach($var as $key => $value){
 			$this->$key = (fonctions::is_serialized($value))?unserialize($value):$value;
 		}
-	}
-	
+	}*/
+
+    public function setFromBdd($var = []){
+        $participation = $this;
+
+        foreach ($var as $propertyToSet => $value) {
+            $participation->{fonctions::camelCase($propertyToSet)} = $value;
+        }
+    }
 	public function save($table = "participation"){
 		parent::save($table);
 	}
@@ -100,7 +109,7 @@ class participation extends bdd{
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return new DateTime($this->createdAt);
     }
 
     /**
@@ -124,7 +133,7 @@ class participation extends bdd{
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return new DateTime($this->updatedAt);
     }
 
     /**
@@ -139,6 +148,14 @@ class participation extends bdd{
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @return String chemin de la photo
+     **/
+    public function getPhotoPath(){
+
+        return "/view/uploads/concours_photos/".$this->idPhoto.".jpg";
     }
 }
 ?>

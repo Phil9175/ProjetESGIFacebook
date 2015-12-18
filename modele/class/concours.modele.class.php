@@ -287,7 +287,7 @@ class concours extends bdd{
      *
      * @return self
      */
-    protected function setFontFamily($fontFamily)
+    public function setFontFamily($fontFamily)
     {
         $this->fontFamily = $fontFamily;
 

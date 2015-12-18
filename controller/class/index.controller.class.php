@@ -3,8 +3,8 @@ class index {
 	private $loginUrl;
 	private $fb;
 	public function __construct() {
-		//session_destroy();
-		//die('okj');
+		/*session_destroy();
+		die('okj');*/
 		$this->fb = new Facebook\Facebook([
 				'app_id' => APP_ID,
 				'app_secret' =>APP_SECRET,
@@ -16,8 +16,18 @@ class index {
 
 			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
 		}else{
+
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+
+			if(!isset($_SESSION['idParticipant']))
+			{
+				$response = $this->fb->get('/me', $_SESSION['facebook_access_token']);
+				$idParticipant = $response->getDecodedBody()['id'];
+				
+				$_SESSION['idParticipant'] = $idParticipant;
+			}
 		}
+
 	}
 
 	public function defaultPage($args) {
