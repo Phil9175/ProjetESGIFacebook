@@ -9,29 +9,26 @@
             <tr>
 <?php
 $i =0;
-foreach($userNode['data'] as $album){
-    if($i < 5 ) {
-        if (isset($album['photos'])) {
-            echo "<td>";
-            $id = $album['id'];
-            $name =$album['name'];
-            $photos = $album['photos']['data'];
-            $photo = $photos[0];
-            $picture = $photo['picture'];
-            echo "<img src='$picture' border='0' />";
-            echo "<br>";
-            echo "$name";
-            echo "<br>";
-            echo "<a class=\"btn btn-default\" href=\"/participationPhoto/sendPhoto/$id\">Selectionnez cet album</a>";
-            echo "<br>";
-            echo "</td>";
+foreach($userNode['data'] as $album):
+    if($i < 5 ) :
+        if (isset($album['photos'])):
+			?>
+            <td>
+            <img src='<?php echo $album['photos']['data'][0]['picture']; ?>' border='0' />
+            <br>
+            <?php echo $album['name']; ?>
+            <br>
+            <a class="btn btn-default" href="/participationPhoto/sendPhoto/<?php echo $album['id']; ?>">Selectionner cet album</a>
+            <br>
+            </td>
+			<?php
             $i++;
-        }
-    }else{
+        endif;
+    else:
         $i =0;
         echo "</tr><tr>";
-    }
-}
+    endif;
+endforeach;
 ?>
             </tr>
         </table>
