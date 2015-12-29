@@ -39,13 +39,13 @@ CREATE TABLE `concours` (
 --
 
 CREATE TABLE `participant` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(75) NOT NULL,
   `first_name` varchar(75) NOT NULL,
   `last_name` varchar(75) NOT NULL,
   `gender` boolean NOT NULL,
   `email` varchar(255) NOT NULL,
-  `birthdate` DATETIME NULL,
+  `birthdate` varchar(25) NULL,
   `city` varchar(50) NULL,
   `role` varchar(20) NOT NULL,
   PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;

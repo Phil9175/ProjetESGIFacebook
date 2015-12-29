@@ -3,8 +3,8 @@ class participant extends bdd{
 	
 	protected $id;
 	protected $name;
-	protected $firstName;
-    protected $lastName;
+	protected $first_name;
+    protected $last_name;
 	protected $email;
 	protected $gender;
 	protected $birthDate;
@@ -80,7 +80,7 @@ class participant extends bdd{
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     /**
@@ -90,9 +90,9 @@ class participant extends bdd{
      *
      * @return self
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -224,7 +224,7 @@ class participant extends bdd{
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     /**
@@ -234,9 +234,9 @@ class participant extends bdd{
      *
      * @return self
      */
-    public function setLastName($lastName)
+    public function setLastName($last_name)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $last_name;
 
         return $this;
     }
