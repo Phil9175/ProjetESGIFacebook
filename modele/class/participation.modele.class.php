@@ -1,11 +1,12 @@
 <?php
 class participation extends bdd{
-	
-	protected $idConcours;
-	protected $idParticipant;
-	protected $idPhoto;
-    protected $createdAt;
-    protected $updatedAt;
+
+    protected $id;
+	protected $id_Concours;
+	protected $id_Participant;
+	protected $id_Photo;
+    protected $created_At;
+    protected $updated_At;
 	
 	public function __construct(){
 		parent::__construct();
@@ -37,7 +38,7 @@ class participation extends bdd{
      */
     public function getIdConcours()
     {
-        return $this->idConcours;
+        return $this->id_Concours;
     }
 
     /**
@@ -47,9 +48,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdConcours($idConcours)
+    public function setIdConcours($id_Concours)
     {
-        $this->idConcours = $idConcours;
+        $this->id_Concours = $id_Concours;
 
         return $this;
     }
@@ -61,7 +62,7 @@ class participation extends bdd{
      */
     public function getIdParticipant()
     {
-        return $this->idParticipant;
+        return $this->id_Participant;
     }
 
     /**
@@ -71,9 +72,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdParticipant($idParticipant)
+    public function setIdParticipant($id_Participant)
     {
-        $this->idParticipant = $idParticipant;
+        $this->id_Participant = $id_Participant;
 
         return $this;
     }
@@ -85,7 +86,7 @@ class participation extends bdd{
      */
     public function getIdPhoto()
     {
-        return $this->idPhoto;
+        return $this->id_Photo;
     }
 
     /**
@@ -95,9 +96,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdPhoto($idPhoto)
+    public function setIdPhoto($id_Photo)
     {
-        $this->idPhoto = $idPhoto;
+        $this->id_Photo = $id_Photo;
 
         return $this;
     }
@@ -109,7 +110,7 @@ class participation extends bdd{
      */
     public function getCreatedAt()
     {
-        return new DateTime($this->createdAt);
+        return new DateTime($this->created_At);
     }
 
     /**
@@ -119,9 +120,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($created_At)
     {
-        $this->createdAt = $createdAt;
+        $this->created_At = $created_At;
 
         return $this;
     }
@@ -133,7 +134,7 @@ class participation extends bdd{
      */
     public function getUpdatedAt()
     {
-        return new DateTime($this->updatedAt);
+        return new DateTime($this->updated_At);
     }
 
     /**
@@ -143,9 +144,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updated_At)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_At = $updated_At;
 
         return $this;
     }
