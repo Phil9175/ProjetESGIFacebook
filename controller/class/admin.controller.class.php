@@ -9,6 +9,19 @@ class admin
     {
     }
     
+	
+	public function defaultPage($args){
+		$participant = new participant();
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
+		$participant->setFromBdd($participant->result);
+		if ($participant->getRole() == "admin"){
+			$concours = new concours;
+			$concourss = $concours->getResults("", "", "concours", ""); 
+			$view = new view("admin", "concours/list", "admin.layout");
+			$view->assign("concours", $concourss);
+		}
+		
+	}
 	 public function edit($args)
     {
 		$participant = new participant();
@@ -29,7 +42,7 @@ class admin
 			$concours = new concours();
 			$concours->getOneBy($args[0], "id", "concours");
 			$concours->setFromBdd($concours->result);
-			$view = new view("admin","concours/edit");
+			$view = new view("admin", "concours/edit", "admin.layout");
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
@@ -40,16 +53,15 @@ class admin
     }
 	
 	
-    public function listAction($args)
+    public function list_concours($args)
     {
 		$participant = new participant();
 		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
-			
 			$concours = new concours;
 			$concourss = $concours->getResults("", "", "concours", ""); 
-			$view = new view("admin","concours/list");
+			$view = new view("admin", "concours/list", "admin.layout");
 			$view->assign("concours", $concourss);
 		}
     }

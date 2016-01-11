@@ -7,4 +7,3 @@
 <link rel="stylesheet" type="text/css" href="/view/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
