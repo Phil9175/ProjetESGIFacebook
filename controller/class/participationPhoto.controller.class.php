@@ -51,17 +51,10 @@ class participationPhoto{
         $idParticipant = $this->sendParticipant();
 
         $participation->setIdPhoto($idPhoto[0]);
-<<<<<<< HEAD
         $participation->setIdParticipant($idParticipant);
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
         $participation->setUpdatedAt(date("Y-m-d H:i:s"));
-=======
-        $participation->setIdParticipant($_SESSION['idParticipant']);
-        $participation->setIdConcours($concours->getId());
-        $participation->setCreatedAt(date("Y-m-d H:i:s"));
-
->>>>>>> 520d89fc3d92800e7af152ff1bc7ce68339e3f6b
         try{
 
             $participation->save("participation");
@@ -82,11 +75,8 @@ class participationPhoto{
         $email = $participant->getEmail();
 
         if (!$email) {
-<<<<<<< HEAD
             $participant->setIdParticipant(trim($userNode['id']));
-=======
-			$participant->setId($_SESSION['idParticipant']);
->>>>>>> 520d89fc3d92800e7af152ff1bc7ce68339e3f6b
+
             $participant->setLastName($userNode['last_name']);
             $participant->setFirstName($userNode['first_name']);
             $participant->setName($userNode['first_name']." ". $userNode['last_name']);

@@ -12,15 +12,15 @@ class admin
 	 public function edit($args)
     {
 		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
 			if ($args["validation"] == "oui"){
 				$concours = new concours();
 				$concours->getOneBy($args[0], "id", "concours");
 				$concours->setFromBdd($concours->result);
-			
-			
+				$concours->setName($args["nom"]);
+				$concours->save("concours");
 			}
 			$concours = new concours();
 			$concours->getOneBy($args[0], "id", "concours");
@@ -38,7 +38,7 @@ class admin
     public function listAction($args)
     {
 		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
 			
@@ -51,7 +51,7 @@ class admin
 	
 	public function activate($args){
 		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
 			if (is_numeric($args[0])){
@@ -68,7 +68,7 @@ class admin
 	
 	public function deactivate($args){
 		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
 			if (is_numeric($args[0])){

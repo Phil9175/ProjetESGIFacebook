@@ -38,7 +38,7 @@ class index {
 		
 		
 		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
 		$participant->setFromBdd($participant->result);
 		
 		
