@@ -18,7 +18,7 @@ foreach($userNode['data'] as $album):
             <br>
             <?php echo $album['name']; ?>
             <br>
-            <a class="btn btn-default" href="/participationPhoto/sendPhoto/<?php echo $album['id']; ?>">Selectionner cet album</a>
+            <a class="btn btn-default" href="/participationPhoto/photo/<?php echo $album['id']; ?>">Selectionner cet album</a>
             <br>
             </td>
 			<?php
