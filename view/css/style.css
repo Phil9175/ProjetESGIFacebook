@@ -89,3 +89,34 @@ div.desc {
     border-color: #eed3d7;
     color: #b94a48
 }
+
+.paginationn {
+	line-height:2em;
+}
+.paginationn a,
+.paginationn span {
+	padding:0.2em 0.5em;
+}
+.paginationn a {
+	border:1px solid #9AAFE5;
+	color:#105CB6;
+	text-decoration:none;
+}
+.paginationn a:hover {
+	border:1px solid #296BB5;
+	color:#000031;
+}
+.paginationn .prevnext {
+	font-weight:bold;
+}
+.paginationn span.disabled { 
+	border:1px solid #DDDDDD;
+	color:#999999;
+}
+.paginationn span.current {
+	border:1px solid #2E6AB1;
+	background-color:#2E6AB1;
+	color:#ffffff;
+	font-weight:bold;
+}
+
