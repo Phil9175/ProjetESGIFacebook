@@ -20,6 +20,10 @@ class admin
 				$concours->getOneBy($args[0], "id", "concours");
 				$concours->setFromBdd($concours->result);
 				$concours->setName($args["nom"]);
+				$concours->setDescription($args["description"]);
+				$concours->setStartDate($args["date_debut"]);
+				$concours->setEndDate($args["date_fin"]);
+				$concours->setStatus($args["status"]);
 				$concours->save("concours");
 			}
 			$concours = new concours();
@@ -31,6 +35,7 @@ class admin
 			$view->assign("description", $concours->getDescription());
 			$view->assign("date_debut", $concours->getStartDate());
 			$view->assign("date_fin", $concours->getEndDate());
+			$view->assign("status", $concours->getStatus());
 		}
     }
 	
