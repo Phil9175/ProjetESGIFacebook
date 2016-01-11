@@ -9,7 +9,9 @@
 		<a class="btn btn-default" href="/voter/defaultPage">Je souhaite voter</a>
 	</div>
 
+	<?php if($status == "admin"): ?>
 	<div id="gerer_concours">
 		<a class="btn btn-danger" href="/admin/listAction">Gestion concours</a>
 	</div>
+	<?php endif; ?>
 </div>

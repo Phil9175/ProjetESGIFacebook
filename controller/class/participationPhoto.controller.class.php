@@ -49,9 +49,9 @@ class participationPhoto{
         $concours->setFromBdd($concours->result);
 
         $participation->setIdPhoto($idPhoto[0]);
-        $participation->setIdParticipant("987654321");
+        $participation->setIdParticipant($_SESSION['idParticipant']);
         $participation->setIdConcours($concours->getId());
-        $participation->setCreatedAt($participation->getCreatedAt(new DateTime()));
+        $participation->setCreatedAt(date("Y-m-d H:i:s"));
 
         try{
             $this->sendParticipant();
@@ -74,6 +74,7 @@ class participationPhoto{
         $email = $participant->getEmail();
 
         if (!$email) {
+			$participant->setId($_SESSION['idParticipant']);
             $participant->setLastName($userNode['last_name']);
             $participant->setFirstName($userNode['first_name']);
             $participant->setName($userNode['first_name']." ". $userNode['last_name']);

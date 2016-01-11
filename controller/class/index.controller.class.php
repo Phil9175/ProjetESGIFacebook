@@ -34,8 +34,17 @@ class index {
 		if(!isset($_SESSION['facebook_access_token'])){
 			header('location:'. $this->loginUrl);
 		}
+		
+		
+		
+		$participant = new participant();
+		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
+		$participant->setFromBdd($participant->result);
+		
+		
 		$view = new view("front","accueil");
-		$view->assign('loginUrl',$this->loginUrl);
+		$view->assign('loginUrl', $this->loginUrl);
+		$view->assign('status', $participant->getRole());
 	}
 	
 	public function participerAction($args) {
