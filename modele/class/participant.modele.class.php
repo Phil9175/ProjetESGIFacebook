@@ -2,6 +2,7 @@
 class participant extends bdd{
 	
 	protected $id;
+    protected $id_participant;
 	protected $name;
 	protected $first_name;
     protected $last_name;
@@ -36,6 +37,30 @@ class participant extends bdd{
     }
 
     /**
+     * Sets the value of id FB.
+     *
+     * @param mixed $id the id
+     *
+     * @return self
+     */
+    public function setIdParticipant($id_participant)
+    {
+        $this->id_participant = $id_participant;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of id FB.
+     *
+     * @return mixed
+     */
+    public function getIdParticipant()
+    {
+        return $this->id_participant;
+    }
+
+    /**
      * Sets the value of id.
      *
      * @param mixed $id the id
@@ -48,7 +73,6 @@ class participant extends bdd{
 
         return $this;
     }
-
     /**
      * Gets the value of name.
      *

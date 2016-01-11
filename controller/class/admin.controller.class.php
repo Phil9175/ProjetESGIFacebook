@@ -15,22 +15,22 @@ class admin
 		$participant->getOneBy($_SESSION['idParticipant'], "id", "participant");
 		$participant->setFromBdd($participant->result);
 		if ($participant->getRole() == "admin"){
+			if ($args["validation"] == "oui"){
+				$concours = new concours();
+				$concours->getOneBy($args[0], "id", "concours");
+				$concours->setFromBdd($concours->result);
 			
+			
+			}
 			$concours = new concours();
 			$concours->getOneBy($args[0], "id", "concours");
 			$concours->setFromBdd($concours->result);
 			$view = new view("admin","concours/edit");
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
-			$view->assign("nom", $concours->getName());
-			$view->assign("nom", $concours->getName());
-			$view->assign("nom", $concours->getName());
-			$view->assign("nom", $concours->getName());
-			$view->assign("nom", $concours->getName());
-			
-			
-			
-			
+			$view->assign("description", $concours->getDescription());
+			$view->assign("date_debut", $concours->getStartDate());
+			$view->assign("date_fin", $concours->getEndDate());
 		}
     }
 	

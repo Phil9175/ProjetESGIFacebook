@@ -40,6 +40,7 @@ CREATE TABLE `concours` (
 
 CREATE TABLE `participant` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `id_participant` bigint NOT NULL,
   `name` varchar(75) NOT NULL,
   `first_name` varchar(75) NOT NULL,
   `last_name` varchar(75) NOT NULL,
@@ -55,14 +56,15 @@ CREATE TABLE `participant` (
 --
 
 CREATE TABLE `participation` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `id_concours` int(11) NOT NULL,
   `id_participant` bigint NOT NULL,
   `id_photo` bigint NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
 
-  PRIMARY KEY(`id_concours`,`id_participant`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 
 ALTER TABLE participation add foreign key (id_concours) References concours(id);
-ALTER TABLE participation add foreign key (id_participant) References participant(id);
+ALTER TABLE participation add foreign key (id_participant) References participant(id_participant);
