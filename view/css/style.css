@@ -90,6 +90,12 @@ div.desc {
     color: #b94a48
 }
 
+.flash-validate{
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #009900
+}
+
 .paginationn {
 	line-height:2em;
 }
