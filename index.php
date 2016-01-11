@@ -1,7 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set("Europe/Paris");
-include("core/class/constantes.core.php");
+include("core/class/constantes.core.class.php");
 
 require_once 'controller/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php';
 
