@@ -14,7 +14,7 @@ class participationPhoto{
             $helper = $this->fb->getRedirectLoginHelper();
             $scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 
-            $this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
+            $this->loginUrl = $helper->getLoginUrl('https://www.concoursphotosesgi.com/login-callback.php',$scope);
             var_dump($this->loginUrl);
         }else{
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
@@ -48,15 +48,23 @@ class participationPhoto{
         $concours->getOneBy("1","status","concours");
         $concours->setFromBdd($concours->result);
 
+        $idParticipant = $this->sendParticipant();
+
         $participation->setIdPhoto($idPhoto[0]);
+<<<<<<< HEAD
+        $participation->setIdParticipant($idParticipant);
+        $participation->setIdConcours($concours->getId());
+        $participation->setCreatedAt(date("Y-m-d H:i:s"));
+        $participation->setUpdatedAt(date("Y-m-d H:i:s"));
+=======
         $participation->setIdParticipant($_SESSION['idParticipant']);
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
 
+>>>>>>> 520d89fc3d92800e7af152ff1bc7ce68339e3f6b
         try{
-            $this->sendParticipant();
-            $participation->save("participation");
 
+            $participation->save("participation");
 
         }catch (Exception $e){
             var_dump($e);
@@ -74,7 +82,11 @@ class participationPhoto{
         $email = $participant->getEmail();
 
         if (!$email) {
+<<<<<<< HEAD
+            $participant->setIdParticipant(trim($userNode['id']));
+=======
 			$participant->setId($_SESSION['idParticipant']);
+>>>>>>> 520d89fc3d92800e7af152ff1bc7ce68339e3f6b
             $participant->setLastName($userNode['last_name']);
             $participant->setFirstName($userNode['first_name']);
             $participant->setName($userNode['first_name']." ". $userNode['last_name']);
@@ -88,6 +100,10 @@ class participationPhoto{
             $participant->setRole("participant");
 
             $participant->save("participant");
+
+            return trim($userNode['id']);
         }
+
+        return $userNode['id'];
     }
 }

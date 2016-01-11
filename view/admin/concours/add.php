@@ -11,14 +11,7 @@
 			endif;
 			?>
 			<?php
-		$tempTitle = (isset($tempTitle))?$tempTitle:"";			
-		$tempContenu = (isset($tempContenu))?$tempContenu:"";			
-		$tempUrl = (isset($tempUrl))?$tempUrl:"";			
-		$tempTags = (isset($tempTags))?$tempTags:"";			
-		$tempMetaTitle = (isset($tempMetaTitle))?$tempMetaTitle:"";			
-		$tempMetaDescription = (isset($tempMetaDescription))?$tempMetaDescription:"";			
-		$tempKeyword = (isset($tempKeyword))?$tempKeyword:"";			
-							
+		
 		$addArticle = new formulaire("addArticle", "", "POST", "/admin/article/add", "name", "multipart/form-data");
 		if (security::get_can_modify_page(security::returnId()) && security::get_can_add_page(security::returnId())){
 			$addArticle->ajoutElement("Créer une page", "radio", "pageouarticle", "", "pageouarticle", "", "page", "", "", "", "");

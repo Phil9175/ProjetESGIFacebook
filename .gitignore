@@ -1,3 +1,4 @@
 # Liste des fichiers à ignorer #
-core/class/constantes.core.php
+core/class/constantes.core.class.php
+login-callback.php
 view/uploads/concours_photos/*
