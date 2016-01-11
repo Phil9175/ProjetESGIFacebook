@@ -33,8 +33,8 @@ class voter {
 		try {
 			$participation = new participation;
 			// On sélectionne les participations du concours ci dessus
-			$participations = $participation->requete("Select * from participation inner join participant on participation.id_participant = participant.id where id_concours = "
-				.$leConcours->getId()." ORDER BY updated_at");
+			$participations = $participation->requete("SELECT * FROM participation, participant where participation.id_concours = "
+				.$leConcours->getId()." and participation.id_participant = participant.id_participant");
 			
 		} catch (Exception $e) {
 			$_SESSION['flash_message'] = "Le Concours n'est pas encore ouvert";
