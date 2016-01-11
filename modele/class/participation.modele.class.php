@@ -110,7 +110,6 @@ class participation extends bdd{
      */
     public function getCreatedAt()
     {
-		$this->created_At(date("Y-m-d H:i:s"));
         return $this->created_At;
     }
 
@@ -124,8 +123,7 @@ class participation extends bdd{
     public function setCreatedAt($created_At)
     {
         $this->created_At = $created_At;
-
-        return $this;
+        return $this->created_At;
     }
 
     /**
