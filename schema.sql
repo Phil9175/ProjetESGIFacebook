@@ -32,6 +32,7 @@ CREATE TABLE `concours` (
   `logo` varchar(255) NULL,
   `font` varchar(255) NULL,
   `font_family` varchar(255) NULL,
+  `font_color` varchar(255) NULL,
   PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 --

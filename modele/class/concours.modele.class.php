@@ -4,14 +4,15 @@ class concours extends bdd{
 	protected $id;
 	protected $name;
 	protected $description;
-	protected $startDate;
-	protected $endDate;
+	protected $start_date;
+	protected $end_date;
 	protected $ranking;
 	protected $award;
 	protected $status;
     protected $logo;
     protected $font;
-    protected $fontFamily;
+	protected $font_color;
+    protected $font_family;
 	
 	public function __construct(){
 		parent::__construct();
@@ -107,7 +108,7 @@ class concours extends bdd{
      */
     public function getStartDate()
     {
-        return $this->startDate;
+        return $this->start_date;
     }
 
     /**
@@ -119,7 +120,7 @@ class concours extends bdd{
      */
     public function setStartDate($startDate)
     {
-        $this->startDate = $startDate;
+        $this->start_date = $startDate;
 
         return $this;
     }
@@ -131,7 +132,7 @@ class concours extends bdd{
      */
     public function getEndDate()
     {
-        return $this->endDate;
+        return $this->end_date;
     }
 
     /**
@@ -143,7 +144,7 @@ class concours extends bdd{
      */
     public function setEndDate($endDate)
     {
-        $this->endDate = $endDate;
+        $this->end_date = $endDate;
 
         return $this;
     }
@@ -269,7 +270,31 @@ class concours extends bdd{
     }
 
 
+ /**
+     * Gets the value of font_color.
+     *
+     * @return mixed
+     */
+    public function getFontColor()
+    {
+        return $this->font_color;
+    }
 
+    /**
+     * Sets the value of font_color.
+     *
+     * @param mixed $font_color the font family
+     *
+     * @return self
+     */
+    public function setFontColor($font_color)
+    {
+        $this->font_color = $font_color;
+
+        return $this;
+    }
+	
+	
     /**
      * Gets the value of fontFamily.
      *
@@ -277,7 +302,7 @@ class concours extends bdd{
      */
     public function getFontFamily()
     {
-        return $this->fontFamily;
+        return $this->font_family;
     }
 
     /**
@@ -289,7 +314,7 @@ class concours extends bdd{
      */
     public function setFontFamily($fontFamily)
     {
-        $this->fontFamily = $fontFamily;
+        $this->font_family = $fontFamily;
 
         return $this;
     }
