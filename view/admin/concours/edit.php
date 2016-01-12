@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="date_fin"> Date </label>
+					<label class="control-label col-sm-2" for="date_fin"> Date de fin <span class="asteriskField"> * </span></label>
 					<div class="col-sm-10">
 						<input class="form-control" id="date_fin" name="date_fin" placeholder="MM/DD/YYYY" type="text" value="<?php echo $date_fin; ?>"/>
 					</div>
@@ -107,6 +107,25 @@
                 $(this).ColorPickerSetColor(this.value);
             });
 			
+			$.datetimepicker.setLocale('fr');
+			$('#date_debut').datetimepicker({
+				dayOfWeekStart : 1,
+				lang:'fr',
+				startDate:	'<?php echo date("d/m/Y"); ?>'
+			});
+			
+			$('#date_debut').datetimepicker({value:'<?php echo $date_debut; ?> <?php echo $heure_debut; ?>',step:10});
+$.datetimepicker.setLocale('fr');
+			$('#date_fin').datetimepicker({
+				dayOfWeekStart : 1,
+				lang:'fr',
+				startDate:	'<?php echo date("d/m/Y"); ?>'
+			});
+			
+			$('#date_fin').datetimepicker({value:'<?php echo $date_fin; ?> <?php echo $heure_fin; ?>',step:10});
+
+
+
 			
         });
 
