@@ -67,6 +67,7 @@ class admin
 				$concours->setEndDate($args["date_fin"]);
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
+				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->save("concours");
 			}
 			$concours = new concours();
@@ -80,6 +81,7 @@ class admin
 			$view->assign("date_fin", $concours->getEndDate());
 			$view->assign("status", $concours->getStatus());
 			$view->assign("font_color", $concours->getFontColor());
+			$view->assign("background_color", $concours->getBackgroundColor());
 			$view->assign("logo", $concours->getLogo());
 		}
     }

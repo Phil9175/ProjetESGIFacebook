@@ -13,6 +13,8 @@ class concours extends bdd{
     protected $font;
 	protected $font_color;
     protected $font_family;
+    protected $background_color;
+	
 	
 	public function __construct(){
 		parent::__construct();
@@ -294,15 +296,14 @@ class concours extends bdd{
         return $this;
     }
 	
-	
-    /**
+	 /**
      * Gets the value of fontFamily.
      *
      * @return mixed
      */
-    public function getFontFamily()
+    public function getBackgroundColor()
     {
-        return $this->font_family;
+        return $this->background_color;
     }
 
     /**
@@ -312,11 +313,14 @@ class concours extends bdd{
      *
      * @return self
      */
-    public function setFontFamily($fontFamily)
+    public function setBackgroundColor($background_color)
     {
-        $this->font_family = $fontFamily;
+        $this->background_color = $background_color;
 
         return $this;
     }
+   
+   
+   
 }
 ?>
