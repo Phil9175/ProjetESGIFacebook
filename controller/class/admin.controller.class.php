@@ -33,38 +33,12 @@ class admin
 				$concours->getOneBy($args[0], "id", "concours");
 				$concours->setFromBdd($concours->result);
 				
-					$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
-					$fichier = fonctions::id_aleatoire();
-					$taille_maxi = 10000000;
-					if ($taille != 0){
-						$taille = filesize($_FILES['logo']['tmp_name']);
-						$extensions = array('.png', '.gif', '.jpg', '.jpeg');
-						$extension = strrchr($_FILES['logo']['name'], '.'); 
-						//Début des vérifications de sécurité...
-						if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-						{
-							 $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg, txt ou doc...';
-						}
-						if($taille>$taille_maxi)
-						{
-							 $erreur = 'Le fichier est trop gros...';
-						}
-						if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
-						{
-							 if(move_uploaded_file($_FILES['logo']['tmp_name'], $dossier . $fichier . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-							 {
-								 $concours->setLogo("/fichiers/".$fichier.".".$extension);
-							}
-							 else //Sinon (la fonction renvoie FALSE).
-							 {
-								  echo 'Erreur, merci de réessayer!';
-							 }
-						}
-					}
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
-				$concours->setStartDate($args["date_debut"]);
-				$concours->setEndDate($args["date_fin"]);
+				sscanf($args["date_debut"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
+				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
@@ -77,14 +51,45 @@ class admin
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
-			$view->assign("date_debut", $concours->getStartDate());
-			$view->assign("date_fin", $concours->getEndDate());
+			sscanf($concours->getStartDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
+			$view->assign("date_debut", $jour."/".$mois."/".$an);
+			$view->assign("heure_debut", $heure.":".$min.":".$sec);
+			sscanf($concours->getEndDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);			
+			$view->assign("date_fin", $jour."/".$mois."/".$an);
+			$view->assign("heure_fin", $heure.":".$min.":".$sec);
 			$view->assign("status", $concours->getStatus());
 			$view->assign("font_color", $concours->getFontColor());
 			$view->assign("background_color", $concours->getBackgroundColor());
-			$view->assign("logo", $concours->getLogo());
 		}
     }
+	
+	 public function add($args)
+    {
+		$participant = new participant();
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
+		$participant->setFromBdd($participant->result);
+		if ($participant->getRole() == "admin"){
+			if ($args["validation"] == "oui"){
+				$concours = new concours();
+				$concours->setName($args["nom"]);
+				$concours->setDescription($args["description"]);
+				sscanf($args["date_debut"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
+				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
+				$concours->setStatus($args["status"]);
+				$concours->setFontColor($args["picker_font"]);
+				$concours->setBackgroundColor($args["picker_back"]);
+				$concours->save("concours");
+				header("Location: https://www.concoursphotosesgi.com/admin/");
+				exit();
+			}
+			$view = new view("admin", "concours/add", "admin.layout");
+
+		}
+    }
+	
+	
 	
 	
     public function list_concours($args)
