@@ -1,6 +1,7 @@
 <h1> Selection photo </h1>
 
 <div>
+    <a class="btn btn-default" href="/participationPhoto/index">Retour</a>
     <pre>
         <?php if(!isset($album)): ?>
             <?php header('location:/notFound'); ?>
@@ -9,7 +10,6 @@
         <div>
             Aucune photo dans cet album
             <br>
-            <a class="btn btn-default" href="/participationPhoto/index">Retour</a>
         </div>
 
             <?php else: ?>
