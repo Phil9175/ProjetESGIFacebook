@@ -40,7 +40,47 @@ class participationPhoto{
         }
     }
 
-    public function sendPhoto($idPhoto){
+    public function importPhoto(){
+        if ($_FILES['fichier']['error']) {
+            switch ($_FILES['fichier']['error']) {
+                case 1: // UPLOAD_ERR_INI_SIZE
+                    $_SESSION['flash_messageError'] = "Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !";
+                    header('Location: /index/defaultPage/');
+                    break;
+                case 2: // UPLOAD_ERR_FORM_SIZE
+                    $_SESSION['flash_messageError'] = "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
+                    header('Location: /index/defaultPage/');
+                    break;
+                case 3: // UPLOAD_ERR_PARTIAL
+                    $_SESSION['flash_messageError'] = "L'envoi du fichier a été interrompu pendant le transfert !";
+                    header('Location: /index/defaultPage/');
+                    break;
+                case 4: // UPLOAD_ERR_NO_FILE
+                    $_SESSION['flash_messageError'] = "Le fichier que vous avez envoyé a une taille nulle !";
+                    header('Location: /index/defaultPage/');
+                    break;
+            }
+        }else{
+            $data = [
+                'message' => 'Ceci est ma photo pour participer au concours photo ESGI',
+                'source' => $this->fb->fileToUpload($_FILES['fichier']['tmp_name']),
+            ];
+
+            try {
+                $response = $this->fb->post('/photos', $data);
+
+                $idPhoto = array();
+                $idPhoto[0] = $response->getDecodedBody()['id'];
+
+                $this->sendPhotoFB($idPhoto);
+
+            } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Error: ' . $e->getMessage();
+                exit;
+            }
+        }
+    }
+    public function sendPhotoFB($idPhoto){
         $participation = new participation();
         $concours = new concours();
 
@@ -49,27 +89,30 @@ class participationPhoto{
 
         $idParticipant = $this->sendParticipant();
 
-        $participation->setIdPhoto($idPhoto[0]);
-
         $participation->getOneBy($idPhoto[0],"id_photo","participation");
         $participation->setFromBdd($participation->result);
 
-        if($participation->getIdPhoto()){
+
+
+        if($participation->getIdPhoto() != null){
             $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
             header('Location: /index/defaultPage/');
         }
+
+        $participation->setIdPhoto($idPhoto[0]);
 
         $participation->setIdParticipant($idParticipant);
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
         $participation->setUpdatedAt(date("Y-m-d H:i:s"));
+
         try{
 
             $participation->save("participation");
-/*
+
             $_SESSION['flash_messageValidate'] = "La photo a bien été enregistré.";
             header('Location: /index/defaultPage/');
-*/
+
 
         }catch (Exception $e){
             var_dump($e);

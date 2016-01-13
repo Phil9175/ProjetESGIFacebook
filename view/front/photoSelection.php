@@ -28,7 +28,7 @@
                         $picture = $photo['picture'];
                         echo "<img src='$picture' border='0' />";
                         echo "</br>";
-                        echo "<a class=\"btn btn-default\" href=\"/participationPhoto/sendPhoto/$idPhoto/\">Selectionnez cette photo</a>";
+                        echo "<a class=\"btn btn-default\" href=\"/participationPhoto/sendPhotoFB/$idPhoto/\">Selectionnez cette photo</a>";
                         echo "</br>";
                         echo "</td>";
                 }

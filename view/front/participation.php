@@ -1,7 +1,15 @@
-<h1> Bienvenue sur la page participation </h1>
+<h1 xmlns="http://www.w3.org/1999/html"> Bienvenue sur la page participation </h1>
 
 <div id="participer">
-    <a class="btn btn-default" href="">Ajoutez une photo dans l'album de votre choix</a>
+    <h2>Ajoutez une photo ou selectionner un album afin de choisir une photo de Facebook.</h2>
+
+    <form method="post" name="form" action="/participationPhoto/importPhoto" enctype="multipart/form-data">
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152"></br>
+        <input class="btn btn-default" type="file" name="fichier">
+        <input class="btn btn-default" type="submit" value="Envoyer">&nbsp;
+        <a class="btn btn-default" href="http://concoursphotosesgi.localhost/">Retour</a>
+    </form>
+    </br>
 </div>
 <div>
     <pre>
