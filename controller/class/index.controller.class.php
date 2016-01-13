@@ -14,7 +14,7 @@ class index {
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 
-			$this->loginUrl = $helper->getLoginUrl('https://www.concoursphotosesgi.com/login-callback.php',$scope);
+			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
 		}else{
 
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
@@ -63,7 +63,7 @@ class index {
 		  {
 			  $helper = $fb->getRedirectLoginHelper();
 			  $scope = ['email','user_likes','user_photos'];
-			  $loginUrl = $helper->getLoginUrl('http://projetesgifacebook.com/login-callback.php', $scope);
+			  $loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php', $scope);
 			  $view = new view("index", "index");
 			  $view->assign("link", $loginUrl);
 		  }else{

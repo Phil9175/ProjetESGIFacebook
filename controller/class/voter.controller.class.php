@@ -14,7 +14,7 @@ class voter {
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions"];
 
-			$this->loginUrl = $helper->getLoginUrl('https://www.concoursphotosesgi.com/login-callback.php',$scope);
+			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 			

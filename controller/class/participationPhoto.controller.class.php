@@ -14,8 +14,7 @@ class participationPhoto{
             $helper = $this->fb->getRedirectLoginHelper();
             $scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 
-            $this->loginUrl = $helper->getLoginUrl('https://www.concoursphotosesgi.com/login-callback.php',$scope);
-            var_dump($this->loginUrl);
+            $this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
         }else{
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
         }
@@ -51,6 +50,17 @@ class participationPhoto{
         $idParticipant = $this->sendParticipant();
 
         $participation->setIdPhoto($idPhoto[0]);
+
+        $participation->getOneBy($idPhoto[0],"id_photo","participation");
+        $participation->setFromBdd($participation->result);
+
+        var_dump($participation);
+
+        if($participation->getIdPhoto()){
+            $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
+            header('Location: /index/defaultPage/');
+        }
+
         $participation->setIdParticipant($idParticipant);
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
@@ -59,10 +69,12 @@ class participationPhoto{
 
             $participation->save("participation");
 
+            $_SESSION['flash_messageValidate'] = "La photo a bien été enregistré.";
+            header('Location: /index/defaultPage/');
+
         }catch (Exception $e){
             var_dump($e);
         }
-
     }
 
     public function sendParticipant(){
@@ -70,11 +82,11 @@ class participationPhoto{
         $userNode = $response->getDecodedBody();
         $participant = new participant();
 
-        $participant->getOneBy($userNode['email'],"email","participant");
+        $participant->getOneBy($userNode['id'],"id_participant","participant");
         $participant->setFromBdd($participant->result);
-        $email = $participant->getEmail();
+        $id = $participant->getIdParticipant();
 
-        if (!$email) {
+        if (!$id) {
             $participant->setIdParticipant(trim($userNode['id']));
 
             $participant->setLastName($userNode['last_name']);
