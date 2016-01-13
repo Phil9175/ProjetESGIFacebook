@@ -63,6 +63,34 @@ class admin
 		}
     }
 	
+	 public function add($args)
+    {
+		$participant = new participant();
+		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
+		$participant->setFromBdd($participant->result);
+		if ($participant->getRole() == "admin"){
+			if ($args["validation"] == "oui"){
+				$concours = new concours();
+				$concours->setName($args["nom"]);
+				$concours->setDescription($args["description"]);
+				sscanf($args["date_debut"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
+				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
+				$concours->setStatus($args["status"]);
+				$concours->setFontColor($args["picker_font"]);
+				$concours->setBackgroundColor($args["picker_back"]);
+				$concours->save("concours");
+				header("Location: https://www.concoursphotosesgi.com/admin/");
+				exit();
+			}
+			$view = new view("admin", "concours/add", "admin.layout");
+
+		}
+    }
+	
+	
+	
 	
     public function list_concours($args)
     {
