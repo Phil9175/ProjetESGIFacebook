@@ -12,7 +12,7 @@
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="description"> Description <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
-						<textarea class="form-control" cols="40" id="description" name="description" rows="10"><?php echo $description; ?></textarea>
+						<textarea class="form-control ckeditor" cols="100" id="description" name="description" rows="10"><?php echo $description; ?></textarea>
 					</div>
 				</div>
 				<div class="form-group ">
@@ -54,13 +54,6 @@
 					</div>
 				</div>
 				
-				<div class="form-group">
-					<label class="control-label col-sm-2 requiredField" for="statut"> Logo du concours <span class="asteriskField"> * </span> </label>
-					<div class="col-sm-10">
-					<img src="https://www.concoursphotosesgi.com<?php echo $logo; ?>">
-							<input name="logo" type="file" />
-					</div>
-				</div>
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<button class="btn btn-primary " name="submit" type="submit"> Enregistrer </button>
@@ -122,11 +115,7 @@ $.datetimepicker.setLocale('fr');
 				startDate:	'<?php echo date("d/m/Y"); ?>'
 			});
 			
-			$('#date_fin').datetimepicker({value:'<?php echo $date_fin; ?> <?php echo $heure_fin; ?>',step:10});
-
-
-
-			
+			$('#date_fin').datetimepicker({value:'<?php echo $date_fin; ?> <?php echo $heure_fin; ?>',step:10});		
         });
 
     </script>

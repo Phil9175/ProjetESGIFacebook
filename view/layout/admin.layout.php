@@ -14,6 +14,8 @@
   <!--/.container-fluid --> 
 </div>
 <?php include "view/".$controller."/".$action.".php";?>
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>/view/ckeditor/ckeditor.js"></script> 
+
 <?php include("view/inc/foot.php"); ?>
 
 
