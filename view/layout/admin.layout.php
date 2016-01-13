@@ -11,7 +11,7 @@
     border-radius: 10px 0px 10px 10px;">
             
             <br />
-            <a href="https://www.concoursphotosesgi.com/admin/add" >Ajouter</a></div>
+            <a href="https://www.concoursphotosesgi.com/admin/add" >Ajouter</a>
 			<br />
             <a href="https://www.concoursphotosesgi.com/admin/list_concours">Liste des concours</a></div>
         </li>
