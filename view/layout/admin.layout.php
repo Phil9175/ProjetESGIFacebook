@@ -4,19 +4,19 @@
     <div class="navbar-collapse">
       <ul class="nav navbar-nav">
 	  <!-- class="active" -->
-        <li><a href="https://www.concoursphotosesgi.com">Accueil de l'application</a></li>
+        <li><a href="<?php echo ADRESSE_SITE; ?>">Accueil de l'application</a></li>
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="connexion">Concours <b class="caret"></b></a>
           <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px; -moz-border-radius: 10px 0px 10px 10px;
     -webkit-border-radius: 10px 0px 10px 10px;
     border-radius: 10px 0px 10px 10px;">
             
             <br />
-            <a href="https://www.concoursphotosesgi.com/admin/add" >Ajouter</a>
+            <a href="<?php echo ADRESSE_SITE; ?>/admin/add" >Ajouter</a>
 			<br />
-            <a href="https://www.concoursphotosesgi.com/admin/list_concours">Liste des concours</a></div>
+            <a href="<?php echo ADRESSE_SITE; ?>/admin/list_concours">Liste des concours</a></div>
         </li>
 		
-        <li><a href="https://www.concoursphotosesgi.com/admin/list_users">Utilisateurs</a></li>
+        <li><a href="<?php echo ADRESSE_SITE; ?>/admin/list_users">Utilisateurs</a></li>
 		
 		
 		

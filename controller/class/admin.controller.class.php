@@ -81,7 +81,7 @@ class admin
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->save("concours");
-				header("Location: https://www.concoursphotosesgi.com/admin/");
+				header("Location: ".ADRESSE_SITE."/admin/");
 				exit();
 			}
 			$view = new view("admin", "concours/add", "admin.layout");
