@@ -1,7 +1,6 @@
 <?php
 class participant extends bdd{
-	
-	protected $id;
+
     protected $id_participant;
 	protected $name;
 	protected $first_name;
@@ -26,15 +25,6 @@ class participant extends bdd{
 		parent::save($table);
 	}
 
-    /**
-     * Gets the value of id.
-     *
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Sets the value of id FB.
@@ -60,19 +50,6 @@ class participant extends bdd{
         return $this->id_participant;
     }
 
-    /**
-     * Sets the value of id.
-     *
-     * @param mixed $id the id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
     /**
      * Gets the value of name.
      *

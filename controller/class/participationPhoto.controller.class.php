@@ -54,8 +54,6 @@ class participationPhoto{
         $participation->getOneBy($idPhoto[0],"id_photo","participation");
         $participation->setFromBdd($participation->result);
 
-        var_dump($participation);
-
         if($participation->getIdPhoto()){
             $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
             header('Location: /index/defaultPage/');
@@ -68,9 +66,10 @@ class participationPhoto{
         try{
 
             $participation->save("participation");
-
+/*
             $_SESSION['flash_messageValidate'] = "La photo a bien été enregistré.";
             header('Location: /index/defaultPage/');
+*/
 
         }catch (Exception $e){
             var_dump($e);
@@ -87,7 +86,8 @@ class participationPhoto{
         $id = $participant->getIdParticipant();
 
         if (!$id) {
-            $participant->setIdParticipant(trim($userNode['id']));
+            $id = trim($userNode['id']);
+            $participant->setIdParticipant($id);
 
             $participant->setLastName($userNode['last_name']);
             $participant->setFirstName($userNode['first_name']);
@@ -102,10 +102,8 @@ class participationPhoto{
             $participant->setRole("participant");
 
             $participant->save("participant");
-
-            return trim($userNode['id']);
         }
 
-        return $userNode['id'];
+        return $id;
     }
 }

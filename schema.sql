@@ -41,7 +41,6 @@ CREATE TABLE `concours` (
 --
 
 CREATE TABLE `participant` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
   `id_participant` bigint NOT NULL,
   `name` varchar(75) NOT NULL,
   `first_name` varchar(75) NOT NULL,
@@ -51,7 +50,7 @@ CREATE TABLE `participant` (
   `birthdate` varchar(25) NULL,
   `city` varchar(50) NULL,
   `role` varchar(20) NOT NULL,
-  PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+  PRIMARY KEY(id_participant)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
 --
 -- Structure de la table `participation`
