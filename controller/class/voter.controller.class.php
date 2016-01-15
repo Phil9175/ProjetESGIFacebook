@@ -37,14 +37,13 @@ class voter {
 				.$leConcours->getId()." and participation.id_participant = participant.id_participant");
 			
 		} catch (Exception $e) {
-			$_SESSION['flash_message'] = "Le Concours n'est pas encore ouvert";
+			$_SESSION['flash_messageError'] = "Le Concours n'est pas encore ouvert";
 			header('Location: /index/defaultPage/');
 		}
 		
 		$maParticipation = new participation;
 		// retrouve la participation du user connecter
 		$maParticipation->getOneByAnd($_SESSION['idParticipant'],$leConcours->getId(), 'id_participant', 'id_concours', 'participation');
-		
 		$maParticipation->setFromBdd($maParticipation->result);
 
 		$view = new view("front","voter");

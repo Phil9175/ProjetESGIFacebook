@@ -2,6 +2,8 @@ body
 {
 width:auto;
 height:auto;
+background: #CCFFFF url(../images/page-bg-1.jpg);
+/*background-color: #CCFFFF;*/
 }
 
 #wrap
@@ -126,3 +128,72 @@ div.desc {
 	font-weight:bold;
 }
 
+ul .gallery {         
+      padding:0 0 0 0;
+      margin:0 0 0 0;
+}
+.gallery li {     
+      list-style:none;
+      margin-bottom:25px;           
+}
+.gallery li img {
+  cursor: pointer;
+}
+
+.modal-body {
+  padding:5px !important;
+}
+.modal-content {
+  border-radius:0;
+}
+.modal-dialog img {
+  text-align:center;
+  margin:0 auto;
+}
+.controls{          
+width:50px;
+display:block;
+font-size:11px;
+padding-top:8px;
+font-weight:bold;          
+}
+.next {
+float:right;
+text-align:right;
+}
+/*override modal for demo only*/
+/* .modal-dialog {
+  max-width:500px;
+  padding-top: 90px;
+} */
+@media screen and (min-width: 768px){
+  .modal-dialog {
+      width:500px;
+      padding-top: 90px;
+  }          
+}
+@media screen and (max-width:1500px){
+  #ads {
+      display:none;
+  }
+}
+
+.oswald{
+    font-family: "Oswald",sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.separe-block{
+
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    /*border-radius: 20px;*/
+    width: 1000px;
+}
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+    display: none !important;
+}

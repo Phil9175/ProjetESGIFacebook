@@ -2,35 +2,79 @@
 class participation extends bdd{
 
     protected $id;
-	protected $id_Concours;
-	protected $id_Participant;
-	protected $id_Photo;
-    protected $created_At;
-    protected $updated_At;
+	protected $id_concours;
+	protected $id_participant;
+	protected $id_photo;
+    protected $created_at;
+    protected $updated_at;
 	
 	public function __construct(){
 		parent::__construct();
 	}
 
-/*	public function setFromBdd($var = []){
-        var_dump($var);
+	/*public function setFromBdd($var = []){
 
 		foreach($var as $key => $value){
 			$this->$key = (fonctions::is_serialized($value))?unserialize($value):$value;
 		}
-	}*/
-
+	}
+*/
     public function setFromBdd($var = []){
         $participation = $this;
 
         foreach ($var as $propertyToSet => $value) {
-            $participation->{fonctions::camelCase($propertyToSet)} = $value;
+
+            switch ($propertyToSet) {
+                case 'id':
+                    $participation->setId($value);
+                    break;
+                case 'id_concours':
+                    $participation->setIdConcours($value);
+                    break;
+                case 'id_participant':
+                    $participation->setIdParticipant($value);
+                    break;
+                case 'id_photo':
+                    $participation->setIdPhoto($value);
+                    break;
+                case 'created_at':
+                    $participation->setCreatedAt($value);
+                    break;
+                case 'updated_at':
+                    $participation->setUpdatedAt($value);
+                    break;
+            }
+           
+            // $participation->set{fonctions::camelCase($propertyToSet)} = $value;
         }
     }
 	public function save($table = "participation"){
 		parent::save($table);
 	}
 
+     /**
+     * Gets the value of id.
+     *
+     * @return mixed
+     */
+    public function getid()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Sets the value of id.
+     *
+     * @param mixed $id the id concours
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
     /**
      * Gets the value of idConcours.
      *
@@ -38,7 +82,7 @@ class participation extends bdd{
      */
     public function getIdConcours()
     {
-        return $this->id_Concours;
+        return $this->id_concours;
     }
 
     /**
@@ -48,9 +92,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdConcours($id_Concours)
+    public function setIdConcours($id_concours)
     {
-        $this->id_Concours = $id_Concours;
+        $this->id_concours = $id_concours;
 
         return $this;
     }
@@ -62,7 +106,7 @@ class participation extends bdd{
      */
     public function getIdParticipant()
     {
-        return $this->id_Participant;
+        return $this->id_participant;
     }
 
     /**
@@ -72,9 +116,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdParticipant($id_Participant)
+    public function setIdParticipant($id_participant)
     {
-        $this->id_Participant = $id_Participant;
+        $this->id_participant = $id_participant;
 
         return $this;
     }
@@ -86,7 +130,7 @@ class participation extends bdd{
      */
     public function getIdPhoto()
     {
-        return $this->id_Photo;
+        return $this->id_photo;
     }
 
     /**
@@ -96,9 +140,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setIdPhoto($id_Photo)
+    public function setIdPhoto($id_photo)
     {
-        $this->id_Photo = $id_Photo;
+        $this->id_photo = $id_photo;
 
         return $this;
     }
@@ -110,7 +154,7 @@ class participation extends bdd{
      */
     public function getCreatedAt()
     {
-        return $this->created_At;
+        return $this->created_at;
     }
 
     /**
@@ -120,9 +164,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setCreatedAt($created_At)
+    public function setCreatedAt($created_at)
     {
-        $this->created_At = $created_At;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -134,7 +178,7 @@ class participation extends bdd{
      */
     public function getUpdatedAt()
     {
-        return new DateTime($this->updated_At);
+        return new DateTime($this->updated_at);
     }
 
     /**
@@ -144,9 +188,9 @@ class participation extends bdd{
      *
      * @return self
      */
-    public function setUpdatedAt($updated_At)
+    public function setUpdatedAt($updated_at)
     {
-        $this->updated_At = $updated_At;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
@@ -156,7 +200,7 @@ class participation extends bdd{
      **/
     public function getPhotoPath(){
 
-        return "/view/uploads/concours_photos/".$this->idPhoto.".jpg";
+        return "/view/uploads/concours_photos/".$this->id_photo.".jpg";
     }
 }
 ?>

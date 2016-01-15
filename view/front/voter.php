@@ -16,7 +16,10 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-<div class="row">
+
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>/view/js/internal/photo-gallery.js"></script>
+
+<div class="">
 	
 	<?php if (empty($participations)): ?>
 		<div class="center">
@@ -33,55 +36,75 @@
 			$tab = $response->getDecodedBody(); 
 
 			?>
-			<div class="my-photo">
-				<a target="_blank" href="<?php echo $tab['link'] ?>">
-					<img src="<?php echo $tab['picture'] ?>" >
-				</a>
-	  			<div class="desc">
-		  			Votre Photo: <br>
-					<div class="fb-like"
-						data-href="<?php echo $maParticipation->getPhotoPath(); ?>"
-						data-layout="button_count"
-						data-action="like"
-						data-show-faces="false">
-					</div>
-	  			</div>
-  			</div>
+			<div class="container no-margin">
+			<div class="center">
+			
+				<ul align="center" class=" gallery">
+					<li class="" data-id="">
+	                	<img class="" style="height: 200px; width: 200px;" src="<?php echo $maParticipation->getPhotoPath(); ?>">
+	                	<br>
+	                	<h3><strong>Votre Photo:</strong></h3>
+				  			<div 
+							style="overflow: hidden !important;"
+				  			class="fb-like"
+							data-href="<?php echo $maParticipation->getPhotoPath(); ?>" 
+							data-layout="box_count" 
+							data-action="like" 
+							data-show-faces="true" 
+							data-share="false">
+	            	</li>
+				</ul>
+				</div>
+			</div>
+	  			
 		<?php else: ?> <!-- le User n'a pas encore choisit de photo --> 
 			<a href="/participationPhoto/index" class="btn btn-default"> Participer</a>
 		<?php endif ?>
 		
 
-		<hr>
+		<hr class="separe-block">
 
-		<h2><?php echo $leConcours->getName() ?></h2>
-		<?php $ranking = array(); ?>
-		<?php foreach ($participations as $key => $value): ?>
-			<?php 
-				$response = $fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
-				$tab = $response->getDecodedBody();
-			
-	         ?>
-	        <div class="img">
-				<a target="_blank" href="<?php echo $tab['link'] ?>">
-					<img src="<?php echo $tab['picture'] ?>" >
-				</a>
-	  			<div class="desc">
-		  			Username: <?php echo $value['name']; ?> <br>
-					<div class="fb-like"
-						data-href="<?php echo "/view/uploads/concours_photos/".$value['id_photo'].".jpg"; ?>"
-						data-layout="button_count"
-						data-action="like"
-						data-show-faces="false">
-					</div>
-	  			</div>
-			</div>
-		<?php endforeach ?>
-		<?php die(); ?>
+		<div class="container no-margin">
+		<h2 class="oswald" align="center">Concours photo: <u><?php echo $leConcours->getName() ?></u></h2>
+		<br>
+			<ul class="row gallery">
+			<?php foreach ($participations as $key => $value): ?>
+				<?php 
+					/*$response = $fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
+					
+					$tab = $response->getDecodedBody();*/
+				
+		         ?>
+		        
+	        	<li  id="ancreNom-<?php echo $value['name']; ?>" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-id="<?php echo $value['name']; ?>">
+                	<img class="img-responsive" style="height: 200px; width: 100%;" src="<?php echo "/view/uploads/concours_photos/".$value['id_photo'].".jpg"; ?>">
+                	<br>
+                	<div>Nom du participant: <?php echo $value['name']; ?></div><br>
+			  			<div 
+						style="overflow: hidden !important;"
+			  			class="fb-like" 
+						data-href="<?php echo "/view/uploads/concours_photos/".$value['id_photo'].".jpg"; ?>" 
+						data-layout="box_count" 
+						data-action="like" 
+						data-show-faces="false" 
+						data-share="false">
+            	</li>
+				
+			<?php endforeach ?>
+			</ul>
+		</div>
+		<?php //die(); ?>
 	<?php endif ?>
 
 </div>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">         
+          <div class="modal-body">              
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <script type="text/javascript">
 	
 	function checkLoginState() {
