@@ -91,6 +91,7 @@
             	</li>
 				
 			<?php endforeach ?>
+			<?php echo fonctions::pagination($current, $nbPages, $link='/voter/defaultPage/', $around=3, $firstlast=1) ?>
 			</ul>
 		</div>
 		<?php //die(); ?>
