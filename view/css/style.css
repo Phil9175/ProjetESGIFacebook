@@ -197,3 +197,34 @@ text-align:right;
 .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
     display: none !important;
 }
+
+
+/* Style page accueil */
+.left
+{
+float:left;
+height: 50px;
+}
+
+#haut_concours
+{
+height: 250px;
+margin: auto;
+padding: auto;
+}
+
+#titre_concours
+{
+float: right;
+margin-top: 16px;
+font-family: "falconpunch";
+font-size: 38px;
+letter-spacing: 5px;
+}
+
+@font-face {
+font-family: "falconpunch";
+src: url('/view/fonts/falconpunch.ttf');
+}
+
+/* Style page d'accueil */
