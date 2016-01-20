@@ -1,7 +1,21 @@
 <h1 xmlns="http://www.w3.org/1999/html"> Bienvenue sur la page participation </h1>
 
 <div id="participer">
-    <h2>Ajoutez une photo ou selectionner un album afin de choisir une photo de Facebook.</h2>
+
+    <?php
+    if(isset($myPhoto)){
+        ?>
+        <h3>Je participe au concours avec cette photo </h3>
+        <img src='<?php echo $myPhoto; ?>' border='0' /><br><br>
+        <a class="btn btn-default" href="/participationPhoto/deleteParticipation/">Annuler ma participation</a>
+        <h2>Mais vous pouvez à tous moment changer de photo (Attention, les votes à votre attention seront remis à 0).</h2>
+        <?php
+    }else{
+        ?>
+        <h2>Ajoutez une photo ou selectionner un album afin de choisir une photo de Facebook.</h2>
+    <?php
+    }
+    ?>
 
     <form method="post" name="form" action="/participationPhoto/importPhoto" enctype="multipart/form-data">
         <input type="hidden" name="MAX_FILE_SIZE" value="2097152"></br>

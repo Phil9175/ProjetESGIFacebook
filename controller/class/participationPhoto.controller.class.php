@@ -3,6 +3,7 @@
 class participationPhoto{
     private $loginUrl;
     private $fb;
+    private $user;
 
     public function __construct(){
         $this->fb = new Facebook\Facebook([
@@ -18,14 +19,29 @@ class participationPhoto{
         }else{
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
         }
+        $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
+        $this->user = $response->getDecodedBody();
     }
 
     public function index(){
         $response = $this->fb->get('/me/albums?fields=name,photos{picture}');
         $userNode = $response->getDecodedBody();
 
+        $idPhoto = $this->isParticipate($this->user['id']);
         $view = new view("front","participation");
         $view->assign('userNode',$userNode);
+
+        foreach($userNode['data'] as $album){
+            if(isset($album['photos'])){
+                $size = count($album['photos']['data']);
+                for($i =0; $i < $size; $i++){
+                       if($album['photos']['data'][$i]['id'] == $idPhoto){
+                           $myphoto = $album['photos']['data'][$i]['picture'];
+                           $view->assign('myPhoto',$myphoto);
+                       }
+                }
+            }
+        }
     }
 
     public function photo($idAlbum){
@@ -37,6 +53,20 @@ class participationPhoto{
             if($album['id'] === $idAlbum[0]){
                 $view->assign('album',$album);
             }
+        }
+    }
+
+    public function isParticipate($idParticipant){
+        $participation = new participation();
+
+        $participation->getOneBy($idParticipant,"id_participant","participation");
+
+        $participation->setFromBdd($participation->result);
+
+        if($participation->getIdPhoto() == null){
+            return false;
+        }else{
+            return $participation->getIdPhoto();
         }
     }
 
@@ -89,15 +119,20 @@ class participationPhoto{
 
         $idParticipant = $this->sendParticipant();
 
-        $participation->getOneBy($idPhoto[0],"id_photo","participation");
+        $participation->getOneBy($idParticipant,"id_participant","participation");
         $participation->setFromBdd($participation->result);
 
 
 
-        if($participation->getIdPhoto() != null){
+        if($participation->getIdPhoto() == $idPhoto[0]){
             $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
             header('Location: /index/defaultPage/');
+        }else if($participation->getIdPhoto() != null){
+            $participation->requeteDelete("DELETE FROM participation WHERE id_photo = ".$participation->getIdPhoto());
+            $participation= new participation();
         }
+
+
 
         $participation->setIdPhoto($idPhoto[0]);
 
@@ -116,32 +151,30 @@ class participationPhoto{
 
         }catch (Exception $e){
             var_dump($e);
-        }
+        }  
     }
 
     public function sendParticipant(){
-        $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
-        $userNode = $response->getDecodedBody();
         $participant = new participant();
 
-        $participant->getOneBy($userNode['id'],"id_participant","participant");
+        $participant->getOneBy($this->user['id'],"id_participant","participant");
         $participant->setFromBdd($participant->result);
         $id = $participant->getIdParticipant();
 
         if (!$id) {
-            $id = trim($userNode['id']);
+            $id = trim($this->user['id']);
             $participant->setIdParticipant($id);
 
-            $participant->setLastName($userNode['last_name']);
-            $participant->setFirstName($userNode['first_name']);
-            $participant->setName($userNode['first_name']." ". $userNode['last_name']);
-            if($userNode['gender'] == 'male'){
+            $participant->setLastName($this->user['last_name']);
+            $participant->setFirstName($this->user['first_name']);
+            $participant->setName($this->user['first_name']." ". $this->user['last_name']);
+            if($this->user['gender'] == 'male'){
                 $participant->setGender(1);
             }else{
                 $participant->setGender(0);
             }
-            $participant->setEmail($userNode['email']);
-            $participant->setBirthDate($userNode['birthday']);
+            $participant->setEmail($this->user['email']);
+            $participant->setBirthDate($this->user['birthday']);
             $participant->setRole("participant");
 
             $participant->save("participant");
