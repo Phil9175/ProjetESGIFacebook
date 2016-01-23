@@ -101,7 +101,7 @@ class participationPhoto{
 
                 $idPhoto = array();
                 $idPhoto[0] = $response->getDecodedBody()['id'];
-
+                $this->uploadFile($_FILES,$idPhoto[0]);
                 $this->sendPhotoFB($idPhoto);
 
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -189,5 +189,79 @@ class participationPhoto{
 
         $_SESSION['flash_messageValidate'] = "Votre participation a bien été annulée.";
         header('Location: /index/defaultPage/');
+    }
+
+    public function uploadFile($files, $id_photo){
+
+        $tabExt = array('jpg','gif','png','jpeg');
+        $infosImg = array();
+        $extension = '';
+        $nomImage = '';
+
+
+        // On verifie si le champ est rempli
+        if( !empty($files['fichier']['name']) )
+        {
+            // Recuperation de l'extension du fichier
+            $extension  = pathinfo($files['fichier']['name'], PATHINFO_EXTENSION);
+
+            // On verifie l'extension du fichier
+            if(in_array(strtolower($extension),$tabExt))
+            {
+                // On recupere les dimensions du fichier
+                $infosImg = getimagesize($files['fichier']['tmp_name']);
+
+                // On verifie le type de l'image
+                if($infosImg[2] >= 1 && $infosImg[2] <= 14)
+                {
+                    // On verifie les dimensions et taille de l'image
+                    if(($infosImg[0] <= WIDTH_MAX) && ($infosImg[1] <= HEIGHT_MAX) && (filesize($files['fichier']['tmp_name']) <= MAX_SIZE))
+                    {
+                        // Parcours du tableau d'erreurs
+                        if(isset($files['fichier']['error'])
+                            && UPLOAD_ERR_OK === $files['fichier']['error'])
+                        {
+                            // On renomme le fichier
+                            $nomImage = $id_photo.'.'. $extension;
+
+                            // Si c'est OK, on teste l'upload
+                            if(move_uploaded_file($files['fichier']['tmp_name'], TARGET.$nomImage))
+                            {
+                                $_SESSION['flash_messageValidate'] = 'Upload réussi !';
+                            }
+                            else
+                            {
+                                // Sinon on affiche une erreur systeme
+                                $_SESSION['flash_messageError'] = 'Problème lors de l\'upload !';
+                            }
+                        }
+                        else
+                        {
+                            $_SESSION['flash_messageError'] = 'Une erreur interne a empêché l\'uplaod de l\'image';
+                        }
+                    }
+                    else
+                    {
+                        // Sinon erreur sur les dimensions et taille de l'image
+                        $_SESSION['flash_messageError'] = 'Erreur dans les dimensions de l\'image !';
+                    }
+                }
+                else
+                {
+                    // Sinon erreur sur le type de l'image
+                    $_SESSION['flash_messageError'] = 'Le fichier à uploader n\'est pas une image !';
+                }
+            }
+            else
+            {
+                // Sinon on affiche une erreur pour l'extension
+                $_SESSION['flash_messageError'] = 'L\'extension du fichier est incorrecte !';
+            }
+        }
+        else
+        {
+            // Sinon on affiche une erreur pour le champ vide
+            $_SESSION['flash_messageError'] = 'Veuillez remplir le formulaire svp !';
+        }
     }
 }
