@@ -182,4 +182,12 @@ class participationPhoto{
 
         return $id;
     }
+
+    public function deleteParticipation(){
+        $participation = new participation();
+        $participation->requeteDelete(("DELETE FROM participation WHERE id_participant = ".$this->user['id']));
+
+        $_SESSION['flash_messageValidate'] = "Votre participation a bien été annulée.";
+        header('Location: /index/defaultPage/');
+    }
 }
