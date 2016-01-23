@@ -69,3 +69,5 @@ CREATE TABLE `participation` (
 
 ALTER TABLE participation add foreign key (id_concours) References concours(id);
 ALTER TABLE participation add foreign key (id_participant) References participant(id_participant);
+
+ALTER TABLE `participation` ADD `id_photo_name` VARCHAR(255) NOT NULL AFTER `id_photo`;

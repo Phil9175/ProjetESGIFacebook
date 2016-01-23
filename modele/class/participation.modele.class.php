@@ -5,6 +5,7 @@ class participation extends bdd{
 	protected $id_concours;
 	protected $id_participant;
 	protected $id_photo;
+    protected $id_photo_name;
     protected $created_at;
     protected $updated_at;
 	
@@ -36,6 +37,9 @@ class participation extends bdd{
                     break;
                 case 'id_photo':
                     $participation->setIdPhoto($value);
+                    break;
+                case 'id_photo_name':
+                    $participation->setIdPhotoName($value);
                     break;
                 case 'created_at':
                     $participation->setCreatedAt($value);
@@ -148,6 +152,30 @@ class participation extends bdd{
     }
 
     /**
+     * Gets the value of idPhotoName.
+     *
+     * @return mixed
+     */
+    public function getIdPhotoName()
+    {
+        return $this->id_photo_name;
+    }
+
+    /**
+     * Sets the value of idPhotoName.
+     *
+     * @param mixed $idPhotoName the id photo
+     *
+     * @return self
+     */
+    public function setIdPhotoName($idPhotoName)
+    {
+        $this->id_photo_name = $idPhotoName;
+
+        return $this;
+    }
+
+    /**
      * Gets the value of createdAt.
      *
      * @return mixed
@@ -200,7 +228,7 @@ class participation extends bdd{
      **/
     public function getPhotoPath(){
 
-        return "/view/uploads/concours_photos/".$this->id_photo.".jpg";
+        return "/view/uploads/concours_photos/".$this->id_photo_name;
     }
 }
 ?>
