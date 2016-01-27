@@ -102,7 +102,9 @@ class participationPhoto{
                 $idPhoto = array();
                 $idPhoto[0] = $response->getDecodedBody()['id'];
                 $this->uploadFile($_FILES,$idPhoto[0]);
-                $this->sendPhotoFB($idPhoto);
+
+                $extension = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);;
+                $this->sendPhotoFB($idPhoto,$idPhoto[0].".".$extension);
 
             } catch(Facebook\Exceptions\FacebookSDKException $e) {
                 echo 'Error: ' . $e->getMessage();
@@ -110,7 +112,7 @@ class participationPhoto{
             }
         }
     }
-    public function sendPhotoFB($idPhoto){
+    public function sendPhotoFB($idPhoto, $namePhoto){
         $participation = new participation();
         $concours = new concours();
 
@@ -140,6 +142,7 @@ class participationPhoto{
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
         $participation->setUpdatedAt(date("Y-m-d H:i:s"));
+        $participation->setIdPhotoName($namePhoto);
 
         try{
 
