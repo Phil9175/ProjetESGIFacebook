@@ -46,10 +46,10 @@
 					<label class="control-label col-sm-2 requiredField" for="statut"> Statut du concours <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-							<input name="statut" type="radio" value="1" <?php if ($status == 1) echo "checked"; ?>/>
+							<input name="status" type="radio" value="1" <?php if ($status == 1) echo "checked"; ?>/>
 							Actif </label>
 						<label class="radio-inline">
-							<input name="statut" type="radio" value="0" <?php if ($status == 0) echo "checked"; ?>/>
+							<input name="status" type="radio" value="0" <?php if ($status == 0) echo "checked"; ?>/>
 							Non Actif </label>
 					</div>
 				</div>

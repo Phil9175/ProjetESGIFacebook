@@ -2,12 +2,51 @@
 class admin
 {
     
-    public $is_connected = false;
-    public $securityToken;
-    
-    public function __construct()
-    {
-    }
+   	private $loginUrl;
+	private $fb;
+	public function __construct() {
+		/*session_destroy();
+		die('okj');*/
+		$this->fb = new Facebook\Facebook([
+				'app_id' => APP_ID,
+				'app_secret' =>APP_SECRET,
+				'default_graph_version' => 'v2.5',
+		]);
+		if(!isset($_SESSION['facebook_access_token'])){
+			$helper = $this->fb->getRedirectLoginHelper();
+			$scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
+
+			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
+		}else{
+
+			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+
+			if(!isset($_SESSION['idParticipant']))
+			{
+				$response = $this->fb->get('/me', $_SESSION['facebook_access_token']);
+				$idParticipant = $response->getDecodedBody()['id'];
+				
+				$_SESSION['idParticipant'] = $idParticipant;
+			}
+		}
+		
+		$requestRoles = $this->fb->get(APP_ID."/roles", APP_TOKEN);
+		$roles = $requestRoles->getDecodedBody()['data'];
+		$is_admin = FALSE;
+		foreach($roles as $key => $value){
+			if($value["user"] == $_SESSION['idParticipant'] && $value["role"] == "administrators"){
+				$is_admin = TRUE;
+				break(1);
+			}else{
+				continue;
+			}
+		}
+		
+		if ($is_admin == FALSE){
+			header("Location: ".ADRESSE_SITE);
+		}
+
+	}
 	
 	public function defaultPage($args){
 		$participant = new participant();

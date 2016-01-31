@@ -14,7 +14,7 @@ class index {
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 
-			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
+			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/',$scope);
 		}else{
 
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
@@ -23,13 +23,12 @@ class index {
 			{
 				$response = $this->fb->get('/me', $_SESSION['facebook_access_token']);
 				$idParticipant = $response->getDecodedBody()['id'];
-				
 				$_SESSION['idParticipant'] = $idParticipant;
 			}
 		}
 
 	}
-
+	
 	public function defaultPage($args) {
 		if(!isset($_SESSION['facebook_access_token'])){
 			header('location:'. $this->loginUrl);
@@ -45,6 +44,21 @@ class index {
 		$view = new view("front","accueil");
 		$view->assign('loginUrl', $this->loginUrl);
 		$view->assign('status', $participant->getRole());
+		
+		$requestRoles = $this->fb->get(APP_ID."/roles", APP_TOKEN);
+		$roles = $requestRoles->getDecodedBody()['data'];
+		$is_admin = FALSE;
+		foreach($roles as $key => $value){
+			if($value["user"] == $_SESSION['idParticipant'] && $value["role"] == "administrators"){
+				$is_admin = TRUE;
+				break(1);
+			}else{
+				continue;
+			}
+		}
+		$view->assign('is_admin', $is_admin);
+		
+		
 	}
 	
 	public function participerAction($args) {

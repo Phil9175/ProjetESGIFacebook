@@ -14,7 +14,7 @@
 		<a class="btn btn-success" href="/voter/defaultPage"> <img src="/view/images/voter.png" height="32" width="32"> Je souhaite voter</a>
 	</div>
 
-	<?php if($status == "admin"): ?>
+	<?php if($is_admin == TRUE): ?>
 	<div id="gerer_concours">
 		<a class="btn btn-danger" href="/admin">Gestion concours</a>
 	</div>
