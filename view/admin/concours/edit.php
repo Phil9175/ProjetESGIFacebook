@@ -16,6 +16,13 @@
 					</div>
 				</div>
 				<div class="form-group ">
+					<label class="control-label col-sm-2 requiredField" for="max_per_page"> Maximum de photos par pages <span class="asteriskField"> * </span> </label>
+					<div class="col-sm-10">
+						<input class="form-control" id="max_per_page" name="max_per_page" type="text" value="<?php echo $max_per_page; ?>"/>
+					</div>
+				</div>
+				
+				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="date_debut"> Date de d&eacute;but <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
 						<input class="form-control" id="date_debut" name="date_debut" placeholder="MM/DD/YYYY" type="text" value="<?php echo $date_debut; ?>"/>

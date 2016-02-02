@@ -14,6 +14,7 @@ class concours extends bdd{
 	protected $font_color;
     protected $font_family;
     protected $background_color;
+	protected $max_per_page;
 	
 	
 	public function __construct(){
@@ -320,6 +321,19 @@ class concours extends bdd{
         return $this;
     }
    
+   
+   public function setMax_per_page($max_per_page)
+   {
+	   $this->max_per_page = $max_per_page;
+	   
+	   return $this;
+	   
+   }
+   
+   public function getMax_per_page()
+   {
+	   return $this->max_per_page;
+   }
    
    
 }

@@ -81,6 +81,7 @@ class admin
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
+				$concours->setMax_per_page($args['max_per_page']);
 				$concours->save("concours");
 			}
 			$concours = new concours();
@@ -99,6 +100,7 @@ class admin
 			$view->assign("status", $concours->getStatus());
 			$view->assign("font_color", $concours->getFontColor());
 			$view->assign("background_color", $concours->getBackgroundColor());
+			$view->assign("max_per_page", $concours->getMax_per_page());
 		}
     }
 	
@@ -119,6 +121,7 @@ class admin
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
+				$concouts->setMax_per_page($args["max_per_page"]);
 				$concours->save("concours");
 				header("Location: ".ADRESSE_SITE."/admin/");
 				exit();

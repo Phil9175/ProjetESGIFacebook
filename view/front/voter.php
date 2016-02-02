@@ -58,7 +58,7 @@
 			</div>
 	  			
 		<?php else: ?> <!-- le User n'a pas encore choisit de photo --> 
-			<a href="/participationPhoto/index" class="btn btn-default"> Participer</a>
+			<a href="<?php echo ADRESSE_SITE; ?>/participationPhoto/index" class="btn btn-default"> Participer</a>
 		<?php endif ?>
 		
 

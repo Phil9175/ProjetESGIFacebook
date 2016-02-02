@@ -42,7 +42,8 @@ class voter {
 
 			if(isset($countParticipation[0]))
 			{
-				$maxParPage = 8;
+				
+				$maxParPage = ($leConcours->getMax_per_page() != "" && $leConcours->getMax_per_page > 0)?$leConcours->getMax_per_page:8;
 
 				$nbPages = ceil($countParticipation[0]['nb']/$maxParPage);
 				if(!empty($args))
