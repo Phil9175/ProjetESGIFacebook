@@ -3,8 +3,8 @@ class voter {
 	private $loginUrl;
 	private $fb;
 	public function __construct() {
-		//session_destroy();
-		//die('okj');
+		/*session_destroy();
+		die('okj');*/
 		$this->fb = new Facebook\Facebook([
 				'app_id' => APP_ID,
 				'app_secret' =>APP_SECRET,
@@ -96,8 +96,33 @@ class voter {
 	}
 
 	public function voterAction($args) {
-
+		die("ok");
 		$view = new view("front","voter");
+	}
+
+
+	public function photo($args)
+	{
+		if(empty($args))
+			header('location:/');
+
+		if(is_numeric($args[0]))
+		{
+			try {
+				$response = $this->fb->get($args[0].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
+				$tab = $response->getDecodedBody(); 
+				
+			} catch (Exception $e) {
+				header('location:/');
+			}
+		}
+		else
+			header('location:/');
+
+		$view = new view("front","photo");
+
+		$view->assign('tab',$tab);
+
 	}
 
 }

@@ -38,16 +38,15 @@
 			?>
 			<div class="container no-margin">
 			<div class="center">
-			
 				<ul align="center" class=" gallery">
 					<li class="" data-id="">
-	                	<img class="" style="height: 200px; width: 200px;" src="<?php echo $maParticipation->getPhotoPath(); ?>">
+	                	<img class="" style="height: 200px; width: 200px;" src="<?php echo $tab['source']; ?>">
 	                	<br>
 	                	<h3><strong>Votre Photo:</strong></h3>
 				  			<div 
 							style="overflow: hidden !important;"
 				  			class="fb-like"
-							data-href="<?php echo $maParticipation->getPhotoPath(); ?>" 
+							data-href="<?php echo ADRESSE_SITE."voter/photo/".$maParticipation->getIdPhoto(); ?>"
 							data-layout="box_count" 
 							data-action="like" 
 							data-show-faces="true" 
@@ -70,20 +69,20 @@
 			<ul class="row gallery center">
 			<?php foreach ($participations as $key => $value): ?>
 				<?php 
-					/*$response = $fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
+					$response = $fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
 					
-					$tab = $response->getDecodedBody();*/
+					$tab = $response->getDecodedBody();
 				
 		         ?>
 		        
 	        	<li id="ancreNom-<?php echo $value['name']; ?>" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-id="<?php echo $value['name']; ?>">
-                	<img class="img-responsive" style="height: 200px; width: 100%;" src="<?php echo "/view/uploads/concours_photos/".$value['id_photo_name']; ?>">
+                	<img class="img-responsive" style="height: 200px; width: 100%;" src="<?php echo $tab['source']; ?>">
                 	<br>
                 	<div> <?php echo $value['name']; ?></div><br>
 			  			<div
 			  			class="fb-like"
 						style="overflow: hidden !important;"
-						data-href="<?php echo "/view/uploads/concours_photos/".$value['id_photo_name']; ?>" 
+						data-href="<?php echo ADRESSE_SITE."voter/photo/".$value['id_photo']; ?>" 
 						data-layout="box_count"
 						data-action="like" 
 						data-show-faces="false" 
