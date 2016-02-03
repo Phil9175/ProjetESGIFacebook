@@ -2,12 +2,55 @@
 class admin
 {
     
-    public $is_connected = false;
-    public $securityToken;
-    
-    public function __construct()
-    {
-    }
+   	private $loginUrl;
+	private $fb;
+	public function __construct() {
+		/*session_destroy();
+		die('okj');*/
+		$this->fb = new Facebook\Facebook([
+				'app_id' => APP_ID,
+				'app_secret' =>APP_SECRET,
+				'default_graph_version' => 'v2.5',
+		]);
+		if(!isset($_SESSION['facebook_access_token'])){
+			$helper = $this->fb->getRedirectLoginHelper();
+			$scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
+
+			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
+		}else{
+
+			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+
+			if(!isset($_SESSION['idParticipant']))
+			{
+				$response = $this->fb->get('/me', $_SESSION['facebook_access_token']);
+				$idParticipant = $response->getDecodedBody()['id'];
+				
+				$_SESSION['idParticipant'] = $idParticipant;
+			}
+		}
+		
+		$requestRoles = $this->fb->get(APP_ID."/roles", APP_TOKEN);
+		$roles = $requestRoles->getDecodedBody()['data'];
+		$is_admin = FALSE;
+		foreach($roles as $key => $value){
+			if($value["user"] == $_SESSION['idParticipant']){
+				if ($value["role"] == "administrators"){
+					$is_admin = TRUE;
+					break;
+				}
+				$is_admin = FALSE;
+				break;
+			}else{
+				continue;
+			}
+		}
+		
+		if ($is_admin == FALSE){
+			header("Location: ".ADRESSE_SITE);
+		}
+
+	}
 	
 	public function defaultPage($args){
 		$participant = new participant();
@@ -42,6 +85,7 @@ class admin
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
+				$concours->setMax_per_page($args['max_per_page']);
 				$concours->save("concours");
 			}
 			$concours = new concours();
@@ -60,6 +104,7 @@ class admin
 			$view->assign("status", $concours->getStatus());
 			$view->assign("font_color", $concours->getFontColor());
 			$view->assign("background_color", $concours->getBackgroundColor());
+			$view->assign("max_per_page", $concours->getMax_per_page());
 		}
     }
 	
@@ -80,6 +125,7 @@ class admin
 				$concours->setStatus($args["status"]);
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
+				$concouts->setMax_per_page($args["max_per_page"]);
 				$concours->save("concours");
 				header("Location: ".ADRESSE_SITE."/admin/");
 				exit();

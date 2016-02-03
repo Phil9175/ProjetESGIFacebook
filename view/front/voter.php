@@ -58,7 +58,7 @@
 			</div>
 	  			
 		<?php else: ?> <!-- le User n'a pas encore choisit de photo --> 
-			<a href="/participationPhoto/index" class="btn btn-default"> Participer</a>
+			<a href="<?php echo ADRESSE_SITE; ?>/participationPhoto/index" class="btn btn-default"> Participer</a>
 		<?php endif ?>
 		
 
@@ -67,7 +67,7 @@
 		<div class="container no-margin">
 		<h2 class="oswald" align="center">Concours photo: <u><?php echo $leConcours->getName() ?></u></h2>
 		<br>
-			<ul class="row gallery">
+			<ul class="row gallery center">
 			<?php foreach ($participations as $key => $value): ?>
 				<?php 
 					/*$response = $fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
@@ -76,18 +76,19 @@
 				
 		         ?>
 		        
-	        	<li  id="ancreNom-<?php echo $value['name']; ?>" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-id="<?php echo $value['name']; ?>">
+	        	<li id="ancreNom-<?php echo $value['name']; ?>" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-id="<?php echo $value['name']; ?>">
                 	<img class="img-responsive" style="height: 200px; width: 100%;" src="<?php echo "/view/uploads/concours_photos/".$value['id_photo_name']; ?>">
                 	<br>
-                	<div>Nom du participant: <?php echo $value['name']; ?></div><br>
-			  			<div 
+                	<div> <?php echo $value['name']; ?></div><br>
+			  			<div
+			  			class="fb-like"
 						style="overflow: hidden !important;"
-			  			class="fb-like" 
 						data-href="<?php echo "/view/uploads/concours_photos/".$value['id_photo_name']; ?>" 
-						data-layout="box_count" 
+						data-layout="box_count"
 						data-action="like" 
 						data-show-faces="false" 
 						data-share="false">
+						</div>
             	</li>
 				
 			<?php endforeach ?>

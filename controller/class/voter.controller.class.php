@@ -14,7 +14,7 @@ class voter {
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions"];
 
-			$this->loginUrl = $helper->getLoginUrl('http://concoursphotosesgi.localhost/login-callback.php',$scope);
+			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 			
@@ -42,7 +42,8 @@ class voter {
 
 			if(isset($countParticipation[0]))
 			{
-				$maxParPage = 8;
+				
+				$maxParPage = ($leConcours->getMax_per_page() != "" && $leConcours->getMax_per_page > 0)?$leConcours->getMax_per_page:8;
 
 				$nbPages = ceil($countParticipation[0]['nb']/$maxParPage);
 				if(!empty($args))

@@ -8,9 +8,8 @@
         <h3>Je participe au concours avec cette photo </h3>
         <ul align="center" class="gallery">
                 <img src='<?php echo $myPhoto; ?>' border='0' /><br><br>
-                <a class="btn btn-default" href="/participationPhoto/deleteParticipation/">Annuler ma participation</a>
+                <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>/participationPhoto/deleteParticipation/">Annuler ma participation</a>
         </ul>
-
 
         <h2>Mais vous pouvez à tous moment changer de photo (Attention, les votes à votre attention seront remis à 0).</h2>
         <?php
@@ -22,11 +21,11 @@
     ?>
 
     <ul align="center" class="gallery">
-        <form method="post" name="form" action="/participationPhoto/importPhoto" enctype="multipart/form-data">
+        <form method="post" name="form" action="<?php echo ADRESSE_SITE; ?>/participationPhoto/importPhoto" enctype="multipart/form-data">
             <input type="hidden" name="MAX_FILE_SIZE" value="2097152"></br>
             <input class="btn btn-default col-lg-offset-5" type="file" name="fichier"><br>
             <input class="btn btn-default" type="submit" value="Envoyer">&nbsp;
-            <a class="btn btn-default" href="http://concoursphotosesgi.localhost/">Retour</a>
+            <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>">Retour</a>
         </form>
     </ul>
     </br>
@@ -46,7 +45,7 @@ foreach($userNode['data'] as $album):
             <br>
             <?php echo $album['name']; ?>
             <br>
-            <a class="btn btn-default" href="/participationPhoto/photo/<?php echo $album['id']; ?>">Selectionner cet album</a>
+            <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>/participationPhoto/photo/<?php echo $album['id']; ?>">Selectionner cet album</a>
             <br>
             </td>
 			<?php
