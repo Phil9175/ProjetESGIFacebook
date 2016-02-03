@@ -34,9 +34,13 @@ class admin
 		$roles = $requestRoles->getDecodedBody()['data'];
 		$is_admin = FALSE;
 		foreach($roles as $key => $value){
-			if($value["user"] == $_SESSION['idParticipant'] && $value["role"] == "administrators"){
-				$is_admin = TRUE;
-				break(1);
+			if($value["user"] == $_SESSION['idParticipant']){
+				if ($value["role"] == "administrators"){
+					$is_admin = TRUE;
+					break;
+				}
+				$is_admin = FALSE;
+				break;
 			}else{
 				continue;
 			}
