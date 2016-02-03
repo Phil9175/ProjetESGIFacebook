@@ -4,6 +4,8 @@ class admin
     
    	private $loginUrl;
 	private $fb;
+	private $is_admin = FALSE;
+	
 	public function __construct() {
 		/*session_destroy();
 		die('okj');*/
@@ -32,31 +34,22 @@ class admin
 		
 		$requestRoles = $this->fb->get(APP_ID."/roles", APP_TOKEN);
 		$roles = $requestRoles->getDecodedBody()['data'];
-		$is_admin = FALSE;
 		foreach($roles as $key => $value){
 			if($value["user"] == $_SESSION['idParticipant']){
 				if ($value["role"] == "administrators"){
-					$is_admin = TRUE;
-					break;
+					$this->is_admin = TRUE;
+					break(1);
 				}
-				$is_admin = FALSE;
-				break;
-			}else{
-				continue;
 			}
 		}
-		
-		if ($is_admin == FALSE){
+		if ($this->is_admin == FALSE){
 			header("Location: ".ADRESSE_SITE);
 		}
 
 	}
 	
 	public function defaultPage($args){
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+		if ($this->is_admin == TRUE){
 			$concours = new concours;
 			$concourss = $concours->getResults("", "", "concours", ""); 
 			$view = new view("admin", "concours/list", "admin.layout");
@@ -65,12 +58,8 @@ class admin
 		
 	}
 	
-	 public function edit($args)
-    {
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+	 public function edit($args){
+		if ($this->is_admin == TRUE){
 			if ($args["validation"] == "oui"){
 				$concours = new concours();
 				$concours->getOneBy($args[0], "id", "concours");
@@ -108,12 +97,8 @@ class admin
 		}
     }
 	
-	 public function add($args)
-    {
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+	 public function add($args){
+		if ($this->is_admin == TRUE){
 			if ($args["validation"] == "oui"){
 				$concours = new concours();
 				$concours->setName($args["nom"]);
@@ -138,12 +123,8 @@ class admin
 	
 	
 	
-    public function list_concours($args)
-    {
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+    public function list_concours($args){
+		if ($this->is_admin == TRUE){
 			$concours = new concours;
 			$concourss = $concours->getResults("", "", "concours", ""); 
 			$view = new view("admin", "concours/list", "admin.layout");
@@ -152,10 +133,7 @@ class admin
     }
 	
 	public function activate($args){
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+		if ($this->is_admin == TRUE){
 			if (is_numeric($args[0])){
 				$concours = new concours();
 				$concours->getOneBy($args[0], "id", "concours");
@@ -169,10 +147,7 @@ class admin
 	}
 	
 	public function deactivate($args){
-		$participant = new participant();
-		$participant->getOneBy($_SESSION['idParticipant'], "id_participant", "participant");
-		$participant->setFromBdd($participant->result);
-		if ($participant->getRole() == "admin"){
+		if ($this->is_admin == TRUE){
 			if (is_numeric($args[0])){
 				$concours = new concours();
 				$concours->getOneBy($args[0], "id", "concours");
