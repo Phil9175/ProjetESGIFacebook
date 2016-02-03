@@ -101,7 +101,6 @@ class participationPhoto{
 
                 $idPhoto = array();
                 $idPhoto[0] = $response->getDecodedBody()['id'];
-                $this->uploadFile($_FILES,$idPhoto[0]);
 
                 $extension = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);;
                 $this->sendPhotoFB($idPhoto,$idPhoto[0].".".$extension);
