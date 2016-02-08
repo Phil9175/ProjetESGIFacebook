@@ -4,6 +4,7 @@ date_default_timezone_set("Europe/Paris");
 include("core/class/constantes.core.class.php");
 
 require_once 'controller/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php';
+require_once 'controller/PHPExcel.php';
 
 spl_autoload_register( function($class_name) {
     if (file_exists("controller/class/" . $class_name . ".controller.class.php"))
