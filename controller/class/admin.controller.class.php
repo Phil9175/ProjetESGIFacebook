@@ -83,7 +83,17 @@ class admin
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				$concours->setStatus($args["status"]);
+				
+				$testConcours = new concours();
+				$testConcours->getOneBy(0, "status", "concours");
+				$testConcours->setFromBdd($testConcours->result);
+				if ($testConcours->getId() == "" && $args["status"] == 1){
+					unset($testConcours);
+					$concours->setStatus(1);
+				}elseif ($args["status"] == 0){
+					unset($testConcours);
+					$concours->setStatus(0);
+				}
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->setMax_per_page($args['max_per_page']);
@@ -148,10 +158,16 @@ class admin
 		if ($this->is_admin == TRUE){
 			if (is_numeric($args[0])){
 				$concours = new concours();
-				$concours->getOneBy($args[0], "id", "concours");
+				$concours->getOneBy(0, "status", "concours");
 				$concours->setFromBdd($concours->result);
-				$concours->setStatus(1);
-				$concours->save("concours");
+				if ($concours->getId() == ""){
+					unset($concours);
+					$concours = new concours();
+					$concours->getOneBy($args[0], "id", "concours");
+					$concours->setFromBdd($concours->result);
+					$concours->setStatus(1);
+					$concours->save("concours");
+				}
 				header('Location: /admin');
 				exit();
 			}
@@ -169,6 +185,16 @@ class admin
 				header('Location: /admin');
 				exit();
 			}
+		}
+	}
+	
+	public function settings($args){
+		if ($this->is_admin == TRUE){
+			if (isset($args["validation"]) && $args["validation"] == "oui"){
+				$settings = new settings;
+				
+			}
+			$view = new view("admin", "settings/edit", "admin2.layout");
 		}
 	}
     

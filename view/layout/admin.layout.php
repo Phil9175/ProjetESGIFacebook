@@ -17,6 +17,7 @@
         </li>
 		
         <li><a href="<?php echo ADRESSE_SITE; ?>admin/list_users">Utilisateurs</a></li>
+        <li><a href="<?php echo ADRESSE_SITE; ?>admin/settings">Réglages</a></li>
 		
 		
 		
