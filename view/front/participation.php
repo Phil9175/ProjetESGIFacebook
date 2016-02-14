@@ -19,12 +19,16 @@
     <?php
     }
     ?>
-
+	
     <ul align="center" class="gallery">
         <form method="post" name="form" action="<?php echo ADRESSE_SITE; ?>participationPhoto/importPhoto" enctype="multipart/form-data">
             <input type="hidden" name="MAX_FILE_SIZE" value="2097152"></br>
-            <input class="btn btn-default col-lg-offset-5" type="file" name="fichier"><br>
-            <input class="btn btn-default" type="submit" value="Envoyer">&nbsp;
+				<input id="uploadFile" placeholder="Choisissez un fichier" disabled="disabled" />
+				<div class="fileUpload btn btn-primary">
+					<span>Choisir un fichier</span>
+					<input id="uploadBtn" type="file" class="upload" name="fichier"/>
+				</div><br /><br />
+            <input class="btn btn-success" type="submit" value="Envoyer">&nbsp;
             <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>">Retour</a>
         </form>
     </ul>
@@ -61,3 +65,9 @@ endforeach;
         </table>
     </pre>
 </div>
+<script type="text/javascript">
+document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+};
+
+</script>
