@@ -4,6 +4,7 @@ class participationPhoto{
     private $loginUrl;
     private $fb;
     private $user;
+	private $open = FALSE;
 
     public function __construct(){
         $this->fb = new Facebook\Facebook([
@@ -21,6 +22,20 @@ class participationPhoto{
         }
         $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
         $this->user = $response->getDecodedBody();
+		
+		$leConcours = new concours;
+		// On sélectionne le concours ouvert
+		$leConcours->getOneBy("1", "status", "concours");
+		$leConcours->setFromBdd($leConcours->result);
+
+		if($leConcours->getId() != ""){
+			$this->open = TRUE;
+			header("Location: ".ADRESSE_SITE);
+			exit();
+		}
+		
+		
+		
     }
 
     public function index(){
@@ -47,7 +62,7 @@ class participationPhoto{
     public function photo($idAlbum){
         $response = $this->fb->get('/me/albums?fields=name,photos{picture}');
         $userNode = $response->getDecodedBody();
-        $view = new view("front","photoSelection");
+        $view = new view("front", "photoSelection");
 
         foreach ($userNode['data'] as $album) {
             if($album['id'] === $idAlbum[0]){
@@ -75,19 +90,19 @@ class participationPhoto{
             switch ($_FILES['fichier']['error']) {
                 case 1: // UPLOAD_ERR_INI_SIZE
                     $_SESSION['flash_messageError'] = "Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !";
-                    header('Location: /index/defaultPage/');
+                    header("Location: ".ADRESSE_SITE."index/defaultPage/");
                     break;
                 case 2: // UPLOAD_ERR_FORM_SIZE
                     $_SESSION['flash_messageError'] = "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-                    header('Location: /index/defaultPage/');
+                    header("Location: ".ADRESSE_SITE."index/defaultPage/");
                     break;
                 case 3: // UPLOAD_ERR_PARTIAL
                     $_SESSION['flash_messageError'] = "L'envoi du fichier a été interrompu pendant le transfert !";
-                    header('Location: /index/defaultPage/');
+                    header("Location: ".ADRESSE_SITE."index/defaultPage/");
                     break;
                 case 4: // UPLOAD_ERR_NO_FILE
                     $_SESSION['flash_messageError'] = "Le fichier que vous avez envoyé a une taille nulle !";
-                    header('Location: /index/defaultPage/');
+                    header("Location: ".ADRESSE_SITE."index/defaultPage/");
                     break;
             }
         }else{
@@ -127,7 +142,8 @@ class participationPhoto{
 
         if($participation->getIdPhoto() == $idPhoto[0]){
             $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
-            header('Location: /index/defaultPage/');
+            header("Location: ".ADRESSE_SITE."index/defaultPage/");
+			exit();
         }else if($participation->getIdPhoto() != null){
             $participation->requeteDelete("DELETE FROM participation WHERE id_photo = ".$participation->getIdPhoto());
             $participation= new participation();
@@ -148,7 +164,8 @@ class participationPhoto{
             $participation->save("participation");
 
             $_SESSION['flash_messageValidate'] = "La photo a bien été enregistré.";
-            header('Location: /index/defaultPage/');
+            header("Location: ".ADRESSE_SITE."index/defaultPage/");
+			exit();
 
 
         }catch (Exception $e){
@@ -190,7 +207,8 @@ class participationPhoto{
         $participation->requeteDelete(("DELETE FROM participation WHERE id_participant = ".$this->user['id']));
 
         $_SESSION['flash_messageValidate'] = "Votre participation a bien été annulée.";
-        header('Location: /index/defaultPage/');
+        header("Location: ".ADRESSE_SITE."index/defaultPage/");
+		exit();
     }
 
     public function uploadFile($files, $id_photo){

@@ -2,6 +2,9 @@
 class index {
 	private $loginUrl;
 	private $fb;
+	private $open = FALSE;
+	
+	
 	public function __construct() {
 		/*session_destroy();
 		die('okj');*/
@@ -26,14 +29,23 @@ class index {
 				$_SESSION['idParticipant'] = $idParticipant;
 			}
 		}
+		
+		$leConcours = new concours;
+		// On sélectionne le concours ouvert
+		$leConcours->getOneBy("1", "status", "concours");
+		$leConcours->setFromBdd($leConcours->result);
+
+		if($leConcours->getId() != ""){
+			$this->open = TRUE;
+		}
+		
+		if(!isset($_SESSION['facebook_access_token'])){
+			header("Location: ".$this->loginUrl);
+		}s
 
 	}
 	
 	public function defaultPage($args) {
-		if(!isset($_SESSION['facebook_access_token'])){
-			header('location:'. $this->loginUrl);
-		}
-		
 		
 		
 		$participant = new participant();
@@ -61,8 +73,8 @@ class index {
 			}
 		}
 		
-		$view->assign('is_admin', $is_admin);
-		
+		$view->assign("is_admin", $is_admin);
+		$view->assign("open", $this->open);
 		
 	}
 	
@@ -86,7 +98,7 @@ class index {
 			  $view = new view("index", "index");
 			  $view->assign("link", $loginUrl);
 		  }else{
-			  header('Location: index/logged/');
+			  header("Location: ".ADRESSE_SITE."index/logged/");
 			  exit();
 		  }
   	}
@@ -112,7 +124,7 @@ class index {
 		
 		if (isset($accessToken)) {
 		  $_SESSION['facebook_access_token'] = (string) $accessToken;	
-		  header('Location: /index/logged');  
+		  header("Location: ".ADRESSE_SITE."index/logged");  
 		}else{
 			
 		}
@@ -126,7 +138,7 @@ class index {
 		  ]);
   	
 	  	if(!isset($_SESSION['facebook_access_token'])){
-			header('Location: index/not_logged');
+			header("Location: ".ADRESSE_SITE."index/not_logged");
 			exit();
 		}else{
 

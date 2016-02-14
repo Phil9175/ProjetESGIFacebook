@@ -2,6 +2,8 @@
 class voter {
 	private $loginUrl;
 	private $fb;
+	private $open = FALSE;
+	
 	public function __construct() {
 		/*session_destroy();
 		die('okj');*/
@@ -17,8 +19,19 @@ class voter {
 			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
-			
 		}
+		
+		$leConcours = new concours;
+		// On sélectionne le concours ouvert
+		$leConcours->getOneBy("1", "status", "concours");
+		$leConcours->setFromBdd($leConcours->result);
+
+		if($leConcours->getId() != ""){
+			$this->open = TRUE;
+			header("Location: ".ADRESSE_SITE);
+			exit();
+		}
+		
 	}
 
 	public function defaultPage($args) {
@@ -34,7 +47,7 @@ class voter {
 		$leConcours->getOneBy("1", "status", "concours");
 		$leConcours->setFromBdd($leConcours->result);
 
-		if($leConcours)
+		if($leConcours->getId() != "")
 		{
 			$countParticipation = new participation;
 			$countParticipation = $countParticipation->requete("SELECT count(*) as nb FROM participation, participant where participation.id_concours = "
@@ -75,7 +88,7 @@ class voter {
 		else // Pas de concours ouvert
 		{
 			$_SESSION['flash_messageError'] = "Le Concours n'est pas encore ouvert";
-			header('Location: /index/defaultPage/');
+			header('Location: '.ADRESSE_SITE.'index/defaultPage/');
 		}
 		
 		$maParticipation = new participation;
@@ -83,7 +96,7 @@ class voter {
 		$maParticipation->getOneByAnd($_SESSION['idParticipant'],$leConcours->getId(), 'id_participant', 'id_concours', 'participation');
 		$maParticipation->setFromBdd($maParticipation->result);
 
-		$view = new view("front","voter");
+		$view = new view("front", "voter");
 		$view->assign('loginUrl',$this->loginUrl);
 		$view->assign('leConcours',$leConcours);
 		$view->assign('participations',$participations);
@@ -97,14 +110,16 @@ class voter {
 
 	public function voterAction($args) {
 		die("ok");
-		$view = new view("front","voter");
+		$view = new view("front", "voter");
 	}
 
 
 	public function photo($args)
 	{
-		if(empty($args))
-			header('location:/');
+		if(empty($args)){
+			header('Location: '.ADRESSE_SITE);
+			exit();
+		}
 
 		if(is_numeric($args[0]))
 		{
@@ -113,15 +128,18 @@ class voter {
 				$tab = $response->getDecodedBody(); 
 				
 			} catch (Exception $e) {
-				header('location:/');
+				header('Location: '.ADRESSE_SITE);
+				exit();
 			}
 		}
-		else
-			header('location:/');
+		else{
+			header('Location: '.ADRESSE_SITE);
+			exit();
+		}
 
-		$view = new view("front","photo");
+		$view = new view("front", "photo");
 
-		$view->assign('tab',$tab);
+		$view->assign("tab", $tab);
 
 	}
 
