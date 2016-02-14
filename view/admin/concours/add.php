@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12">
-			<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>/admin/add" method="POST" enctype="multipart/form-data">
+			<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/add" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="validation" value="oui">
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="nom"> Nom <span class="asteriskField"> * </span> </label>

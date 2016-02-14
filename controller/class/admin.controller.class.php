@@ -45,25 +45,18 @@ class admin
 		if ($this->is_admin == FALSE){
 			header("Location: ".ADRESSE_SITE);
 		}
-		
+		/*
 		$facebookApp = $this->fb;
 		$app_id = APP_ID;
-
 		$app_secret = APP_SECRET;
-		
 		$app_access_token = $app_id . '|' . $app_secret;
-		
 		$response = $facebookApp->post( '/1654683138137649/notifications', array(
-		
 						'template' => 'You have received a new message.',
-		
 						'href' => 'RELATIVE URL'
 					) );    
-		
 		print_r($response);
-
-
-
+		*/
+	
 
 	}
 	
@@ -79,7 +72,7 @@ class admin
 	
 	 public function edit($args){
 		if ($this->is_admin == TRUE){
-			if ($args["validation"] == "oui"){
+			if (isset($args["validation"]) && $args["validation"] == "oui"){
 				$concours = new concours();
 				$concours->getOneBy($args[0], "id", "concours");
 				$concours->setFromBdd($concours->result);
@@ -118,7 +111,7 @@ class admin
 	
 	 public function add($args){
 		if ($this->is_admin == TRUE){
-			if ($args["validation"] == "oui"){
+			if (isset($args["validation"]) && $args["validation"] == "oui"){
 				$concours = new concours();
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);

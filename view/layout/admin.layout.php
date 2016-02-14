@@ -11,12 +11,12 @@
     border-radius: 10px 0px 10px 10px;">
             
             <br />
-            <a href="<?php echo ADRESSE_SITE; ?>/admin/add" >Ajouter</a>
+            <a href="<?php echo ADRESSE_SITE; ?>admin/add" >Ajouter</a>
 			<br />
-            <a href="<?php echo ADRESSE_SITE; ?>/admin/list_concours">Liste des concours</a></div>
+            <a href="<?php echo ADRESSE_SITE; ?>admin/list_concours">Liste des concours</a></div>
         </li>
 		
-        <li><a href="<?php echo ADRESSE_SITE; ?>/admin/list_users">Utilisateurs</a></li>
+        <li><a href="<?php echo ADRESSE_SITE; ?>admin/list_users">Utilisateurs</a></li>
 		
 		
 		
@@ -29,7 +29,7 @@
   <!--/.container-fluid --> 
 </div>
 <?php include "view/".$controller."/".$action.".php";?>
-<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>/view/ckeditor/ckeditor.js"></script> 
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>view/ckeditor/ckeditor.js"></script> 
 
 <?php include("view/inc/foot.php"); ?>
 

@@ -17,14 +17,14 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>/view/js/internal/photo-gallery.js"></script>
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>view/js/internal/photo-gallery.js"></script>
 
 <div class="">
 	
 	<?php if (empty($participations)): ?>
 		<div class="center">
 			<h2> Aucune Photo pour le moment </h2>
-			<h3><a href="/participationPhoto/index">Devenez le premier participant au concours </a></h3>
+			<h3><a href="<?php echo ADRESSE_SITE; ?>participationPhoto/index">Devenez le premier participant au concours </a></h3>
 		</div>
 
 	<?php else: ?> <!--On a des participations -->
@@ -57,7 +57,7 @@
 			</div>
 	  			
 		<?php else: ?> <!-- le User n'a pas encore choisit de photo --> 
-			<a href="<?php echo ADRESSE_SITE; ?>/participationPhoto/index" class="btn btn-default"> Participer</a>
+			<a href="<?php echo ADRESSE_SITE; ?>participationPhoto/index" class="btn btn-default"> Participer</a>
 		<?php endif ?>
 		
 

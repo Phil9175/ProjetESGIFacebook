@@ -1,10 +1,10 @@
 <h1> Selection photo </h1>
 
 <div>
-    <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>/participationPhoto/index">Retour</a>
+    <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>participationPhoto/index">Retour</a>
     <pre>
         <?php if(!isset($album)): ?>
-            <?php header('location:/notFound'); ?>
+            <?php header('location: '.ADRESSE_SITE.'notFound'); ?>
         <?php else : ?>
             <?php if(!isset($album['photos'])): ?>
         <div>
