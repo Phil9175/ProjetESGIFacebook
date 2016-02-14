@@ -28,8 +28,8 @@ class settings extends bdd{
 		$this->id = $id;
 	}
 	
-	public function set_logo_societe($concours){
-		$this->concours = $concours;
+	public function set_logo_societe($logo_societe){
+		$this->logo_societe = $logo_societe;
 	}
 	
 	public function set_nom_societe($nom_societe){
@@ -54,31 +54,31 @@ class settings extends bdd{
 		
 		
 	public function get_id(){
-		$this->id;
+		return $this->id;
 	}
 	
 	public function get_logo_societe(){
-		$this->concours;
+		return $this->logo_societe;
 	}
 	
 	public function get_nom_societe(){
-		$this->nom_societe;
+		return $this->nom_societe;
 	}
 	
 	public function get_mail_host(){
-		$this->mail_host;
+		return $this->mail_host;
 	}
 	
 	public function get_mail_port(){
-		$this->mail_port;
+		return $this->mail_port;
 	}
 	
 	public function get_mail_username(){
-		$this->mail_username;
+		return $this->mail_username;
 	}
 	
 	public function get_mail_password(){
-		$this->mail_password;
+		return $this->mail_password;
 	}
 }
 ?>

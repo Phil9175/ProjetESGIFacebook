@@ -99,10 +99,50 @@ class admin
 				$concours->setMax_per_page($args['max_per_page']);
 				$concours->save("concours");
 			}
+			
+			
+			if (isset($args[1]) && $args[1] == "picture"){
+				$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
+						$fichier = fonctions::id_aleatoire();
+						$taille_maxi = 10000000;
+						$taille = filesize($_FILES['user_photo']['tmp_name']);
+						$extensions = array('.png', '.gif', '.jpg', '.jpeg', '.svg');
+						$extension = strrchr($_FILES['user_photo']['name'], '.'); 
+						//Début des vérifications de sécurité...
+						if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+						{
+							 $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
+						}
+						if($taille>$taille_maxi)
+						{
+							 $erreur = 'Le fichier est trop gros...';
+						}
+						if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+						{
+							 if(move_uploaded_file($_FILES['user_photo']['tmp_name'], $dossier . $fichier . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+							 {
+								 $concours = new concours();
+								 $concours->getOneBy($args[0], "id", "concours");
+								 $concours->setFromBdd($concours->result);
+								 $settings->set_logo_societe('/fichiers/'.$fichier . $extension);
+								 $concours->save("concours");
+								 $_SESSION['errors'][] = ["type" => "success", "message" => "Le logo a bien ete modifié."];
+								header('Location: '.ADRESSE_SITE.'admin/edit/'.$args[1]);
+							}
+							 else //Sinon (la fonction renvoie FALSE).
+							 {
+								  echo 'Erreur, merci de réessayer!';
+							 }
+						}
+			}
+
+
+
+
 			$concours = new concours();
 			$concours->getOneBy($args[0], "id", "concours");
 			$concours->setFromBdd($concours->result);
-			$view = new view("admin", "concours/edit", "admin.layout");
+			$view = new view("admin", "concours/edit", "admin2.layout");
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
@@ -190,7 +230,7 @@ class admin
 	
 	public function settings($args){
 		if ($this->is_admin == TRUE){
-			if($args[0] == "picture"){
+			if(isset($args[0]) && $args[0] == "picture"){
 						$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
 						$fichier = fonctions::id_aleatoire();
 						$taille_maxi = 10000000;
@@ -223,7 +263,7 @@ class admin
 								  echo 'Erreur, merci de réessayer!';
 							 }
 						}
-			}elseif ($args[0] == "informations"){
+			}elseif (isset($args[0]) && $args[0] == "informations"){
 				//set des informations de societe
 				$settings = new settings();
 				$settings->getOneBy(1, "id", "settings");
@@ -247,6 +287,7 @@ class admin
 			$view->assign("mail_port", $settings->get_mail_port());
 			$view->assign("mail_username", $settings->get_mail_username());
 			$view->assign("mail_password", $settings->get_mail_password());
+			$view->assign("logo_societe", $settings->get_logo_societe());
 			
 		}
 	}

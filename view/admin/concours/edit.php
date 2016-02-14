@@ -1,8 +1,38 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-12">
-			<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/edit/<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="validation" value="oui">
+<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12"> 
+					<!-- BEGIN PROFILE CONTENT -->
+					<div class="profile-content">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="portlet light">
+									<div class="portlet-title tabbable-line">
+									<?php 
+									if (isset($_SESSION["errors"])):
+										foreach($_SESSION["errors"] as $key => $value):
+										?>
+										<div class="alert alert-<?php echo $value["type"]; ?>">
+											<?php echo $value["message"]; ?>
+										</div>
+										<?php 
+										endforeach;
+										unset($_SESSION["errors"]);
+									endif;
+									?>
+									
+										<div class="caption caption-md"> <i class="icon-globe theme-font hide"></i> <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span> </div>
+										<ul class="nav nav-tabs">
+											<li class="active"> <a href="#tab_1_1" data-toggle="tab">Informations et parametres</a> </li>
+											<li> <a href="#tab_1_2" data-toggle="tab">Logo</a> </li>
+											
+										</ul>
+									</div>
+									<div class="portlet-body">
+										<div class="tab-content"> 
+											<!-- PERSONAL INFO TAB -->
+											<div class="tab-pane active" id="tab_1_1">
+								<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/edit/<?php echo $id; ?>" method="POST" role="form" enctype="multipart/form-data">
+													<input type="hidden" name="validation" value="oui">
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="nom"> Nom <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
@@ -60,17 +90,51 @@
 							Non Actif </label>
 					</div>
 				</div>
-				
-				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						<button class="btn btn-primary " name="submit" type="submit"> Enregistrer </button>
+												
+													<div class="margiv-top-10">
+														<button type="submit" class="btn green-haze">
+														Sauvegarder les changements </button>
+														<button type="reset" class="btn default">
+														Annuler </button>
+													</div>
+												</form>
+											</div>
+											<!-- END PERSONAL INFO TAB --> 
+											<!-- CHANGE AVATAR TAB -->
+											<div class="tab-pane" id="tab_1_2">
+								<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/edit/<?php echo $id; ?>/picture" method="POST" role="form" enctype="multipart/form-data">
+													<div class="form-group">
+														<div class="fileinput fileinput-new" data-provides="fileinput">
+															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.$logo_societe; ?>" alt=""/> </div>
+															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Selectionnez une image </span> <span class="fileinput-exists"> Changer </span>
+																<input type="file" name="user_photo">
+																</span> <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Enlever </a> </div>
+														</div>
+													</div>
+													<div class="margin-top-10"> <button type="submit" class="btn green-haze">
+														Sauvegarder les changements </button>
+														<button type="reset" class="btn default">
+														Annuler </button> </div>
+												</form>
+											</div>
+											<!-- END CHANGE AVATAR TAB --> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+					<!-- END PROFILE CONTENT --> 
 				</div>
-			</form>
-		</div>
-	</div>
-</div>
+			</div>
+			<!-- END PAGE CONTENT--> 
+			
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>view/js/colorpicker.js"></script> 
 
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>view/js/jquery.datetimepicker.full.js"></script>
+
+<script type="text/javascript" src="<?php echo ADRESSE_SITE; ?>view/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript">
         $(document).ready(function() {
             $('#picker_font').ColorPicker({

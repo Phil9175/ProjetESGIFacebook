@@ -31,26 +31,26 @@
 										<div class="tab-content"> 
 											<!-- PERSONAL INFO TAB -->
 											<div class="tab-pane active" id="tab_1_1">
-												<form role="form" action="<?php echo ADRESSE_SITE; ?>admin/settings/informations">
+												<form role="form" method="POST" action="<?php echo ADRESSE_SITE; ?>admin/settings/informations">
 													<div class="form-group">
 														<label class="control-label">Nom de la societe</label>
-														<input type="text" value="<?php echo $nom_societe; ?>" placeholder="Nom de societe" name="nom_societe" class="form-control"/>
+														<input type="text" value="<?php echo $nom_societe; ?>" name="nom_societe" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Serveur mail</label>
-														<input type="text" value="<?php echo $mail_host; ?>" name="mail_host" placeholder="Host" class="form-control"/>
+														<input type="text" value="<?php echo $mail_host; ?>" name="mail_host" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Port du serveur mail</label>
-														<input type="text" value="<?php echo $mail_port; ?>" name="mail_port" placeholder="80" class="form-control"/>
+														<input type="text" value="<?php echo $mail_port; ?>" name="mail_port" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Nom d'utilisateur mail</label>
-														<input type="text" value="<?php echo $mail_username; ?>" name="mail_username" placeholder="" class="form-control"/>
+														<input type="text" value="<?php echo $mail_username; ?>" name="mail_username" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Mot de passe mail</label>
-														<input type="text" value="<?php echo $mail_password; ?>" name="mail_password" placeholder="" class="form-control"/>
+														<input type="text" value="<?php echo $mail_password; ?>" name="mail_password" class="form-control"/>
 													</div>
 												
 													<div class="margiv-top-10">
@@ -64,17 +64,20 @@
 											<!-- END PERSONAL INFO TAB --> 
 											<!-- CHANGE AVATAR TAB -->
 											<div class="tab-pane" id="tab_1_2">
-												<form action="<?php echo ADRESSE_SITE; ?>admin/settings/picture" role="form" enctype="multipart/form-data">
+												<form action="<?php echo ADRESSE_SITE; ?>admin/settings/picture" role="form" enctype="multipart/form-data" method="POST">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
-															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/> </div>
+															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.$logo_societe; ?>" alt=""/> </div>
 															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Select image </span> <span class="fileinput-exists"> Changer </span>
+															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Selectionnez une image </span> <span class="fileinput-exists"> Changer </span>
 																<input type="file" name="user_photo">
 																</span> <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Enlever </a> </div>
 														</div>
 													</div>
-													<div class="margin-top-10"> <a href="javascript:;" class="btn green-haze"> Enregistrer </a> <a href="javascript:;" class="btn default"> Annuler </a> </div>
+													<div class="margin-top-10"> <button type="submit" class="btn green-haze">
+														Sauvegarder les changements </button>
+														<button type="reset" class="btn default">
+														Annuler </button> </div>
 												</form>
 											</div>
 											<!-- END CHANGE AVATAR TAB --> 
