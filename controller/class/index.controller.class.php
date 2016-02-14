@@ -38,14 +38,13 @@ class index {
 		if($leConcours->getId() != ""){
 			$this->open = TRUE;
 		}
-		
-		if(!isset($_SESSION['facebook_access_token'])){
-			header("Location: ".$this->loginUrl);
-		}s
 
 	}
 	
 	public function defaultPage($args) {
+		if(!isset($_SESSION['facebook_access_token'])){
+			header("Location: ".$this->loginUrl);
+		}
 		
 		
 		$participant = new participant();

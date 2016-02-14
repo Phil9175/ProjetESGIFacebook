@@ -109,14 +109,14 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li class="start "> <a href="<?php echo ADRESSE_SITE; ?>"> <i class="icon-home"></i> <span class="title">Accueil</span> </a> </li>
 				<li> <a href="javascript:;"> <i class="icon-basket"></i> <span class="title">Concours</span> <span class="arrow "></span> </a>
 					<ul class="sub-menu">
-						<li> <a href="<?php ADRESSE_SITE; ?>concours/list"> <i class="icon-home"></i> Liste des concours</a> </li>
-						<li> <a href="<?php ADRESSE_SITE; ?>concours/add"> <i class="icon-basket"></i> Ajouter un concours</a> </li>
+						<li> <a href="<?php ADRESSE_SITE; ?>admin/concours/list"> <i class="icon-home"></i> Liste des concours</a> </li>
+						<li> <a href="<?php ADRESSE_SITE; ?>admin/concours/add"> <i class="icon-basket"></i> Ajouter un concours</a> </li>
 					</ul>
 				</li>
 				
 				<li class="last "> <a href="javascript:;"> <i class="icon-pointer"></i> <span class="title">Utilisateurs</span> <span class="arrow "></span> </a>
 					<ul class="sub-menu">
-						<li> <a href="<?php ADRESSE_SITE; ?>utilisateurs/list"> Liste</a> </li>
+						<li> <a href="<?php ADRESSE_SITE; ?>admin/utilisateurs/list"> Liste</a> </li>
 					</ul>
 				</li>
 			</ul>
