@@ -5,6 +5,7 @@ class admin
    	private $loginUrl;
 	private $fb;
 	private $is_admin = FALSE;
+	private $logo;
 	
 	public function __construct() {
 		/*session_destroy();
@@ -56,7 +57,11 @@ class admin
 					) );    
 		print_r($response);
 		*/
-	
+		
+		$settings = new settings();
+		$settings->getOneBy(1, "id", "settings");
+		$settings->setFromBdd($settings->result);
+		define("LOGO", $settings->get_logo_societe(), TRUE);
 
 	}
 	
@@ -87,7 +92,7 @@ class admin
 				$testConcours = new concours();
 				$testConcours->getOneBy(0, "status", "concours");
 				$testConcours->setFromBdd($testConcours->result);
-				if ($testConcours->getId() == "" && $args["status"] == 1){
+				if ($testConcours->getId() == "" && $args["status"] == 1 && $testConcours->getId() != $args[0]){
 					unset($testConcours);
 					$concours->setStatus(1);
 				}elseif ($args["status"] == 0){
@@ -136,13 +141,10 @@ class admin
 						}
 			}
 
-
-
-
 			$concours = new concours();
 			$concours->getOneBy($args[0], "id", "concours");
 			$concours->setFromBdd($concours->result);
-			$view = new view("admin", "concours/edit", "admin2.layout");
+			$view = new view("admin", "concours/edit", "admin.layout");
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
@@ -169,12 +171,26 @@ class admin
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				$concours->setStatus($args["status"]);
+				
+				$testConcours = new concours();
+				$testConcours->getOneBy(0, "status", "concours");
+				$testConcours->setFromBdd($testConcours->result);
+				if ($testConcours->getId() == "" && $args["status"] == 1){
+					unset($testConcours);
+					$concours->setStatus(1);
+					$_SESSION['errors'][] = ["type" => "success", "message" => "Le concours a ete active."];
+				}elseif ($args["status"] == 0){
+					unset($testConcours);
+					$concours->setStatus(0);
+					$_SESSION['errors'][] = ["type" => "danger", "message" => "Le concours n'a pas pu etre activé."];
+				}
+				
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concouts->setMax_per_page($args["max_per_page"]);
-				$concours->save("concours");
-				header("Location: ".ADRESSE_SITE."/admin/");
+				$id = $concours->save("concours");
+				$_SESSION['errors'][] = ["type" => "success", "message" => "Le concours a bien ete ajoute."];
+				header("Location: ".ADRESSE_SITE."/admin/edit/".$id);
 				exit();
 			}
 			$view = new view("admin", "concours/add", "admin.layout");
@@ -278,7 +294,7 @@ class admin
 				header('Location: '.ADRESSE_SITE.'admin/settings/#tab_1_1');
 			}
 					
-			$view = new view("admin", "settings/edit", "admin2.layout");
+			$view = new view("admin", "settings/edit", "admin.layout");
 			$settings = new settings;
 			$settings->getOneBy(1, "id", "settings");
 			$settings->setFromBdd($settings->result);

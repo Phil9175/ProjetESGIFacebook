@@ -47,6 +47,8 @@ class bdd {
 			$query = $this->connexion->prepare($sql);
 			$query->execute($array_to_execute);
 		}
+		return $this->connexion->lastInsertId();
+
 	}
 	
 	public function getOneBy($value, $column = "id", $table){
