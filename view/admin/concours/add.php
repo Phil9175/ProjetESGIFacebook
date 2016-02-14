@@ -36,45 +36,45 @@
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="nom"> Nom <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
-						<input class="form-control" id="nom" name="nom" type="text" value="<?php echo $nom; ?>"/>
+						<input class="form-control" id="nom" name="nom" type="text" />
 					</div>
 				</div>
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="description"> Description <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
-						<textarea class="form-control ckeditor" cols="100" id="description" name="description" rows="10"><?php echo $description; ?></textarea>
+						<textarea class="form-control ckeditor" cols="100" id="description" name="description" rows="10"></textarea>
 					</div>
 				</div>
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="max_per_page"> Maximum de photos par pages <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
-						<input class="form-control" id="max_per_page" name="max_per_page" type="text" value="<?php echo $max_per_page; ?>"/>
+						<input class="form-control" id="max_per_page" name="max_per_page" type="text"/>
 					</div>
 				</div>
 				
 				<div class="form-group ">
 					<label class="control-label col-sm-2 requiredField" for="date_debut"> Date de d&eacute;but <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
-						<input class="form-control" id="date_debut" name="date_debut" placeholder="MM/DD/YYYY" type="text" value="<?php echo $date_debut; ?>"/>
+						<input class="form-control" id="date_debut" name="date_debut" placeholder="MM/DD/YYYY" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="date_fin"> Date de fin <span class="asteriskField"> * </span></label>
 					<div class="col-sm-10">
-						<input class="form-control" id="date_fin" name="date_fin" placeholder="MM/DD/YYYY" type="text" value="<?php echo $date_fin; ?>"/>
+						<input class="form-control" id="date_fin" name="date_fin" placeholder="MM/DD/YYYY" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="picker_font"> Couleur de la police </label>
 					<div class="col-sm-10">
-						<input class="form-control" id="picker_font" name="picker_font" value="<?php echo $font_color; ?>" style="background-color: <?php echo $font_color; ?>;"/>
+						<input class="form-control" id="picker_font" name="picker_font" />
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="picker_back"> Couleur du background </label>
 					<div class="col-sm-10">
-						<input class="form-control" id="picker_back" name="picker_back" value="<?php echo $background_color; ?>" style="background-color: <?php echo $background_color; ?>;"/>
+						<input class="form-control" id="picker_back" name="picker_back" />
 					</div>
 				</div>
 				
@@ -83,10 +83,10 @@
 					<label class="control-label col-sm-2 requiredField" for="statut"> Statut du concours <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-							<input name="status" type="radio" value="1" <?php if ($status == 1) echo "checked"; ?>/>
+							<input name="status" type="radio" value="1" />
 							Actif </label>
 						<label class="radio-inline">
-							<input name="status" type="radio" value="0" <?php if ($status == 0) echo "checked"; ?>/>
+							<input name="status" type="radio" value="0" />
 							Non Actif </label>
 					</div>
 				</div>
@@ -98,7 +98,7 @@
 											<div class="tab-pane" id="tab_1_2">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
-															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.$logo_societe; ?>" alt=""/> </div>
+															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.LOGO; ?>" alt=""/> </div>
 															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
 															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Selectionnez une image </span> <span class="fileinput-exists"> Changer </span>
 																<input type="file" name="user_photo">
