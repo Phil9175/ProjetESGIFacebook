@@ -2,7 +2,7 @@
 class settings extends bdd{
 
     protected $id;
-	protected $logo_concours;
+	protected $logo_societe;
 	protected $nom_societe;
 	protected $mail_host;
     protected $mail_port;
@@ -28,7 +28,7 @@ class settings extends bdd{
 		$this->id = $id;
 	}
 	
-	public function set_logo_concours($concours){
+	public function set_logo_societe($concours){
 		$this->concours = $concours;
 	}
 	
@@ -57,7 +57,7 @@ class settings extends bdd{
 		$this->id;
 	}
 	
-	public function get_logo_concours(){
+	public function get_logo_societe(){
 		$this->concours;
 	}
 	

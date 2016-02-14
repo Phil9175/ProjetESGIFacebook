@@ -190,11 +190,64 @@ class admin
 	
 	public function settings($args){
 		if ($this->is_admin == TRUE){
-			if (isset($args["validation"]) && $args["validation"] == "oui"){
-				$settings = new settings;
-				
+			if($args[0] == "picture"){
+						$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
+						$fichier = fonctions::id_aleatoire();
+						$taille_maxi = 10000000;
+						$taille = filesize($_FILES['user_photo']['tmp_name']);
+						$extensions = array('.png', '.gif', '.jpg', '.jpeg', '.svg');
+						$extension = strrchr($_FILES['user_photo']['name'], '.'); 
+						//Début des vérifications de sécurité...
+						if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+						{
+							 $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
+						}
+						if($taille>$taille_maxi)
+						{
+							 $erreur = 'Le fichier est trop gros...';
+						}
+						if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+						{
+							 if(move_uploaded_file($_FILES['user_photo']['tmp_name'], $dossier . $fichier . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+							 {
+								 $settings = new settings();
+								 $settings->getOneBy(1, "id", "settings");
+								 $settings->setFromBdd($settings->result);
+								 $settings->set_logo_societe('/fichiers/'.$fichier . $extension);
+								 $settings->save("settings");
+								 $_SESSION['errors'][] = ["type" => "success", "message" => "Le logo a bien ete modifié."];
+								header('Location: '.ADRESSE_SITE.'admin/settings/#tab_1_2');
+							}
+							 else //Sinon (la fonction renvoie FALSE).
+							 {
+								  echo 'Erreur, merci de réessayer!';
+							 }
+						}
+			}elseif ($args[0] == "informations"){
+				//set des informations de societe
+				$settings = new settings();
+				$settings->getOneBy(1, "id", "settings");
+				$settings->setFromBdd($settings->result);
+				$settings->set_nom_societe($args["nom_societe"]);
+				$settings->set_mail_host($args["mail_host"]);
+				$settings->set_mail_port($args["mail_port"]);
+				$settings->set_mail_username($args["mail_username"]);
+				$settings->set_mail_password($args["mail_password"]);
+				$settings->save("settings");
+				$_SESSION['errors'][] = ["type" => "success", "message" => "Les informations ont bien été modifiées."];
+				header('Location: '.ADRESSE_SITE.'admin/settings/#tab_1_1');
 			}
+					
 			$view = new view("admin", "settings/edit", "admin2.layout");
+			$settings = new settings;
+			$settings->getOneBy(1, "id", "settings");
+			$settings->setFromBdd($settings->result);
+			$view->assign("nom_societe", $settings->get_nom_societe());
+			$view->assign("mail_host", $settings->get_mail_host());
+			$view->assign("mail_port", $settings->get_mail_port());
+			$view->assign("mail_username", $settings->get_mail_username());
+			$view->assign("mail_password", $settings->get_mail_password());
+			
 		}
 	}
     

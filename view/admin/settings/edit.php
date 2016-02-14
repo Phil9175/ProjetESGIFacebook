@@ -1,121 +1,90 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-12">
-			<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/add" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="validation" value="oui">
-				<div class="form-group ">
-					<label class="control-label col-sm-2 requiredField" for="nom"> Nom <span class="asteriskField"> * </span> </label>
-					<div class="col-sm-10">
-						<input class="form-control" id="nom" name="nom" type="text" />
+<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12"> 
+					<!-- BEGIN PROFILE CONTENT -->
+					<div class="profile-content">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="portlet light">
+									<div class="portlet-title tabbable-line">
+									<?php 
+									if (isset($_SESSION["errors"])):
+										foreach($_SESSION["errors"] as $key => $value):
+										?>
+										<div class="alert alert-<?php echo $value["type"]; ?>">
+											<?php echo $value["message"]; ?>
+										</div>
+										<?php 
+										endforeach;
+										unset($_SESSION["errors"]);
+									endif;
+									?>
+									
+										<div class="caption caption-md"> <i class="icon-globe theme-font hide"></i> <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span> </div>
+										<ul class="nav nav-tabs">
+											<li class="active"> <a href="#tab_1_1" data-toggle="tab">Informations et parametres</a> </li>
+											<li> <a href="#tab_1_2" data-toggle="tab">Logo</a> </li>
+											
+										</ul>
+									</div>
+									<div class="portlet-body">
+										<div class="tab-content"> 
+											<!-- PERSONAL INFO TAB -->
+											<div class="tab-pane active" id="tab_1_1">
+												<form role="form" action="<?php echo ADRESSE_SITE; ?>admin/settings/informations">
+													<div class="form-group">
+														<label class="control-label">Nom de la societe</label>
+														<input type="text" value="<?php echo $nom_societe; ?>" placeholder="Nom de societe" name="nom_societe" class="form-control"/>
+													</div>
+													<div class="form-group">
+														<label class="control-label">Serveur mail</label>
+														<input type="text" value="<?php echo $mail_host; ?>" name="mail_host" placeholder="Host" class="form-control"/>
+													</div>
+													<div class="form-group">
+														<label class="control-label">Port du serveur mail</label>
+														<input type="text" value="<?php echo $mail_port; ?>" name="mail_port" placeholder="80" class="form-control"/>
+													</div>
+													<div class="form-group">
+														<label class="control-label">Nom d'utilisateur mail</label>
+														<input type="text" value="<?php echo $mail_username; ?>" name="mail_username" placeholder="" class="form-control"/>
+													</div>
+													<div class="form-group">
+														<label class="control-label">Mot de passe mail</label>
+														<input type="text" value="<?php echo $mail_password; ?>" name="mail_password" placeholder="" class="form-control"/>
+													</div>
+												
+													<div class="margiv-top-10">
+														<button type="submit" class="btn green-haze">
+														Sauvegarder les changements </button>
+														<button type="reset" class="btn default">
+														Annuler </button>
+													</div>
+												</form>
+											</div>
+											<!-- END PERSONAL INFO TAB --> 
+											<!-- CHANGE AVATAR TAB -->
+											<div class="tab-pane" id="tab_1_2">
+												<form action="<?php echo ADRESSE_SITE; ?>admin/settings/picture" role="form" enctype="multipart/form-data">
+													<div class="form-group">
+														<div class="fileinput fileinput-new" data-provides="fileinput">
+															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="https://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/> </div>
+															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Select image </span> <span class="fileinput-exists"> Changer </span>
+																<input type="file" name="user_photo">
+																</span> <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Enlever </a> </div>
+														</div>
+													</div>
+													<div class="margin-top-10"> <a href="javascript:;" class="btn green-haze"> Enregistrer </a> <a href="javascript:;" class="btn default"> Annuler </a> </div>
+												</form>
+											</div>
+											<!-- END CHANGE AVATAR TAB --> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+					<!-- END PROFILE CONTENT --> 
 				</div>
-				<div class="form-group ">
-					<label class="control-label col-sm-2 requiredField" for="description"> Description <span class="asteriskField"> * </span> </label>
-					<div class="col-sm-10">
-						<textarea class="form-control ckeditor" cols="100" id="description" name="description" rows="10"></textarea>
-					</div>
-				</div>
-				<div class="form-group ">
-					<label class="control-label col-sm-2 requiredField" for="date_debut"> Date de d&eacute;but <span class="asteriskField"> * </span> </label>
-					<div class="col-sm-10">
-						<input class="form-control" id="date_debut" name="date_debut" placeholder="MM/DD/YYYY" type="text" value=""/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="date_fin"> Date de fin <span class="asteriskField"> * </span></label>
-					<div class="col-sm-10">
-						<input class="form-control" id="date_fin" name="date_fin" placeholder="MM/DD/YYYY" type="text" value=""/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="picker_font"> Couleur de la police </label>
-					<div class="col-sm-10">
-						<input class="form-control" id="picker_font" name="picker_font" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="picker_back"> Couleur du background </label>
-					<div class="col-sm-10">
-						<input class="form-control" id="picker_back" name="picker_back" />
-					</div>
-				</div>
-				
-				
-				<div class="form-group">
-					<label class="control-label col-sm-2 requiredField" for="statut"> Statut du concours <span class="asteriskField"> * </span> </label>
-					<div class="col-sm-10">
-						<label class="radio-inline">
-							<input name="statut" type="radio" value="1" />
-							Actif </label>
-						<label class="radio-inline">
-							<input name="statut" type="radio" value="0" checked/>
-							Non Actif </label>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						<button class="btn btn-primary " name="submit" type="submit"> Enregistrer </button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-        $(document).ready(function() {
-            $('#picker_font').ColorPicker({
-                onSubmit : function(hsb, hex, rgb, el) {
-                    $(el).val('#' + hex);
-                    $(el).ColorPickerHide();
-                },
-                onBeforeShow : function() {
-                    $(this).ColorPickerSetColor(this.value);
-                },
-				onChange: function (hsb, hex, rgb) {
-					$('#picker_font').css('backgroundColor', '#' + hex);
-					$('#picker_font').val('#' + hex);
-				}
-	
-            }).bind('keyup', function() {
-                $(this).ColorPickerSetColor(this.value);
-            });
-			
-			 $('#picker_back').ColorPicker({
-                onSubmit : function(hsb, hex, rgb, el) {
-                    $(el).val('#' + hex);
-                    $(el).ColorPickerHide();
-                },
-                onBeforeShow : function() {
-                    $(this).ColorPickerSetColor(this.value);
-                },
-				onChange: function (hsb, hex, rgb) {
-					$('#picker_back').css('backgroundColor', '#' + hex);
-					$('#picker_back').val('#' + hex);
-				}
-	
-            }).bind('keyup', function() {
-                $(this).ColorPickerSetColor(this.value);
-            });
-			
-			$.datetimepicker.setLocale('fr');
-			$('#date_debut').datetimepicker({
-				dayOfWeekStart : 1,
-				lang:'fr',
-				startDate:	'<?php echo date("d/m/Y"); ?>'
-			});
-			
-			$('#date_debut').datetimepicker({value:'<?php echo $date_debut; ?> <?php echo $heure_debut; ?>',step:10});
-$.datetimepicker.setLocale('fr');
-			$('#date_fin').datetimepicker({
-				dayOfWeekStart : 1,
-				lang:'fr',
-				startDate:	'<?php echo date("d/m/Y"); ?>'
-			});
-			
-			$('#date_fin').datetimepicker({value:'<?php echo $date_fin; ?> <?php echo $heure_fin; ?>',step:10});		
-        });
-
-    </script>
+			</div>
+			<!-- END PAGE CONTENT--> 

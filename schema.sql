@@ -85,7 +85,7 @@ CREATE TABLE `participation` (
 
 CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
-  `logo_concours` text NOT NULL,
+  `logo_societe` text NOT NULL,
   `nom_societe` varchar(60) NOT NULL,
   `mail_host` varchar(80) NOT NULL,
   `mail_port` int(11) NOT NULL,
