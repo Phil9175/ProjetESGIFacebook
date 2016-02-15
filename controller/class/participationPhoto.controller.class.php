@@ -30,6 +30,8 @@ class participationPhoto{
 
 		if($leConcours->getId() != ""){
 			$this->open = TRUE;
+		}else{
+			$this->open = FALSE;
 			header("Location: ".ADRESSE_SITE);
 			exit();
 		}
