@@ -187,7 +187,7 @@ class admin
 				
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
-				$concouts->setMax_per_page($args["max_per_page"]);
+				$concours->setMax_per_page($args["max_per_page"]);
 				$id = $concours->save("concours");
 				$_SESSION['errors'][] = ["type" => "success", "message" => "Le concours a bien ete ajoute."];
 				header("Location: ".ADRESSE_SITE."/admin/edit/".$id);
