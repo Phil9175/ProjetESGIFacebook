@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5
-Version: 4.1.0
-Author: KeenThemes
-Website: https://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -45,6 +34,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="<?php echo ADRESSE_SITE; ?>view/assets/admin/layout4/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+<script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/jquery.min.js" type="text/javascript"></script> 
+<link rel="stylesheet" type="text/css" href="<?php echo ADRESSE_SITE; ?>view/css/jquery-ui.theme.css">
+<link rel="stylesheet" type="text/css" href="<?php echo ADRESSE_SITE; ?>view/css/jquery.datetimepicker.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo ADRESSE_SITE; ?>view/css/colorpicker.css" />
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -63,7 +56,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner"> 
 		<!-- BEGIN LOGO -->
-		<div class="page-logo"> <a href="index.html"> <img src="<?php echo ADRESSE_SITE.LOGO; ?>" alt="logo" class="logo-default"/> </a>
+		<div class="page-logo"> <a href="index.html"> <img src="<?php echo ADRESSE_SITE.LOGO; ?>" alt="logo" class="logo-default" height="57px"/> </a>
 			<div class="menu-toggler sidebar-toggler"> 
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header --> 
 			</div>
@@ -166,7 +159,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/respond.min.js"></script>
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]--> 
-<script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/jquery.min.js" type="text/javascript"></script> 
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script> 
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip --> 
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script> 

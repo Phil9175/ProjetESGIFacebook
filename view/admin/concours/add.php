@@ -171,7 +171,7 @@
 				startDate:	'<?php echo date("d/m/Y"); ?>'
 			});
 			
-			$('#date_debut').datetimepicker({value:'<?php echo $date_debut; ?> <?php echo $heure_debut; ?>',step:10});
+			$('#date_debut').datetimepicker({value:'<?php echo date("d/m/Y H:i:s"); ?>',step:10});
 $.datetimepicker.setLocale('fr');
 			$('#date_fin').datetimepicker({
 				dayOfWeekStart : 1,
@@ -179,7 +179,7 @@ $.datetimepicker.setLocale('fr');
 				startDate:	'<?php echo date("d/m/Y"); ?>'
 			});
 			
-			$('#date_fin').datetimepicker({value:'<?php echo $date_fin; ?> <?php echo $heure_fin; ?>',step:10});		
+			$('#date_fin').datetimepicker({value:'<?php echo date("d/m/Y H:i:s"); ?>',step:10});
         });
 
     </script>
