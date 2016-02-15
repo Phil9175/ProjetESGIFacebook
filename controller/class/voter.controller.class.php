@@ -19,6 +19,7 @@ class voter {
 			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+
 		}
 		
 		$leConcours = new concours;
