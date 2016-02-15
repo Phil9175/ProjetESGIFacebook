@@ -23,6 +23,8 @@ if ($_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions"]
 unset($_SESSION['facebook_access_token']);
 header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
 exit();
+}else{
+$_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 }
 
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
