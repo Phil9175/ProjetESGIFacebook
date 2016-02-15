@@ -19,6 +19,12 @@ class participationPhoto{
 
             $this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/', $scope);
         }else{
+if ($_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions"]){
+unset($_SESSION['facebook_access_token']);
+header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
+exit();
+}
+
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
         }
         $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
