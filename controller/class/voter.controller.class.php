@@ -18,6 +18,11 @@ class voter {
 
 			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/',$scope);
 		}else{
+
+if($_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"]){
+}else{
+$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions"];
+}
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
 		}
