@@ -16,7 +16,7 @@ class voter {
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions"];
 
-			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback.php',$scope);
+			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'login-callback',$scope);
 		}else{
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 		}
