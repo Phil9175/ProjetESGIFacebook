@@ -22,7 +22,7 @@ class callback {
 		
 		if(isset($accessToken)){
 			$_SESSION['facebook_access_token'] = (string) $accessToken;
-			header("location:/");
+			header("Location: ".ADRESSE_SITE);
 		}
 	}
 	
