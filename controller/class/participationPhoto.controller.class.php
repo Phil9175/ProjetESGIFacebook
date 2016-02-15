@@ -128,7 +128,7 @@ class participationPhoto{
             }
         }
     }
-    public function sendPhotoFB($idPhoto, $namePhoto){
+    public function sendPhotoFB($idPhoto){
         $participation = new participation();
         $concours = new concours();
 
@@ -159,7 +159,6 @@ class participationPhoto{
         $participation->setIdConcours($concours->getId());
         $participation->setCreatedAt(date("Y-m-d H:i:s"));
         $participation->setUpdatedAt(date("Y-m-d H:i:s"));
-        $participation->setIdPhotoName($namePhoto);
 
         try{
 
