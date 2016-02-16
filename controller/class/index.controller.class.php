@@ -54,7 +54,6 @@ class index {
 		
 		$view = new view("front","accueil");
 		$view->assign('loginUrl', $this->loginUrl);
-		$view->assign('status', $participant->getRole());
 		
 		$requestRoles = $this->fb->get(APP_ID."/roles", APP_TOKEN);
 		$roles = $requestRoles->getDecodedBody()['data'];

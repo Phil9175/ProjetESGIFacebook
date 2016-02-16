@@ -197,16 +197,14 @@ class participationPhoto{
 
             $participant->setLastName($this->user['last_name']);
             $participant->setFirstName($this->user['first_name']);
-            $participant->setName($this->user['first_name']." ". $this->user['last_name']);
             if($this->user['gender'] == 'male'){
                 $participant->setGender(1);
             }else{
                 $participant->setGender(0);
             }
             $participant->setEmail($this->user['email']);
-            $participant->setBirthDate($this->user['birthday']);
-            $participant->setRole("participant");
-
+			list($mois, $jour, $annee) = explode("/", $this->user['birthday']);
+            $participant->setBirthDate($annee."-".$mois."-".$jour);
             $participant->save("participant");
         }
 

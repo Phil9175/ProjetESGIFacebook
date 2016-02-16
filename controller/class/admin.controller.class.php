@@ -305,5 +305,56 @@ class admin
 			
 		}
 	}
+	
+	public function utilisateurs($args){
+		$view = new view("admin", "utilisateurs/list", "admin_table.layout");
+		
+	}
     
+	public function users_list($args){
+				$participant = new participant;
+				$participants = $participant->requete("SELECT COUNT(*) FROM participant");
+				$iTotalRecords  = $participants[0]["COUNT(*)"];
+				unset($participants);
+				unset($participant);
+				
+				$participant = new participant;
+				$iDisplayLength = intval($_REQUEST['length']);
+				$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+				$iDisplayStart  = intval($_REQUEST['start']);
+				$sEcho          = intval($_REQUEST['draw']);
+				$end = $iDisplayStart + $iDisplayLength;
+				$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+				$participant = new participant;
+				$participants = $participant->requete("SELECT * FROM participant ORDER BY id DESC LIMIT ".$iDisplayStart.", ".$iDisplayLength."");
+				
+				$records         = array();
+			$records["data"] = array();
+			
+			foreach ($participants as $key => $value) {
+				$records["data"][] = array(
+			  '<input type="checkbox" name="id[]" value="'.$value["id"].'">',
+			  $value["first_name"],
+			  $value["last_name"],
+			  $value["gender"],
+			  $value["email"],
+			  $value["birthdate"]
+		   );
+				
+			}
+			
+			if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+				$records["customActionStatus"]  = "OK"; // pass custom message(useful for getting status of group actions)
+				$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+			}
+			
+			$records["draw"]            = $sEcho;
+			$records["recordsTotal"]    = $iTotalRecords;
+			$records["recordsFiltered"] = $iTotalRecords;
+			
+			echo json_encode($records);
+	}
+	
+	
+	
 }

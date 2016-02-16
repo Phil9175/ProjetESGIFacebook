@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost:3306
--- Généré le :  Dim 14 Février 2016 à 18:41
+-- Généré le :  Mar 16 Février 2016 à 19:51
 -- Version du serveur :  5.1.73
 -- Version de PHP :  5.6.14
 
@@ -43,6 +43,13 @@ CREATE TABLE `concours` (
   `max_per_page` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `concours`
+--
+
+INSERT INTO `concours` (`id`, `name`, `description`, `award`, `start_date`, `end_date`, `status`, `ranking`, `logo`, `font`, `font_family`, `font_color`, `background_color`, `max_per_page`) VALUES
+(1, 'yrdy', '<p>ytr</p>\r\n', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'N;', NULL, NULL, NULL, '', '', 8);
+
 -- --------------------------------------------------------
 
 --
@@ -50,16 +57,22 @@ CREATE TABLE `concours` (
 --
 
 CREATE TABLE `participant` (
+  `id` int(11) NOT NULL,
   `id_participant` bigint(20) NOT NULL,
-  `name` varchar(75) NOT NULL,
   `first_name` varchar(75) NOT NULL,
   `last_name` varchar(75) NOT NULL,
   `gender` tinyint(1) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `birthdate` varchar(25) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `role` varchar(20) NOT NULL
+  `birthdate` date DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `participant`
+--
+
+INSERT INTO `participant` (`id`, `id_participant`, `first_name`, `last_name`, `gender`, `email`, `birthdate`, `city`) VALUES
+(1, 10208518914714290, 'Pierre', 'Gr', 1, 'philgranger@orange.fr', '1991-08-30', NULL);
 
 -- --------------------------------------------------------
 
@@ -94,6 +107,13 @@ CREATE TABLE `settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- Contenu de la table `settings`
+--
+
+INSERT INTO `settings` (`id`, `logo_societe`, `nom_societe`, `mail_host`, `mail_port`, `mail_username`, `mail_password`) VALUES
+(1, '/fichiers/f4bad8e9a3dda4899a1af56d5151cdb07de6a7d0.png', 'Societe Client', 'concoursphotosesgi.com', 80, 'test@concoursphotosesgi.com', 'motdepasse');
+
+--
 -- Index pour les tables exportées
 --
 
@@ -107,7 +127,8 @@ ALTER TABLE `concours`
 -- Index pour la table `participant`
 --
 ALTER TABLE `participant`
-  ADD PRIMARY KEY (`id_participant`);
+  ADD PRIMARY KEY (`id_participant`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Index pour la table `participation`
@@ -131,17 +152,22 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT pour la table `concours`
 --
 ALTER TABLE `concours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `participant`
+--
+ALTER TABLE `participant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `participation`
 --
 ALTER TABLE `participation`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
