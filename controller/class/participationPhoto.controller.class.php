@@ -12,20 +12,19 @@ class participationPhoto{
             'app_secret' =>APP_SECRET,
             'default_graph_version' => 'v2.5',
         ]);
+		$scope = ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
+		
         if(!isset($_SESSION['facebook_access_token'])){
-
             $helper = $this->fb->getRedirectLoginHelper();
-            $scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
-
             $this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/', $scope);
         }else{
-if ($_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions"]){
-unset($_SESSION['facebook_access_token']);
-header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
-exit();
-}else{
-$_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
-}
+			if (isset($_SESSION['scope']) && count(array_diff($_SESSION['scope'], ["email","user_likes","user_photos","publish_actions"])) == 0 ){
+				unset($_SESSION['facebook_access_token']);
+				header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
+				exit();
+			}else{
+				$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
+			}
 
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
         }

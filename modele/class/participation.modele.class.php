@@ -12,42 +12,12 @@ class participation extends bdd{
 		parent::__construct();
 	}
 
-	/*public function setFromBdd($var = []){
-
+	public function setFromBdd($var = []){
 		foreach($var as $key => $value){
 			$this->$key = (fonctions::is_serialized($value))?unserialize($value):$value;
 		}
 	}
-*/
-    public function setFromBdd($var = []){
-        $participation = $this;
 
-        foreach ($var as $propertyToSet => $value) {
-
-            switch ($propertyToSet) {
-                case 'id':
-                    $participation->setId($value);
-                    break;
-                case 'id_concours':
-                    $participation->setIdConcours($value);
-                    break;
-                case 'id_participant':
-                    $participation->setIdParticipant($value);
-                    break;
-                case 'id_photo':
-                    $participation->setIdPhoto($value);
-                    break;
-                case 'created_at':
-                    $participation->setCreatedAt($value);
-                    break;
-                case 'updated_at':
-                    $participation->setUpdatedAt($value);
-                    break;
-            }
-           
-            // $participation->set{fonctions::camelCase($propertyToSet)} = $value;
-        }
-    }
 	public function save($table = "participation"){
 		parent::save($table);
 	}

@@ -12,17 +12,16 @@ class voter {
 				'app_secret' =>APP_SECRET,
 				'default_graph_version' => 'v2.5',
 		]);
+		$scope =["email","user_likes","user_photos","publish_actions"];
+		
 		if(!isset($_SESSION['facebook_access_token'])){
 			$helper = $this->fb->getRedirectLoginHelper();
-			$scope =["email","user_likes","user_photos","publish_actions"];
-
 			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/',$scope);
 		}else{
-
-if($_SESSION['scope'] == ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"]){
-}else{
-$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions"];
-}
+			if (count(array_diff($_SESSION['scope'], ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"])) == 0 ){
+			}else{
+				$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions"];
+			}
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
 		}
@@ -64,7 +63,7 @@ $_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions"];
 			if(isset($countParticipation[0]))
 			{
 				
-				$maxParPage = ($leConcours->getMax_per_page() != "" && $leConcours->getMax_per_page > 0)?$leConcours->getMax_per_page:8;
+				$maxParPage = ($leConcours->getMax_per_page() != "" && $leConcours->getMax_per_page() > 0)?$leConcours->getMax_per_page():8;
 
 				$nbPages = ceil($countParticipation[0]['nb']/$maxParPage);
 				if(!empty($args))

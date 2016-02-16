@@ -1,7 +1,6 @@
 <?php
 class admin
 {
-    
    	private $loginUrl;
 	private $fb;
 	private $is_admin = FALSE;

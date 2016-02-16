@@ -14,7 +14,6 @@ class settings extends bdd{
 	}
 
 	public function setFromBdd($var = []){
-
 		foreach($var as $key => $value){
 			$this->$key = (fonctions::is_serialized($value))?unserialize($value):$value;
 		}
