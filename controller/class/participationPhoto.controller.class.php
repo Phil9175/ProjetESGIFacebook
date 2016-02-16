@@ -15,15 +15,17 @@ class participationPhoto{
 		$scope = ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
 		
         if(!isset($_SESSION['facebook_access_token'])){
+			$_SESSION['scope'] = $scope;
             $helper = $this->fb->getRedirectLoginHelper();
             $this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/', $scope);
         }else{
-			if (isset($_SESSION['scope']) && count(array_diff($_SESSION['scope'], ["email","user_likes","user_photos","publish_actions"])) == 0 ){
+			if (isset($_SESSION['scope']) && !in_array("user_photos", $_SESSION['scope'])){
 				unset($_SESSION['facebook_access_token']);
+				$_SESSION['scope'] = $scope;
 				header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
 				exit();
 			}else{
-				$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
+				$_SESSION['scope'] = $scope;
 			}
 
             $this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);

@@ -12,15 +12,16 @@ class voter {
 				'app_secret' =>APP_SECRET,
 				'default_graph_version' => 'v2.5',
 		]);
-		$scope =["email","user_likes","user_photos","publish_actions"];
+		$scope = ["email","user_likes","publish_actions"];
 		
 		if(!isset($_SESSION['facebook_access_token'])){
+			$_SESSION['scope'] = $scope;
 			$helper = $this->fb->getRedirectLoginHelper();
 			$this->loginUrl = $helper->getLoginUrl(ADRESSE_SITE.'callback/',$scope);
 		}else{
-			if (count(array_diff($_SESSION['scope'], ["email","user_likes","user_photos","publish_actions","user_birthday","user_location"])) == 0 ){
+			if (isset($_SESSION['scope']) && in_array("user_photos", $_SESSION['scope'])){
 			}else{
-				$_SESSION['scope'] = ["email","user_likes","user_photos","publish_actions"];
+				$_SESSION['scope'] = $scope;
 			}
 			$this->fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
