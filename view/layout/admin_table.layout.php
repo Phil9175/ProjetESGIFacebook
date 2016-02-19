@@ -102,14 +102,15 @@
 				<li class="start "> <a href="<?php echo ADRESSE_SITE; ?>"> <i class="icon-home"></i> <span class="title">Accueil</span> </a> </li>
 				<li> <a href="javascript:;"> <i class="icon-basket"></i> <span class="title">Concours</span> <span class="arrow "></span> </a>
 					<ul class="sub-menu">
-						<li> <a href="<?php ADRESSE_SITE; ?>admin/list"> <i class="icon-home"></i> Liste des concours</a> </li>
-						<li> <a href="<?php ADRESSE_SITE; ?>admin/add"> <i class="icon-basket"></i> Ajouter un concours</a> </li>
+						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/utilisateurs"> Liste par concours</a> </li>
+						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/add"> <i class="icon-basket"></i> Ajouter un concours</a> </li>
 					</ul>
 				</li>
 				
 				<li class="last "> <a href="javascript:;"> <i class="icon-pointer"></i> <span class="title">Utilisateurs</span> <span class="arrow "></span> </a>
 					<ul class="sub-menu">
-						<li> <a href="<?php ADRESSE_SITE; ?>admin/utilisateurs/list"> Liste</a> </li>
+						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/"> Liste par concours</a> </li>
+						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/list_users"> Liste de tous les utilisateurs</a> </li>
 					</ul>
 				</li>
 			</ul>
@@ -182,7 +183,7 @@
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/admin/layout4/scripts/layout.js" type="text/javascript"></script>
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/admin/layout4/scripts/demo.js" type="text/javascript"></script>
 <script src="<?php echo ADRESSE_SITE; ?>view/assets/global/scripts/datatable.js"></script>
-<script src="<?php echo ADRESSE_SITE; ?>view/assets/admin/pages/scripts/table-ajax.js"></script>
+<script src="<?php echo ADRESSE_SITE; ?>view/assets/admin/pages/scripts/table-ajax.js" class="concours" id="id"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
         jQuery(document).ready(function() {    

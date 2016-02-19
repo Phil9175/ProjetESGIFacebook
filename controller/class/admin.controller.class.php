@@ -82,9 +82,9 @@ class admin
 				
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
-				sscanf($args["date_debut"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_debut"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_fin"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
@@ -146,10 +146,10 @@ class admin
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
-			sscanf($concours->getStartDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
+			sscanf($concours->getStartDate(), "%d-%d-%d %d:%d:%d", $an, $mois, $jour, $heure, $min, $sec);
 			$view->assign("date_debut", $jour."/".$mois."/".$an);
 			$view->assign("heure_debut", $heure.":".$min.":".$sec);
-			sscanf($concours->getEndDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);			
+			sscanf($concours->getEndDate(), "%d-%d-%d %d:%d:%d", $an, $mois, $jour, $heure, $min, $sec);			
 			$view->assign("date_fin", $jour."/".$mois."/".$an);
 			$view->assign("heure_fin", $heure.":".$min.":".$sec);
 			$view->assign("status", $concours->getStatus());
@@ -165,9 +165,10 @@ class admin
 				$concours = new concours();
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
-				sscanf($args["date_debut"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_debut"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
+				mail("philgranger@orange.fr", "test", $jour.$mois.$an.$heure.$min.$sec);
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				sscanf($args["date_fin"], "%2s\/%2s\/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_fin"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
@@ -192,7 +193,6 @@ class admin
 				exit();
 			}
 			$view = new view("admin", "concours/add", "admin.layout");
-
 		}
     }
 	
@@ -307,18 +307,26 @@ class admin
 	}
 	
 	public function utilisateurs($args){
-		$view = new view("admin", "utilisateurs/list", "admin_table.layout");
-		
+		if (!$args[0]){
+			$view = new view("admin", "utilisateurs/list_concours", "admin_table.layout");
+		}elseif ($args[0] == "list_users"){
+			if (!$args[1]) {
+				$view = new view("admin", "utilisateurs/list_users", "admin_table_users.layout");
+			}else{
+				$view = new view("admin", "utilisateurs/list_users_concours", "admin_table_users_concours.layout");
+				$view->assign("id", $args[1]);
+			}
+		}
 	}
     
-	public function users_list($args){
+	public function liste($args){
+		if ($args[0] == "users"){
 				$participant = new participant;
 				$participants = $participant->requete("SELECT COUNT(*) FROM participant");
 				$iTotalRecords  = $participants[0]["COUNT(*)"];
 				unset($participants);
 				unset($participant);
 				
-				$participant = new participant;
 				$iDisplayLength = intval($_REQUEST['length']);
 				$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
 				$iDisplayStart  = intval($_REQUEST['start']);
@@ -332,13 +340,15 @@ class admin
 			$records["data"] = array();
 			
 			foreach ($participants as $key => $value) {
+				list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+				$genre = ($value["gender"] == 1)?"Homme":"Femme";
 				$records["data"][] = array(
 			  '<input type="checkbox" name="id[]" value="'.$value["id"].'">',
 			  $value["first_name"],
 			  $value["last_name"],
-			  $value["gender"],
+			$genre,
 			  $value["email"],
-			  $value["birthdate"]
+			  $jour."/".$mois."/".$annee
 		   );
 				
 			}
@@ -353,6 +363,106 @@ class admin
 			$records["recordsFiltered"] = $iTotalRecords;
 			
 			echo json_encode($records);
+		}elseif ($args[0] == "concours"){
+			if (!isset($args[1])){
+				$concours = new concours;
+				$concourss = $concours->requete("SELECT COUNT(*) FROM concours");
+				$iTotalRecords  = $concourss[0]["COUNT(*)"];
+				unset($concourss);
+				unset($concours);
+				
+				$iDisplayLength = intval($_REQUEST['length']);
+				$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+				$iDisplayStart  = intval($_REQUEST['start']);
+				$sEcho          = intval($_REQUEST['draw']);
+				$end = $iDisplayStart + $iDisplayLength;
+				$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+				$concours = new concours;
+				$concourss = $concours->requete("SELECT * FROM concours ORDER BY id DESC LIMIT ".$iDisplayStart.", ".$iDisplayLength."");
+				
+				
+				$records         = array();
+			$records["data"] = array();
+			
+			foreach ($concourss as $key => $value) {
+				//list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+				$status = ($value["status"] == 1)?"Actif":"Fermé";
+				$records["data"][] = array(
+			  '<input type="checkbox" name="id[]" value="'.$value["id"].'">',
+			  $value["name"],
+			  $value["start_date"],
+				$value["end_date"],
+			  $status,
+			  "<a href=\"".ADRESSE_SITE."admin/utilisateurs/list_users/".$value["id"]."\">Voir les utilisateurs</a><br><a href=\"".ADRESSE_SITE."admin/edit/".$value["id"]."\">Editer le concours</a>"
+			  
+			  
+		   );
+				
+			}
+			
+				if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+					$records["customActionStatus"]  = "OK"; // pass custom message(useful for getting status of group actions)
+					$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+				}
+				
+				$records["draw"]            = $sEcho;
+				$records["recordsTotal"]    = $iTotalRecords;
+				$records["recordsFiltered"] = $iTotalRecords;
+				mail("philgranger@orange.fr", "test", serialize($records));
+				echo json_encode($records);
+			}else{
+				$participant = new participant;
+				$participants = $participant->requete("select COUNT(*) from participant, participation where participant.id_participant = participation.id_participant and participation.id_concours = '".intval($args[1])."'");
+				$iTotalRecords  = $participants[0]["COUNT(*)"];
+				unset($participants);
+				unset($participant);
+				
+				$iDisplayLength = intval($_REQUEST['length']);
+				$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+				$iDisplayStart  = intval($_REQUEST['start']);
+				$sEcho          = intval($_REQUEST['draw']);
+				$end = $iDisplayStart + $iDisplayLength;
+				$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+				$participant = new participant;
+				$participants = $participant->requete("select participant.id, participant.first_name, participant.last_name, participant.birthdate, participant.gender, participation.id_photo, participant.email, participation.updated_at from participant, participation where participant.id_participant = participation.id_participant and participation.id_concours = '".intval($args[1])."' ORDER BY participation.id DESC LIMIT ".$iDisplayStart.", ".$iDisplayLength."");
+				$records         = array();
+				$records["data"] = array();
+			
+			foreach ($participants as $key => $value) {
+			list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+				$genre = ($value["gender"] == 1)?"Homme":"Femme";
+				$records["data"][] = array(
+			 	'<input type="checkbox" name="id[]" value="'.$value["id"].'">',
+			 	$value["first_name"],
+			  	$value["last_name"],
+				$genre,
+				$value["id_photo"],
+				$value["updated_at"],
+				$jour."/".$mois."/".$annee,
+				$value["email"]
+		   );
+				
+			}
+			
+			if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+				$records["customActionStatus"]  = "OK"; // pass custom message(useful for getting status of group actions)
+				$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+			}
+			
+			$records["draw"]            = $sEcho;
+			$records["recordsTotal"]    = $iTotalRecords;
+			$records["recordsFiltered"] = $iTotalRecords;
+			
+			echo json_encode($records);
+			}
+			
+			
+				
+			
+			
+			
+			
+		}
 	}
 	
 	

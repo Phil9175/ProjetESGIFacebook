@@ -1,3 +1,6 @@
+var script_tag = document.getElementById("id")
+var search_term = script_tag.getAttribute("class");
+
 var TableAjax = function () {
 
     var initPickers = function () {
@@ -41,7 +44,7 @@ var TableAjax = function () {
                 ],
                 "pageLength": 10, // default record count per page
                 "ajax": {
-                    "url": "https://www.concoursphotosesgi.com/admin/users_list", // ajax source
+                    "url": "https://www.concoursphotosesgi.com/admin/liste/"+search_term, // ajax source
                 },
                 "order": [
                     [1, "asc"]
