@@ -77,8 +77,7 @@
 		        
 	        	<li id="ancreNom-<?php echo $value['name']; ?>" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" data-id="<?php echo $value['name']; ?>">
                 	<img class="img-responsive" style="height: 200px; width: 100%;" src="<?php echo $tab['source']; ?>">
-                	<br>
-                	<div> <?php echo $value['name']; ?></div><br>
+                	<br><br>
 			  			<div
 			  			class="fb-like"
 						style="overflow: hidden !important;"
