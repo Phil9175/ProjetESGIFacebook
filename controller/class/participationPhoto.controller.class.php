@@ -33,12 +33,8 @@ class participationPhoto{
         $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
         $this->user = $response->getDecodedBody();
 		
-		$leConcours = new concours;
-		// On sélectionne le concours ouvert
-		$leConcours->getOneBy("1", "status", "concours");
-		$leConcours->setFromBdd($leConcours->result);
 
-		if($leConcours->getId() != ""){
+		if(security::checkConcours() == TRUE){
 			$this->open = TRUE;
 		}else{
 			$this->open = FALSE;

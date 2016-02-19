@@ -27,12 +27,7 @@ class voter {
 
 		}
 		
-		$leConcours = new concours;
-		// On sélectionne le concours ouvert
-		$leConcours->getOneBy("1", "status", "concours");
-		$leConcours->setFromBdd($leConcours->result);
-
-		if($leConcours->getId() != ""){
+		if(security::checkConcours() == TRUE){
 			$this->open = TRUE;
 		}else{
 			$this->open = FALSE;
