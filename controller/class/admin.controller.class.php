@@ -82,9 +82,9 @@ class admin
 				
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
-				sscanf($args["date_debut"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_debut"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				sscanf($args["date_fin"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_fin"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
@@ -146,10 +146,10 @@ class admin
 			$view->assign("id", $args[0]);
 			$view->assign("nom", $concours->getName());
 			$view->assign("description", $concours->getDescription());
-			sscanf($concours->getStartDate(), "%d-%d-%d %d:%d:%d", $an, $mois, $jour, $heure, $min, $sec);
+			sscanf($concours->getStartDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
 			$view->assign("date_debut", $jour."/".$mois."/".$an);
 			$view->assign("heure_debut", $heure.":".$min.":".$sec);
-			sscanf($concours->getEndDate(), "%d-%d-%d %d:%d:%d", $an, $mois, $jour, $heure, $min, $sec);			
+			sscanf($concours->getEndDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);			
 			$view->assign("date_fin", $jour."/".$mois."/".$an);
 			$view->assign("heure_fin", $heure.":".$min.":".$sec);
 			$view->assign("status", $concours->getStatus());
@@ -165,10 +165,10 @@ class admin
 				$concours = new concours();
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
-				sscanf($args["date_debut"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_debut"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				mail("philgranger@orange.fr", "test", $jour.$mois.$an.$heure.$min.$sec);
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
-				sscanf($args["date_fin"], "%d/%d/%d %d:%d:%d", $jour, $mois, $an, $heure, $min, $sec);
+				sscanf($args["date_fin"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
@@ -385,15 +385,18 @@ class admin
 			$records["data"] = array();
 			
 			foreach ($concourss as $key => $value) {
+				sscanf($value["start_date"], "%4s-%2s-%2s %2s:%2s:%2s", $anDebut, $moisDebut, $jourDebut, $heureDebut, $minDebut, $secDebut);	
+				sscanf($value["end_date"], "%4s-%2s-%2s %2s:%2s:%2s", $anFin, $moisFin, $jourFin, $heureFin, $minFin, $secFin);	
+				
 				//list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
 				$status = ($value["status"] == 1)?"Actif":"Fermé";
 				$records["data"][] = array(
 			  '<input type="checkbox" name="id[]" value="'.$value["id"].'">',
 			  $value["name"],
-			  $value["start_date"],
-				$value["end_date"],
+			  "Le ".$jourDebut."/".$moisDebut."/".$anDebut." à ".$heureDebut.":".$minDebut.":".$secDebut,
+			  "Le ".$jourFin."/".$moisFin."/".$anFin." à ".$heureFin.":".$minFin.":".$secFin,
 			  $status,
-			  "<a href=\"".ADRESSE_SITE."admin/utilisateurs/list_users/".$value["id"]."\">Voir les utilisateurs</a><br><a href=\"".ADRESSE_SITE."admin/edit/".$value["id"]."\">Editer le concours</a>"
+			  "<a href=\"".ADRESSE_SITE."admin/utilisateurs/list_users/".$value["id"]."\" class=\"btn btn-xs default btn-editable\">Voir les utilisateurs</a><br><a href=\"".ADRESSE_SITE."admin/edit/".$value["id"]."\" class=\"btn btn-xs default btn-editable\">Editer le concours</a>"
 			  
 			  
 		   );
@@ -430,6 +433,8 @@ class admin
 			
 			foreach ($participants as $key => $value) {
 			list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+			sscanf($value["updated_at"], "%4s-%2s-%2s %2s:%2s:%2s", $anPart, $moisPart, $jourPart, $heurePart, $minPart, $secPart);	
+			
 				$genre = ($value["gender"] == 1)?"Homme":"Femme";
 				$records["data"][] = array(
 			 	'<input type="checkbox" name="id[]" value="'.$value["id"].'">',
@@ -437,7 +442,7 @@ class admin
 			  	$value["last_name"],
 				$genre,
 				$value["id_photo"],
-				$value["updated_at"],
+				"Le ".$jourPart."/".$moisPart."/".$anPart." à ".$heurePart.":".$minPart.":".$secPart,
 				$jour."/".$mois."/".$annee,
 				$value["email"]
 		   );

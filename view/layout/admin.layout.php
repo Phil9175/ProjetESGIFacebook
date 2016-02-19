@@ -98,22 +98,8 @@
 			<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing --> 
 			<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded --> 
 			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-				<li class="start "> <a href="<?php echo ADRESSE_SITE; ?>"> <i class="icon-home"></i> <span class="title">Accueil</span> </a> </li>
-				<li> <a href="javascript:;"> <i class="icon-basket"></i> <span class="title">Concours</span> <span class="arrow "></span> </a>
-					<ul class="sub-menu">
-						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/utilisateurs"> Liste par concours</a> </li>
-						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/add"> <i class="icon-basket"></i> Ajouter un concours</a> </li>
-					</ul>
-				</li>
-				
-				<li class="last "> <a href="javascript:;"> <i class="icon-pointer"></i> <span class="title">Utilisateurs</span> <span class="arrow "></span> </a>
-					<ul class="sub-menu">
-						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/"> Liste par concours</a> </li>
-						<li> <a href="<?php echo ADRESSE_SITE; ?>admin/utilisateurs/list_users"> Liste de tous les utilisateurs</a> </li>
-					</ul>
-				</li>
-			</ul>
+		<?php include "view/inc/menuAdmin.php"; ?>			
+			
 			<!-- END SIDEBAR MENU --> 
 		</div>
 	</div>
