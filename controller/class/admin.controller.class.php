@@ -431,6 +431,23 @@ class admin
 				$records         = array();
 				$records["data"] = array();
 			
+				$participations = new participation;
+				$participations = $participations->requete("SELECT * FROM participation, participant where participation.id_concours = "
+				.intval($args[1])." and participation.id_participant = participant.id_participant");
+				
+					foreach ($participations as $key => $value){ 
+					$response = $this->fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
+					
+					$tab = $response->getDecodedBody();
+					
+					$rep = $this->fb->get(ADRESSE_SITE."voter/photo/".$value['id_photo'], $_SESSION['facebook_access_token']);
+					$tabVote = $rep->getDecodedBody();
+					$nbVote = $tabVote['share']['share_count'];
+
+					$ranking[$value['id']] = $nbVote;
+					}
+				
+				
 			foreach ($participants as $key => $value) {
 			list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
 			sscanf($value["updated_at"], "%4s-%2s-%2s %2s:%2s:%2s", $anPart, $moisPart, $jourPart, $heurePart, $minPart, $secPart);	
@@ -442,6 +459,7 @@ class admin
 			  	$value["last_name"],
 				$genre,
 				$value["id_photo"],
+				$ranking[$value["id"]],
 				"Le ".$jourPart."/".$moisPart."/".$anPart." à ".$heurePart.":".$minPart.":".$secPart,
 				$jour."/".$mois."/".$annee,
 				$value["email"]

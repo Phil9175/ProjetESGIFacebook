@@ -46,6 +46,9 @@
 									<th width="15%">
 										 Photo
 									</th>
+									<th width="15%">
+										 Nombre de votes
+									</th>
 									<th width="20%">
 										 Date de participation
 									</th>
