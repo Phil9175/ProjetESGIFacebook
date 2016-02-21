@@ -15,27 +15,37 @@ padding: 100px;
 margin-top: 25px;
 margin-left: 200px;
 margin-right: 200px;
-border-radius: 15px;
--moz-box-shadow: 10px 10px 5px #656565;
--webkit-box-shadow: 10px 10px 5px #656565;
--o-box-shadow: 10px 10px 5px #656565;
-box-shadow: 10px 10px 5px #656565;
-filter:progid:DXImageTransform.Microsoft.Shadow(color='#6565', Direction=135, Strength=5);
+border: solid black 1px;
 }
 
-.button_accueil
+#participer
 {
 width:auto;
 height:auto;
 text-align: center;
 padding:20px;
 margin :10px;
+border: groove black 5px;
 }
 
-.button_accueil a
+#voter
 {
-width: 325px;
-height: 40px;
+width:auto;
+height:auto;
+text-align: center;
+padding:20px;
+margin :10px;
+border: groove black 5px;
+}
+
+#gerer_concours
+{
+width:auto;
+height:auto;
+text-align: center;
+padding:20px;
+margin :10px;
+border: groove black 5px;
 }
 
 div.img {
@@ -190,59 +200,31 @@ text-align:right;
 
 
 /* Style page accueil */
-
-#logo
-{
-width:297.5px;
-height:421px;
-}
-
-.left_logo
+.left
 {
 float:left;
 height: 50px;
 }
 
-.left
+#haut_concours
 {
-float: left;
-}
-
-#top_concours
-{
-height: 200px;
+height: 250px;
 margin: auto;
-padding-left: 120px;
-text-align: center;
-
+padding: auto;
 }
 
-#content_concours
+#titre_concours
 {
-
-}
-
-#bottom_concours
-{
-  border-top: solid 1px black;
-  padding-top: 10px;
-  font-family: "photographs";
-  font-size: 25px;
-}
-
-#title_concours
-{
-float: left;
-margin-top: 50px;
-font-family: "photographs";
-font-size: 75px;
+float: right;
+margin-top: 16px;
+font-family: "falconpunch";
+font-size: 38px;
 letter-spacing: 5px;
 }
 
-
 @font-face {
-font-family: "photographs";
-src: url('/view/fonts/Photographs.ttf');
+font-family: "falconpunch";
+src: url('/view/fonts/falconpunch.ttf');
 }
 
 /* Style page d'accueil */
