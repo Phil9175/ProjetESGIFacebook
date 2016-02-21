@@ -20,7 +20,7 @@
 									</a>
 									<ul class="dropdown-menu pull-right">
 										<li>
-											<a href="<?php echo ADRESSE_SITE."admin/export/all"; ?>">
+											<a href="<?php echo ADRESSE_SITE."admin/export/".$id; ?>">
 											Exporter en Excel </a>
 										</li>
 									</ul>

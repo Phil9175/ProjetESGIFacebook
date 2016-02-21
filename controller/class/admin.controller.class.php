@@ -433,7 +433,7 @@ class admin
 			
 				$participations = new participation;
 				$participations = $participations->requete("SELECT * FROM participation, participant where participation.id_concours = "
-				.intval($args[1])." and participation.id_participant = participant.id_participant");
+				.intval($args[1])." and participation.id_participant = participant.id_participant LIMIT ".$iDisplayStart.", ".$iDisplayLength."");
 				
 					foreach ($participations as $key => $value){ 
 					$response = $this->fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
@@ -478,13 +478,140 @@ class admin
 			
 			echo json_encode($records);
 			}
+		}
+	}
+	
+	public function export($args){
+		if ($args[0] == "all"){
+				$objPHPExcel = new PHPExcel();
+					// Set document properties
+					$objPHPExcel->getProperties()->setCreator("Concours Photo")
+												 ->setLastModifiedBy("Concours Photo")
+												 ->setTitle("Concours Photo")
+												 ->setSubject("Concours Photo")
+												 ->setDescription("Concours Photo")
+												 ->setKeywords("Concours Photo")
+												 ->setCategory("Concours Photo");
+												 
+					$objPHPExcel->setActiveSheetIndex(0)
+								->setCellValue('A1', "Nom")
+								->setCellValue('B1', "Prénom")
+								->setCellValue('C1', "Genre")
+								->setCellValue('D1', "Date de naissance")
+								->setCellValue('E1', "Email")
+								->setCellValue('F1', "Identifiant photo");
 			
+			$participant = new participant;
+				$participants = $participant->requete("select participant.id, participant.first_name, participant.last_name, participant.birthdate, participant.gender, participation.id_photo, participant.email, participation.updated_at from participant, participation where participant.id_participant = participation.id_participant  ORDER BY participation.id DESC");
+				$records         = array();
+				$records["data"] = array();
 			
 				
+				
+				$j = 2;
+			foreach ($participants as $key => $value) {
+			list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+			sscanf($value["updated_at"], "%4s-%2s-%2s %2s:%2s:%2s", $anPart, $moisPart, $jourPart, $heurePart, $minPart, $secPart);	
+				$genre = ($value["gender"] == 1)?"Homme":"Femme";
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.$j.'', $value["first_name"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$j.'', $value["last_name"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$j.'', $genre);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$j.'', $jour."/".$mois."/".$annee);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$j.'', $value["email"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$j.'', $value["id_photo"]);
+				$j++;				
+			}
+			
+			// Rename worksheet
+			$objPHPExcel->getActiveSheet()->setTitle('Export');
+			
+			
+			// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+			$objPHPExcel->setActiveSheetIndex(0);
+			
+			
+			// Redirect output to a client’s web browser (Excel5)
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="bordereauderemiseprefecture.xls"');
+			header('Cache-Control: max-age=0');
+			
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+			$objWriter->save('php://output');
 			
 			
 			
+		}elseif (is_numeric($args[0])){
 			
+			$objPHPExcel = new PHPExcel();
+					// Set document properties
+					$objPHPExcel->getProperties()->setCreator("Concours Photo")
+												 ->setLastModifiedBy("Concours Photo")
+												 ->setTitle("Concours Photo")
+												 ->setSubject("Concours Photo")
+												 ->setDescription("Concours Photo")
+												 ->setKeywords("Concours Photo")
+												 ->setCategory("Concours Photo");
+												 
+					$objPHPExcel->setActiveSheetIndex(0)
+								->setCellValue('A1', "Nom")
+								->setCellValue('B1', "Prénom")
+								->setCellValue('C1', "Genre")
+								->setCellValue('D1', "Date de naissance")
+								->setCellValue('E1', "Email")
+								->setCellValue('F1', "Identifiant photo")
+								->setCellValue('G1', "Nombre de votes");
+			
+			$participant = new participant;
+				$participants = $participant->requete("select participant.id, participant.first_name, participant.last_name, participant.birthdate, participant.gender, participation.id_photo, participant.email, participation.updated_at from participant, participation where participant.id_participant = participation.id_participant and participation.id_concours = '".intval($args[0])."'  ORDER BY participation.id DESC");
+				$records         = array();
+				$records["data"] = array();
+			
+				$participations = new participation;
+				$participations = $participations->requete("SELECT * FROM participation, participant where participation.id_concours = "
+				.intval($args[0])." and participation.id_participant = participant.id_participant");
+				
+					foreach ($participations as $key => $value){ 
+					$response = $this->fb->get($value['id_photo'].'?fields=id,link,picture,source', $_SESSION['facebook_access_token']);
+					
+					$tab = $response->getDecodedBody();
+					
+					$rep = $this->fb->get(ADRESSE_SITE."voter/photo/".$value['id_photo'], $_SESSION['facebook_access_token']);
+					$tabVote = $rep->getDecodedBody();
+					$nbVote = $tabVote['share']['share_count'];
+
+					$ranking[$value['id']] = $nbVote;
+					}
+				
+				$j = 2;
+			foreach ($participants as $key => $value) {
+			list($annee, $mois, $jour) = explode("-", $value["birthdate"]);
+			sscanf($value["updated_at"], "%4s-%2s-%2s %2s:%2s:%2s", $anPart, $moisPart, $jourPart, $heurePart, $minPart, $secPart);	
+				$genre = ($value["gender"] == 1)?"Homme":"Femme";
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.$j.'', $value["first_name"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$j.'', $value["last_name"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$j.'', $genre);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$j.'', $jour."/".$mois."/".$annee);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$j.'', $value["email"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$j.'', $value["id_photo"]);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('G'.$j.'', $ranking[$value["id"]]);
+				$j++;				
+			}
+			
+			// Rename worksheet
+			$objPHPExcel->getActiveSheet()->setTitle('Export');
+			
+			
+			// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+			$objPHPExcel->setActiveSheetIndex(0);
+			
+			
+			// Redirect output to a client’s web browser (Excel5)
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="bordereauderemiseprefecture.xls"');
+			header('Cache-Control: max-age=0');
+			
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+			$objWriter->save('php://output');
 		}
 	}
 	
