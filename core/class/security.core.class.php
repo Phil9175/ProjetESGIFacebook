@@ -3,7 +3,7 @@ class security{
 	public static function checkConcours(){
 		$leConcours = new concours;
 		// On sélectionne le concours ouvert
-		$leConcours->getOneBy("1", "status", "concours");
+		$leConcours->getOneBy(1, "status", "concours");
 		$leConcours->setFromBdd($leConcours->result);
 
 		if($leConcours->getId() != ""){

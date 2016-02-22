@@ -88,7 +88,7 @@ class admin
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
-				$testConcours->getOneBy(0, "status", "concours");
+				$testConcours->getOneBy(1, "status", "concours");
 				$testConcours->setFromBdd($testConcours->result);
 				if ($testConcours->getId() == "" && $args["status"] == 1 && $testConcours->getId() != $args[0]){
 					unset($testConcours);
@@ -172,7 +172,7 @@ class admin
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				
 				$testConcours = new concours();
-				$testConcours->getOneBy(0, "status", "concours");
+				$testConcours->getOneBy(1, "status", "concours");
 				$testConcours->setFromBdd($testConcours->result);
 				if ($testConcours->getId() == "" && $args["status"] == 1){
 					unset($testConcours);
