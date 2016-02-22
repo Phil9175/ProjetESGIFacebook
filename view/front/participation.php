@@ -41,23 +41,22 @@
 <?php
 $i =0;
 foreach($userNode['data'] as $album):
-    if($i < 5) :
-        if (isset($album['photos'])):
-			?>
-            <td id="album">
-                <a href="<?php echo ADRESSE_SITE; ?>participationPhoto/photo/<?php echo $album['id']; ?>" class="nouderline">
-                    <ul class="row gallery center">
-                        <li> <img src='<?php echo $album['photos']['data'][0]['picture']; ?>'/></li>
-                        <li> <?php echo $album['name']; ?></li>
-                    </ul>
-            </a>
-            </td>
-			<?php
-            $i++;
-        endif;
-    else:
+    if($i >4){
         $i =0;
         echo "</tr><tr>";
+    }
+    if (isset($album['photos'])):
+        ?>
+        <td id="album">
+            <a href="<?php echo ADRESSE_SITE; ?>participationPhoto/photo/<?php echo $album['id']; ?>" class="nouderline">
+                <ul class="row gallery center">
+                    <li> <img src='<?php echo $album['photos']['data'][0]['picture']; ?>'/></li>
+                    <li> <?php echo $album['name']; ?></li>
+                </ul>
+        </a>
+        </td>
+        <?php
+        $i++;
     endif;
 endforeach;
 ?>
