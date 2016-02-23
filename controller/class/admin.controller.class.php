@@ -14,6 +14,7 @@ class admin
 				'app_secret' =>APP_SECRET,
 				'default_graph_version' => 'v2.5',
 		]);
+		
 		if(!isset($_SESSION['facebook_access_token'])){
 			$helper = $this->fb->getRedirectLoginHelper();
 			$scope =["email","user_likes","user_photos","publish_actions","user_birthday","user_location"];
@@ -44,17 +45,25 @@ class admin
 		if ($this->is_admin == FALSE){
 			header("Location: ".ADRESSE_SITE);
 		}
+		
 		/*
-		$facebookApp = $this->fb;
 		$app_id = APP_ID;
 		$app_secret = APP_SECRET;
 		$app_access_token = $app_id . '|' . $app_secret;
-		$response = $facebookApp->post( '/1654683138137649/notifications', array(
-						'template' => 'You have received a new message.',
-						'href' => 'RELATIVE URL'
-					) );    
-		print_r($response);
+
+		$fb = new Facebook\Facebook([
+					'app_id' => APP_ID,
+					'app_secret' =>APP_SECRET,
+					'default_graph_version' => 'v2.5',
+		]);
+		$response = $fb->post('/1654683138137649/notifications', [
+			'template' => "Message",
+			'href' => "concoursphotosesgi/test",
+			'access_token' => $app_access_token
+			]);
 		*/
+		
+		
 		
 		$settings = new settings();
 		$settings->getOneBy(1, "id", "settings");
@@ -532,7 +541,7 @@ class admin
 			
 			// Redirect output to a client’s web browser (Excel5)
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="bordereauderemiseprefecture.xls"');
+			header('Content-Disposition: attachment;filename="export_utilisateurs.xls"');
 			header('Cache-Control: max-age=0');
 			
 			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
@@ -607,7 +616,7 @@ class admin
 			
 			// Redirect output to a client’s web browser (Excel5)
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="bordereauderemiseprefecture.xls"');
+			header('Content-Disposition: attachment;filename="export_utilisateurs.xls"');
 			header('Cache-Control: max-age=0');
 			
 			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');

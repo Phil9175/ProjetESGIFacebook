@@ -2,10 +2,7 @@ body
 {
 width:auto;
 height:auto;
-/* background: #CCFFFF url(../images/page-bg-1.jpg); */
-/*background-color: #CCFFFF;*/
 }
-
 #wrap
 {
 width:auto;
@@ -13,9 +10,8 @@ height:auto;
 text-align: center;
 padding: 100px;
 margin-top: 25px;
-margin-left: 200px;
-margin-right: 200px;
-border: solid black 1px;
+margin-left: auto;
+margin-right: auto;
 }
 
 #participer
@@ -25,7 +21,6 @@ height:auto;
 text-align: center;
 padding:20px;
 margin :10px;
-border: groove black 5px;
 }
 
 #album
@@ -44,7 +39,6 @@ height:auto;
 text-align: center;
 padding:20px;
 margin :10px;
-border: groove black 5px;
 }
 
 #gerer_concours
@@ -54,7 +48,6 @@ height:auto;
 text-align: center;
 padding:20px;
 margin :10px;
-border: groove black 5px;
 }
 
 div.img {
