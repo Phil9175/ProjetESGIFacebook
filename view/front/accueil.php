@@ -3,7 +3,7 @@
 
 	<div id="haut_concours">
 		<p class="left"> <img width="200px" src="<?php echo ADRESSE_SITE.LOGO; ?>"> </p><br>
-		<h2 id="titre_concours"> Concours Photo </h2>
+		<h2 id="titre_concours"> <?php echo $slogan; ?> </h2>
 	</div>
 
 	<?php if ($open == TRUE): ?>

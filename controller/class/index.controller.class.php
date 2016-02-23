@@ -83,6 +83,7 @@ class index {
 		}else{
 			$slogan = $settings->get_slogan();
 		}
+		$view->assign("slogan", $slogan);
 		
 	}
 	
