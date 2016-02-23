@@ -95,10 +95,10 @@
 					<label class="control-label col-sm-2 requiredField" for="statut"> Méthode de notification <span class="asteriskField"> * </span> </label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-							<input name="status" type="radio" value="email" <?php if ($methode_notification == "email") echo "checked"; ?>/>
+							<input name="methode_notification" type="radio" value="email" <?php if ($methode_notification == "email") echo "checked"; ?>/>
 							Email </label>
 						<label class="radio-inline">
-							<input name="status" type="radio" value="notification" <?php if ($methode_notification == "notification") echo "checked"; ?>/>
+							<input name="methode_notification" type="radio" value="notification" <?php if ($methode_notification == "notification") echo "checked"; ?>/>
 							Notification </label>
 					</div>
 				</div>
