@@ -94,6 +94,22 @@ class participationPhoto{
     }
 
     public function importPhoto(){
+        $tabExt = array('jpg','gif','png','jpeg');
+
+        if (!$_FILES['fichier']) {
+            $_SESSION['flash_messageError'] = "Le fichier envoyé n'est pas une photo !";
+            header("Location: ".ADRESSE_SITE."index/defaultPage/");
+            return;
+        } else {
+            $extension  = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION);
+
+            if(!in_array(strtolower($extension),$tabExt))
+            {
+                $_SESSION['flash_messageError'] = 'L\'extension du fichier est incorrecte !';
+                header("Location: ".ADRESSE_SITE."index/defaultPage/");
+            }
+        }
+
         if ($_FILES['fichier']['error']) {
             switch ($_FILES['fichier']['error']) {
                 case 1: // UPLOAD_ERR_INI_SIZE
