@@ -40,7 +40,9 @@ CREATE TABLE `concours` (
   `font_family` varchar(255) DEFAULT NULL,
   `font_color` varchar(24) DEFAULT NULL,
   `background_color` varchar(24) DEFAULT NULL,
-  `max_per_page` int(255) DEFAULT NULL
+  `max_per_page` int(255) DEFAULT NULL,
+  `methode_notification` varchar(20) DEFAULT NULL,
+  `is_notify` int(255) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

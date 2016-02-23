@@ -109,6 +109,7 @@ class admin
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->setMax_per_page($args['max_per_page']);
+				$concours->setMethode_notification($args['methode_notification']);
 				$concours->save("concours");
 			}
 			
@@ -165,6 +166,7 @@ class admin
 			$view->assign("font_color", $concours->getFontColor());
 			$view->assign("background_color", $concours->getBackgroundColor());
 			$view->assign("max_per_page", $concours->getMax_per_page());
+			$view->assign("methode_notification", $concours->getMethode_notification());
 			$view->assign("logo_concours", $concours->getLogo());
 		}
     }
@@ -176,7 +178,6 @@ class admin
 				$concours->setName($args["nom"]);
 				$concours->setDescription($args["description"]);
 				sscanf($args["date_debut"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
-				mail("philgranger@orange.fr", "test", $jour.$mois.$an.$heure.$min.$sec);
 				$concours->setStartDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
 				sscanf($args["date_fin"], "%2s/%2s/%4s %2s:%2s:%2s", $jour, $mois, $an, $heure, $min, $sec);
 				$concours->setEndDate($an."-".$mois."-".$jour." ".$heure.":".$min.":".$sec);
@@ -197,6 +198,7 @@ class admin
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->setMax_per_page($args["max_per_page"]);
+				$concours->setMethode_notification($args['methode_notification']);
 						$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
 						$fichier = fonctions::id_aleatoire();
 						$taille_maxi = 10000000;
@@ -321,6 +323,7 @@ class admin
 				$settings->getOneBy(1, "id", "settings");
 				$settings->setFromBdd($settings->result);
 				$settings->set_nom_societe($args["nom_societe"]);
+				$settings->set_slogan($args["slogan"]);
 				$settings->set_mail_host($args["mail_host"]);
 				$settings->set_mail_port($args["mail_port"]);
 				$settings->set_mail_username($args["mail_username"]);
@@ -335,6 +338,7 @@ class admin
 			$settings->getOneBy(1, "id", "settings");
 			$settings->setFromBdd($settings->result);
 			$view->assign("nom_societe", $settings->get_nom_societe());
+			$view->assign("slogan", $settings->get_slogan());
 			$view->assign("mail_host", $settings->get_mail_host());
 			$view->assign("mail_port", $settings->get_mail_port());
 			$view->assign("mail_username", $settings->get_mail_username());

@@ -8,6 +8,7 @@ class settings extends bdd{
     protected $mail_port;
     protected $mail_username;
     protected $mail_password;
+    protected $slogan;
 	
 	public function __construct(){
 		parent::__construct();
@@ -50,7 +51,10 @@ class settings extends bdd{
 	public function set_mail_password($mail_password){
 		$this->mail_password = $mail_password;
 	}
-		
+	
+	public function set_slogan($slogan){
+		$this->slogan = $slogan;
+	}
 		
 	public function get_id(){
 		return $this->id;
@@ -78,6 +82,10 @@ class settings extends bdd{
 	
 	public function get_mail_password(){
 		return $this->mail_password;
+	}
+	
+	public function get_slogan(){
+		return $this->slogan;
 	}
 }
 ?>

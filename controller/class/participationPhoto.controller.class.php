@@ -165,7 +165,7 @@ class participationPhoto{
 
 
         if($participation->getIdPhoto() == $idPhoto[0]){
-            $_SESSION['flash_messageError'] = "La photo a déjà été enregistré.";
+            $_SESSION['flash_messageError'] = "La photo a déjà été enregistrée";
             header("Location: ".ADRESSE_SITE."index/defaultPage/");
 			exit();
         }else if($participation->getIdPhoto() != null){
@@ -186,7 +186,7 @@ class participationPhoto{
 
             $participation->save("participation");
 
-            $_SESSION['flash_messageValidate'] = "La photo a bien été enregistré.";
+            $_SESSION['flash_messageValidate'] = "La photo a bien été enregistrée";
             header("Location: ".ADRESSE_SITE."index/defaultPage/");
 			exit();
 
@@ -227,7 +227,7 @@ class participationPhoto{
         $participation = new participation();
         $participation->requeteDelete(("DELETE FROM participation WHERE id_participant = ".$this->user['id']));
 
-        $_SESSION['flash_messageValidate'] = "Votre participation a bien été annulée.";
+        $_SESSION['flash_messageValidate'] = "Votre participation a bien été annulée";
         header("Location: ".ADRESSE_SITE."index/defaultPage/");
 		exit();
     }

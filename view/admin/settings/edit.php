@@ -37,6 +37,10 @@
 														<input type="text" value="<?php echo $nom_societe; ?>" name="nom_societe" class="form-control"/>
 													</div>
 													<div class="form-group">
+														<label class="control-label">Slogan de la societe</label>
+														<input type="text" value="<?php echo $slogan; ?>" name="slogan" class="form-control"/>
+													</div>
+													<div class="form-group">
 														<label class="control-label">Serveur mail</label>
 														<input type="text" value="<?php echo $mail_host; ?>" name="mail_host" class="form-control"/>
 													</div>

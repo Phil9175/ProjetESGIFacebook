@@ -90,6 +90,19 @@
 							Non Actif </label>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-2 requiredField" for="statut"> Methode de notification des utilisateurs <span class="asteriskField"> * </span> </label>
+					<div class="col-sm-10">
+						<label class="radio-inline">
+							<input name="methode_notification" type="radio" value="email" />
+							Email </label>
+						<label class="radio-inline">
+							<input name="methode_notification" type="radio" value="notification" />
+							Notification </label>
+					</div>
+				</div>
+				
 												
 													
 											</div>

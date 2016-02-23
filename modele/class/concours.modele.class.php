@@ -15,6 +15,8 @@ class concours extends bdd{
     protected $font_family;
     protected $background_color;
 	protected $max_per_page;
+	protected $methode_notification;
+	protected $is_notify;
 	
 	
 	public function __construct(){
@@ -335,6 +337,31 @@ class concours extends bdd{
 	   return $this->max_per_page;
    }
    
+   public function setMethode_notification($methode_notification)
+   {
+	   $this->methode_notification = $methode_notification;
+	   
+	   return $this;
+	   
+   }
+   
+   public function getMethode_notification()
+   {
+	   return $this->methode_notification;
+   }
+   
+   public function setIs_notify($is_notify)
+   {
+	   $this->is_notify = $is_notify;
+	   
+	   return $this;
+	   
+   }
+   
+   public function getIs_notify()
+   {
+	   return $this->is_notify;
+   }
    
 }
 ?>

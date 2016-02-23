@@ -74,6 +74,16 @@ class index {
 		
 		$logo = (security::getLogo())?security::getLogo():$settings->get_logo_societe();
 		define("LOGO", $logo);
+		
+		if ($this->open == TRUE){
+			$leConcours = new concours;
+			$leConcours->getOneBy("1", "status", "concours");
+			$leConcours->setFromBdd($leConcours->result);
+			$slogan = $leConcours->getName();
+		}else{
+			$slogan = $settings->get_slogan();
+		}
+		
 	}
 	
 	public function participerAction($args) {
