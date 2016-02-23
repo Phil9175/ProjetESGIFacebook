@@ -68,7 +68,12 @@ class index {
 		
 		$view->assign("is_admin", $is_admin);
 		$view->assign("open", $this->open);
+		$settings = new settings();
+		$settings->getOneBy(1, "id", "settings");
+		$settings->setFromBdd($settings->result);
 		
+		$logo = (security::getLogo())?security::getLogo():$settings->get_logo_societe();
+		define("LOGO", $logo);
 	}
 	
 	public function participerAction($args) {

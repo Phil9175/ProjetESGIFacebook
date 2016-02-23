@@ -23,6 +23,29 @@ class security{
 	}
 	
 	
+	public static function getLogo(){
+		$leConcours = new concours;
+		// On sélectionne le concours ouvert
+		$leConcours->getOneBy(1, "status", "concours");
+		$leConcours->setFromBdd($leConcours->result);
+
+		if($leConcours->getId() != ""){
+			sscanf($leConcours->getStartDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);
+			$date_debut = $an.$mois.$jour.$heure.$min.$sec;
+			sscanf($leConcours->getEndDate(), "%4s-%2s-%2s %2s:%2s:%2s", $an, $mois, $jour, $heure, $min, $sec);			
+			$date_fin = $an.$mois.$jour.$heure.$min.$sec;
+			$date = date("YmdHis");
+			if ($date>$date_debut && $date<$date_fin){
+				return $leConcours->getLogo();
+			}else{
+				return FALSE;
+			}
+		}else{
+			return FALSE;
+		}
+	}
+		
+
 public static function cleanInput($input){
 	 $search = array(
     '@<script[^>]*?>.*?</script>@si',   // On enleve le javascript

@@ -139,7 +139,7 @@ class admin
 								 $concours->setLogo('/fichiers/'.$fichier . $extension);
 								 $concours->save("concours");
 								 $_SESSION['errors'][] = ["type" => "success", "message" => "Le logo a bien ete modifié."];
-								header('Location: '.ADRESSE_SITE.'admin/edit/'.$args[1]);
+								header('Location: '.ADRESSE_SITE.'admin/edit/'.$args[0]);
 							}
 							 else //Sinon (la fonction renvoie FALSE).
 							 {

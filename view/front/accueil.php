@@ -2,7 +2,7 @@
 <?php include 'view/front/flashMessage.php'; ?>
 
 	<div id="haut_concours">
-		<p class="left"> <img width="297.5px" height="421px" src="<?php echo ADRESSE_SITE; ?>view/images/logo_photoquizz.svg"> </p>
+		<p class="left"> <img width="200px" src="<?php echo ADRESSE_SITE.LOGO; ?>"> </p><br>
 		<h2 id="titre_concours"> Concours Photo </h2>
 	</div>
 
