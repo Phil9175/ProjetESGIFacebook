@@ -2,7 +2,7 @@ body
 {
 width:auto;
 height:auto;
-background: #CCFFFF url(../images/page-bg-1.jpg);
+/* background: #CCFFFF url(../images/page-bg-1.jpg); */
 /*background-color: #CCFFFF;*/
 }
 
@@ -15,46 +15,27 @@ padding: 100px;
 margin-top: 25px;
 margin-left: 200px;
 margin-right: 200px;
-border: solid black 1px;
+border-radius: 15px;
+-moz-box-shadow: 10px 10px 5px #656565;
+-webkit-box-shadow: 10px 10px 5px #656565;
+-o-box-shadow: 10px 10px 5px #656565;
+box-shadow: 10px 10px 5px #656565;
+filter:progid:DXImageTransform.Microsoft.Shadow(color='#6565', Direction=135, Strength=5);
 }
 
-#participer
+.button_accueil
 {
 width:auto;
 height:auto;
 text-align: center;
 padding:20px;
 margin :10px;
-border: groove black 5px;
 }
 
-#album
+.button_accueil a
 {
-text-align: center;
-}
-
-a.nouderline:link
-{
-text-decoration:none;
-}
-#voter
-{
-width:auto;
-height:auto;
-text-align: center;
-padding:20px;
-margin :10px;
-border: groove black 5px;
-}
-
-#gerer_concours
-{
-width:auto;
-height:auto;
-text-align: center;
-padding:20px;
-margin :10px;
-border: groove black 5px;
+width: 325px;
+height: 40px;
 }
 
 div.img {
@@ -209,31 +190,59 @@ text-align:right;
 
 
 /* Style page accueil */
-.left
+
+#logo
+{
+width:297.5px;
+height:421px;
+}
+
+.left_logo
 {
 float:left;
 height: 50px;
 }
 
-#haut_concours
+.left
 {
-height: 250px;
-margin: auto;
-padding: auto;
+float: left;
 }
 
-#titre_concours
+#top_concours
 {
-float: right;
-margin-top: 16px;
-font-family: "falconpunch";
-font-size: 38px;
+height: 200px;
+margin: auto;
+padding-left: 120px;
+text-align: center;
+
+}
+
+#content_concours
+{
+
+}
+
+#bottom_concours
+{
+  border-top: solid 1px black;
+  padding-top: 10px;
+  font-family: "photographs";
+  font-size: 25px;
+}
+
+#title_concours
+{
+float: left;
+margin-top: 50px;
+font-family: "photographs";
+font-size: 75px;
 letter-spacing: 5px;
 }
 
+
 @font-face {
-font-family: "falconpunch";
-src: url('/view/fonts/falconpunch.ttf');
+font-family: "photographs";
+src: url('/view/fonts/Photographs.ttf');
 }
 
 /* Style page d'accueil */
@@ -256,4 +265,5 @@ src: url('/view/fonts/falconpunch.ttf');
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
 /* style upload */
