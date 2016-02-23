@@ -28,6 +28,15 @@ margin :10px;
 border: groove black 5px;
 }
 
+#album
+{
+text-align: center;
+}
+
+a.nouderline:link
+{
+text-decoration:none;
+}
 #voter
 {
 width:auto;
@@ -247,5 +256,4 @@ src: url('/view/fonts/falconpunch.ttf');
     opacity: 0;
     filter: alpha(opacity=0);
 }
-
 /* style upload */
