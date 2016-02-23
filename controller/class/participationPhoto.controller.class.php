@@ -22,7 +22,7 @@ class participationPhoto{
 			if (isset($_SESSION['scope']) && !in_array("user_photos", $_SESSION['scope'])){
 				unset($_SESSION['facebook_access_token']);
 				$_SESSION['scope'] = $scope;
-				header("Location: ".ADRESSE_SITE.$_SERVER['REQUEST_URI']);
+				header("Location: ".ADRESSE_SITE);
 				exit();
 			}else{
 				$_SESSION['scope'] = $scope;

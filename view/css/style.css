@@ -23,9 +23,16 @@ padding:20px;
 margin :10px;
 }
 
-#album
+.album
 {
 text-align: center;
+width: 165px;
+height: 200px;
+}
+
+.image
+{
+width: 160px;
 }
 
 a.nouderline:link

@@ -11,11 +11,11 @@
                 <a class="btn btn-default" href="<?php echo ADRESSE_SITE; ?>participationPhoto/deleteParticipation/">Annuler ma participation</a>
         </ul>
 
-        <h2>Mais vous pouvez à tous moment changer de photo (Attention, les votes à votre attention seront remis à 0).</h2>
+        <h4>Mais vous pouvez à tous moment changer de photo (Attention, les votes à votre attention seront remis à 0).</h4>
         <?php
     }else{
         ?>
-        <h2>Ajoutez une photo ou selectionner un album afin de choisir une photo de Facebook.</h2>
+        <h3>Ajoutez une photo ou selectionner un album afin de choisir une photo de Facebook.</h3>
     <?php
     }
     ?>
@@ -47,13 +47,11 @@ foreach($userNode['data'] as $album):
     }
     if (isset($album['photos'])):
         ?>
-        <td id="album">
-            <a href="<?php echo ADRESSE_SITE; ?>participationPhoto/photo/<?php echo $album['id']; ?>" class="nouderline">
-                <ul class="row gallery center">
-                    <li> <img src='<?php echo $album['photos']['data'][0]['picture']; ?>'/></li>
-                    <li> <?php echo $album['name']; ?></li>
+        <td class="album">
+                <ul class="gallery">
+                    <li> <a href="<?php echo ADRESSE_SITE; ?>participationPhoto/photo/<?php echo $album['id']; ?>" class="nouderline"><img class="image" src="<?php echo $album['photos']['data'][0]['picture']; ?>" /></a></li>
+                    <li> <a href="<?php echo ADRESSE_SITE; ?>participationPhoto/photo/<?php echo $album['id']; ?>" class="nouderline"><?php echo $album['name']; ?></a></li>
                 </ul>
-        </a>
         </td>
         <?php
         $i++;

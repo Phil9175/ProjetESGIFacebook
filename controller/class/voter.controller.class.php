@@ -12,7 +12,7 @@ class voter {
 				'app_secret' =>APP_SECRET,
 				'default_graph_version' => 'v2.5',
 		]);
-		$scope = ["email","user_likes","publish_actions"];
+		$scope = ["email","user_likes"];
 		
 		if(!isset($_SESSION['facebook_access_token'])){
 			$_SESSION['scope'] = $scope;
