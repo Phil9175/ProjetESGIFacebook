@@ -114,7 +114,7 @@ class admin
 			
 			
 			if (isset($args[1]) && $args[1] == "picture"){
-				$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
+						$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
 						$fichier = fonctions::id_aleatoire();
 						$taille_maxi = 10000000;
 						$taille = filesize($_FILES['user_photo']['tmp_name']);
@@ -136,7 +136,7 @@ class admin
 								 $concours = new concours();
 								 $concours->getOneBy($args[0], "id", "concours");
 								 $concours->setFromBdd($concours->result);
-								 $settings->set_logo_societe('/fichiers/'.$fichier . $extension);
+								 $concours->setLogo('/fichiers/'.$fichier . $extension);
 								 $concours->save("concours");
 								 $_SESSION['errors'][] = ["type" => "success", "message" => "Le logo a bien ete modifié."];
 								header('Location: '.ADRESSE_SITE.'admin/edit/'.$args[1]);
@@ -165,6 +165,7 @@ class admin
 			$view->assign("font_color", $concours->getFontColor());
 			$view->assign("background_color", $concours->getBackgroundColor());
 			$view->assign("max_per_page", $concours->getMax_per_page());
+			$view->assign("logo_concours", $concours->getLogo());
 		}
     }
 	
@@ -196,6 +197,34 @@ class admin
 				$concours->setFontColor($args["picker_font"]);
 				$concours->setBackgroundColor($args["picker_back"]);
 				$concours->setMax_per_page($args["max_per_page"]);
+						$dossier = $_SERVER['DOCUMENT_ROOT'].'/fichiers/';
+						$fichier = fonctions::id_aleatoire();
+						$taille_maxi = 10000000;
+						$taille = filesize($_FILES['user_photo']['tmp_name']);
+						$extensions = array('.png', '.gif', '.jpg', '.jpeg', '.svg');
+						$extension = strrchr($_FILES['user_photo']['name'], '.'); 
+						//Début des vérifications de sécurité...
+						if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+						{
+							 $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
+						}
+						if($taille>$taille_maxi)
+						{
+							 $erreur = 'Le fichier est trop gros...';
+						}
+						if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+						{
+							 if(move_uploaded_file($_FILES['user_photo']['tmp_name'], $dossier . $fichier . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+							 {
+								 $concours->setLogo('/fichiers/'.$fichier . $extension);
+								 $_SESSION['errors'][] = ["type" => "success", "message" => "Le logo a bien ete modifié."];
+							}
+							 else //Sinon (la fonction renvoie FALSE).
+							 {
+								  echo 'Erreur, merci de réessayer!';
+							 }
+						}
+						
 				$id = $concours->save("concours");
 				$_SESSION['errors'][] = ["type" => "success", "message" => "Le concours a bien ete ajoute."];
 				header("Location: ".ADRESSE_SITE."/admin/edit/".$id);

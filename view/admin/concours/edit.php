@@ -105,7 +105,7 @@
 								<form class="form-horizontal" action="<?php echo ADRESSE_SITE; ?>admin/edit/<?php echo $id; ?>/picture" method="POST" role="form" enctype="multipart/form-data">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
-															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.$logo_societe; ?>" alt=""/> </div>
+															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;"> <img src="<?php echo ADRESSE_SITE.$logo_concours; ?>" alt=""/> </div>
 															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
 															<div> <span class="btn default btn-file"> <span class="fileinput-new"> Selectionnez une image </span> <span class="fileinput-exists"> Changer </span>
 																<input type="file" name="user_photo">
