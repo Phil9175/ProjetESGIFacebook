@@ -42,7 +42,7 @@ CREATE TABLE `concours` (
   `background_color` varchar(24) DEFAULT NULL,
   `max_per_page` int(255) DEFAULT NULL,
   `methode_notification` varchar(20) DEFAULT NULL,
-  `is_notify` int(255) DEFAULT NULL,
+  `is_notify` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -102,6 +102,7 @@ CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
   `logo_societe` text NOT NULL,
   `nom_societe` varchar(60) NOT NULL,
+  `slogan` varchar(80) NOT NULL,
   `mail_host` varchar(80) NOT NULL,
   `mail_port` int(11) NOT NULL,
   `mail_username` varchar(80) NOT NULL,
