@@ -20,7 +20,7 @@
 									endif;
 									?>
 									
-										<div class="caption caption-md"> <i class="icon-globe theme-font hide"></i> <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span> </div>
+										<div class="caption caption-md"> <i class="icon-globe theme-font hide"></i> <span class="caption-subject font-blue-madison bold uppercase">Edition de concours</span> </div>
 										<ul class="nav nav-tabs">
 											<li class="active"> <a href="#tab_1_1" data-toggle="tab">Informations et parametres</a> </li>
 											<li> <a href="#tab_1_2" data-toggle="tab">Logo</a> </li>

@@ -49,9 +49,9 @@ var Datatable = function() {
                         "metronicAjaxRequestGeneralError": "Requete impossible, verifiez votre connexion internet",
 
                         // data tables spesific
-                        "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-                        "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
-                        "infoEmpty": "No records found to show",
+                        "lengthMenu": "<span class='seperator'>|</span>Vue de _MENU_ resultats",
+                        "info": "<span class='seperator'>|</span> _TOTAL_ resultats",
+                        "infoEmpty": "Aucun resultat a afficher",
                         "emptyTable": "Pas de donnees en table",
                         "zeroRecords": "Pas de resultats",
                         "paginate": {
