@@ -33,7 +33,6 @@ class participationPhoto{
         $response = $this->fb->get('/me?fields=id,email,birthday,gender,first_name,last_name');
         $this->user = $response->getDecodedBody();
 		
-
 		if(security::checkConcours() == TRUE){
 			$this->open = TRUE;
 		}else{
@@ -41,8 +40,6 @@ class participationPhoto{
 			header("Location: ".ADRESSE_SITE);
 			exit();
 		}
-		
-		
 		
     }
 
@@ -187,6 +184,21 @@ class participationPhoto{
             $participation->save("participation");
 
             $_SESSION['flash_messageValidate'] = "La photo a bien été enregistrée";
+			$app_id = APP_ID;
+			$app_secret = APP_SECRET;
+			$app_access_token = $app_id . '|' . $app_secret;
+	
+			$fb = new Facebook\Facebook([
+						'app_id' => APP_ID,
+						'app_secret' =>APP_SECRET,
+						'default_graph_version' => 'v2.5',
+			]);
+			$response = $fb->post('/'.$this->user['id'].'/notifications', [
+				'template' => "Vous avez participe au concours photos ESGI",
+				'href' => "concoursphotosesgi.com",
+				'access_token' => $app_access_token
+				]);
+			
             header("Location: ".ADRESSE_SITE."index/defaultPage/");
 			exit();
 
